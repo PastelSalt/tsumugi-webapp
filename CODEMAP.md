@@ -80,7 +80,7 @@ Plain JavaScript (ESM), Express 5, Mongoose, Zod. Local-first: see [Server/READM
 | `client/src/App.jsx` | Route table with lazy-loaded route chunks, Suspense fallback, link interception, workspace path list, redirects from the old workspace paths, unknown-route handling |
 | `client/src/app/router.js` | Minimal history-API router: `useLocation`, `navigate`, same-origin link interception, focus-after-navigation flag |
 | `client/src/hooks/` | `usePageMeta` (title/description/robots + heading focus), `usePreviewState` (`?preview=` demo states), `useQueryParam` (view, filter, and selection in the URL), `useMediaQuery` |
-| `client/src/lib/api.js`, `session.js` | API client (envelope unwrapping, `ApiError` with field errors) and the signed-in session store (`bootstrap`, `login`, `register`, `logout`, `updateMe`, `demoRequested`) |
+| `client/src/lib/api.js`, `session.js` | API client (envelope unwrapping, `ApiError` with field errors) and the signed-in session store (`bootstrap`, `login`, `register`, `logout`, `updateMe`); `demoRequested()` reads the `?demo` marker from the address (no storage) |
 | `client/src/pages/workspace/pages/AccountExtras.jsx` | Account sections for a real account: devices, activity, Recently deleted, your data, delete account |
 | `client/src/lib/markdown.jsx` | Small Markdown parser/renderer (no raw HTML) used by the legal pages, the Help page, and the document reader |
 | `client/src/lib/keys.js` | OS-aware keyboard labels (Ctrl or Cmd) |
@@ -122,7 +122,7 @@ client/index.html
 
 Vite serves the client during development (proxying `/api` to the API on port 3001) and bundles it into `client/dist` for production. In-app links navigate without reloading the document.
 
-Signed-in flow: `WorkspaceApp` checks the session (`lib/session.js`); signed out goes to `/login?next=…`; signed in loads `GET /api/v1/workspace/snapshot` into `pages/workspace/data/store.js` ("live mode"), so the existing selectors work unchanged. Task changes are optimistic with Undo; other writes go through `quickadd/ActionDialogs.jsx` and `data/liveActions.js`, then the snapshot is refreshed. `/home?demo` keeps the no-account sample workspace (fixtures, nothing saved).
+Signed-in flow: `WorkspaceApp` checks the session (`lib/session.js`); signed out goes to `/login?next=…`; signed in loads `GET /api/v1/workspace/snapshot` into `pages/workspace/data/store.js` ("live mode"), so the existing selectors work unchanged. Task changes are optimistic with Undo; other writes go through `quickadd/ActionDialogs.jsx` and `data/liveActions.js`, then the snapshot is refreshed. `/demo` (redirects to `/home?demo=1`) opens the permanent no-account sample workspace (fixtures, nothing saved); `app/router.js` carries the `?demo` marker through in-workspace navigation, so reloads and shared links stay in the demo.
 
 ## Current gaps
 

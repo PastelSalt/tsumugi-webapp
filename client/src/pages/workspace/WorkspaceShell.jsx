@@ -56,7 +56,7 @@ function AccountMenu({ pathname, placement }) {
           {legalLinks.map(([href, label]) => <a href={href} key={href}>{label}</a>)}
         </div>
         <a href="/">Back to landing page</a>
-        {live ? <button type="button" onClick={() => logout().then(() => navigate("/login", { replace: true }))}>Log out</button> : <a href="/login">Leave demo</a>}
+        {live ? <button type="button" onClick={() => logout().then(() => navigate("/login", { replace: true }))}>Log out</button> : <><a href="/register">Create an account</a><a href="/">Leave the demo</a></>}
       </div>
     </details>
   )
@@ -84,6 +84,7 @@ function TopStatus() {
   const todayLabel = new Date(`${DEMO_TODAY}T00:00:00`).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })
   return (
     <div className="ws-status" aria-label="Today">
+      {!isLive() && <a className="ws-status__chip ws-status__chip--demo" href="/register" title="Sample data. Nothing is saved. Create an account to keep your work.">Demo</a>}
       <span className="ws-status__date"><CalendarDays size={15} aria-hidden="true" /> {todayLabel}</span>
       <a className="ws-status__chip" href="/tasks"><strong>{f.dueToday}</strong> due today</a>
       <a className={f.overdue ? 'ws-status__chip ws-status__chip--alert' : 'ws-status__chip'} href="/tasks"><TriangleAlert size={14} aria-hidden="true" /><strong>{f.overdue}</strong> overdue</a>
@@ -127,7 +128,10 @@ function DemoNote({ onDismiss }) {
   return (
     <p className="demo-note" role="note">
       <Info size={16} aria-hidden="true" />
-      <span>This is a demo with sample data. You can add and change tasks; nothing is saved when you leave.</span>
+      <span>
+        <strong>You are in the demo.</strong> The data is a sample and the date is fixed at 12 Nov 2026. You can add and change tasks; nothing is saved when you leave.{' '}
+        <a href="/register">Create an account</a> to keep your own work, or <a href="/">leave the demo</a>.
+      </span>
       <button type="button" className="demo-note__close" aria-label="Dismiss this note" onClick={onDismiss}><X size={16} aria-hidden="true" /></button>
     </p>
   )

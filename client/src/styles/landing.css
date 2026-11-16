@@ -15,7 +15,8 @@
 .nav-meter { width: 72px; height: 4px; overflow: hidden; border-radius: 99px; background: var(--line); }
 .nav-meter span { display: block; height: 100%; border-radius: inherit; background: var(--pink); transition: width 150ms ease-out; }
 .menu-toggle { display: none; place-items: center; width: 44px; height: 44px; border: 0; border-radius: 50%; color: var(--ink); background: var(--pink-soft); }
-.nav-login { margin-left: auto; font-size: 13px; }
+.nav-demo { margin-left: auto; font-size: 13px; }
+.nav-login { font-size: 13px; }
 
 /* ---------- Pills and mock UI (shared by hero scene and tour) ---------- */
 .pill { display: inline-flex; align-items: center; padding: 2px 9px; border-radius: 999px; font-size: 12px; font-weight: 700; white-space: nowrap; }
@@ -221,7 +222,7 @@
   .nav-link { padding: 12px 14px; font-size: 15px; }
   .nav-link--active::after { display: none; }
   .nav-meter { width: 100%; }
-  .nav-login { margin: 0; padding: 10px; text-align: center; }
+  .nav-demo, .nav-login { margin: 0; padding: 10px; text-align: center; }
   .nav-content .button { justify-content: center; }
 }
 

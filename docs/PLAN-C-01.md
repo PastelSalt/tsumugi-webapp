@@ -176,9 +176,12 @@ These are listed in the frontend plans and testing checklist; I cannot do them f
 Found while reviewing `../tsumugi-mobile` for [PLAN-D-01](PLAN-D-01.md). These need the owner because the mobile app has its own recorded decisions.
 
 ### C1-27 🔴 Lift or narrow the mobile "play-demo" rule
+
+> **Decided 2026-11-16 (owner): the demo stays, permanently, on both the website and the mobile app, including in production.** The website demo is built and reload-proof at `/demo`. For mobile, the demo ("Continue as demo user") keeps running on bundled sample data with no network. What is still open is only the second half below: whether signed-in use may network.
+
 - **Blocks:** any networking in the Android app: sign-in, saving, syncing, files.
 - **Why it needs you:** `tsumugi-mobile/CONTEXT.md` records (2026-11-14) that the app never gets a backend, never saves anything on the device, and requests no permissions; `test/privacy_test.dart` fails the build if the app imports networking or storage packages (`http`, `dio`, `shared_preferences`, `sqflite`, `path_provider`, `url_launcher`, …) or if the release manifest asks for `INTERNET`. Connecting to the backend contradicts that rule.
-- **You need to decide:** keep the demo promise for people who never sign in (recommended: "Continue as demo user" stays offline and sends nothing), and allow networking and local storage only after sign-in, in clearly named folders, with the privacy text updated. Details in [PLAN-D-01 section 3](PLAN-D-01.md).
+- **You need to decide:** whether to allow networking and local storage **after sign-in** only, in clearly named folders, with the privacy text updated. The demo promise itself is settled (above): the demo stays offline and sends nothing. Details in [PLAN-D-01 section 3](PLAN-D-01.md).
 - **Default if unanswered:** the mobile app stays a play-demo; I will not touch it. (I have not changed the mobile repository.)
 - **Then:** the mobile side adds Dio, a cookie jar, local cache, the `INTERNET` permission, updates `privacy_test.dart` and the legal copy, and replaces the in-memory session overlay with the repository described in PLAN-D-01 section 10.
 
@@ -213,4 +216,4 @@ When you decide an item, tell me the item number and the decision. I will: (1) m
 
 | # | Decision | Date |
 | --- | --- | --- |
-| — | *(nothing settled yet)* | — |
+| C1-27 (part) | The demo stays on both web and mobile, permanently, including in production | 2026-11-16 |

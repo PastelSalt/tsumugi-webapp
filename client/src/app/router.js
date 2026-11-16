@@ -20,8 +20,14 @@ export function useLocation() {
   return { pathname: path.replace(/\/+$/, '') || '/', search: search ? `?${search}` : '' }
 }
 
+// The sample workspace is marked by `?demo` in the address, so a reload or a shared link stays in the demo and nothing
+// is stored in the browser. Moving around inside the workspace carries the marker along.
+const WORKSPACE = /^\/(home|projects|tasks|library|insights|account|help)(\/|$)/
+const inDemo = () => new URLSearchParams(window.location.search).has('demo')
+
 export function navigate(to, { replace = false, scroll = true, focus = true } = {}) {
   const url = new URL(to, window.location.href)
+  if (inDemo() && WORKSPACE.test(url.pathname) && !url.searchParams.has('demo')) url.searchParams.set('demo', '1')
   const method = replace ? 'replaceState' : 'pushState'
   window.history[method]({}, '', `${url.pathname}${url.search}${url.hash}`)
   pendingFocus = focus

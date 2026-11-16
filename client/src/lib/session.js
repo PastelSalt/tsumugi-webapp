@@ -46,9 +46,7 @@ export function sessionEnded() {
   if (state.status === 'in') { booting = null; set({ status: 'out', user: null }) }
 }
 
-// `?demo` opens the sample workspace without an account. Once requested it stays on for the rest of the visit.
-let demoOn = false
-export function demoRequested() {
-  if (new URLSearchParams(window.location.search).has('demo')) demoOn = true
-  return demoOn
-}
+// `?demo` (or the /demo entry) opens the sample workspace without an account. The marker lives in the address and is
+// carried along by navigate() in app/router.js, so it survives a reload and nothing is stored. The demo is a permanent
+// feature, not a development aid (docs/PLAN-C-01.md C1-27, README "Try the demo").
+export const demoRequested = () => new URLSearchParams(window.location.search).has('demo')

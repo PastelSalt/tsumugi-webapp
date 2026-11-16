@@ -17,8 +17,8 @@ npm run preview      # preview the production build
 
 ## What is here
 
-- Landing, demo-mode auth, draft legal pages, and an individual demo workspace (Home, Projects, Tasks, Library, Insights, Account, Help).
-- Everything runs on placeholder data in the browser. Nothing is saved, and there is no backend connection.
+- Landing, sign-in and sign-up, draft legal pages, the individual workspace (Home, Projects, Tasks, Library, Insights, Account, Help), and the **no-account demo** of that workspace at `/demo` (sample data in `pages/workspace/data/fixtures.js`; a permanent feature, not a development aid).
+- Signed in, the workspace runs on the API (see `../Server/README.md`). The demo at `/demo` runs on built-in placeholder data: nothing is saved, nothing is sent, and nothing is stored in the browser.
 - Routes are handled by a small history-API router (`src/app/router.js`) and a route table in `src/App.jsx`; each route group is its own lazy chunk.
 
 ## Conventions

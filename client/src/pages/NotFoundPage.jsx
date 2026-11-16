@@ -13,9 +13,10 @@ export default function NotFoundPage() {
       <section className="not-found section-shell" id="not-found" aria-labelledby="not-found-title">
         <p className="eyebrow">Error 404</p>
         <h1 id="not-found-title">This thread doesn&apos;t lead anywhere.</h1>
-        <p>The page you followed does not exist or has moved. Head back to the start, or continue to the demo sign-in.</p>
+        <p>The page you followed does not exist or has moved. Head back to the start, or try the sample workspace without an account.</p>
         <div className="not-found__actions">
           <a className="button button--primary" href="/">Back to home <ArrowUpRight size={16} strokeWidth={2.5} aria-hidden="true" /></a>
+          <a className="text-link" href="/demo">Try the demo</a>
           <a className="text-link" href="/login">Log in</a>
         </div>
       </section>

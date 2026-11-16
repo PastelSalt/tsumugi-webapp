@@ -50,7 +50,7 @@ function LoginPage() {
           <span>New to Tsumugi? <a className="text-link" href="/register">Create account</a></span>
           <button className="button button--primary" type="submit" disabled={busy}>{busy ? 'Signing in…' : 'Log in'} <ArrowUpRight size={16} strokeWidth={2.5} aria-hidden="true" /></button>
         </div>
-        <a className="auth-demo-link" href="/home?demo">Explore the sample workspace instead</a>
+        <a className="auth-demo-link" href="/demo">Explore the sample workspace instead</a>
       </form>
     </AuthShell>
   )

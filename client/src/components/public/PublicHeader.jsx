@@ -15,7 +15,10 @@ function CompactHeader() {
   return (
     <header className="public-header section-shell">
       <Brand />
-      <a className="text-link" href="/"><ArrowLeft size={16} strokeWidth={2.5} aria-hidden="true" /> Back to home</a>
+      <span className="public-header__links">
+        <a className="text-link" href="/demo">Try the demo</a>
+        <a className="text-link" href="/"><ArrowLeft size={16} strokeWidth={2.5} aria-hidden="true" /> Back to home</a>
+      </span>
     </header>
   )
 }
@@ -69,6 +72,7 @@ function LandingHeader({ sections, activeSection, progress }) {
           <span className="nav-meter" role="img" aria-label={`${Math.round(progress)} percent page progress`}>
             <span style={{ width: `${progress}%` }} />
           </span>
+          <a className="text-link nav-demo" href="/demo">Try the demo</a>
           <a className="text-link nav-login" href="/login">Log in</a>
           <a className="button button--small button--dark" href="/register">Create your workspace <ArrowUpRight size={14} strokeWidth={2.5} aria-hidden="true" /></a>
         </div>

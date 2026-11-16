@@ -6,7 +6,7 @@
 
 ## How to resume
 
-The product now runs end to end **locally**: an Express + MongoDB API in `Server/` and the React app, with real accounts, saved projects, tasks, requirements, files, documents, and history. The no-account sample workspace remains at `/home?demo`. Start it with `npm run setup` then `npm run dev` (see README). Read this file, then [`CODEMAP.md`](CODEMAP.md) for the file index and the newest entries of [`LOG.md`](LOG.md) for what changed last. Nothing is committed unless the owner asks.
+The product now runs end to end **locally**: an Express + MongoDB API in `Server/` and the React app, with real accounts, saved projects, tasks, requirements, files, documents, and history. The no-account sample workspace is a **permanent feature** at `/demo` (see Decisions on record). Start it with `npm run setup` then `npm run dev` (see README). Read this file, then [`CODEMAP.md`](CODEMAP.md) for the file index and the newest entries of [`LOG.md`](LOG.md) for what changed last. Nothing is committed unless the owner asks.
 
 Rules that apply to all work:
 
@@ -30,7 +30,8 @@ Rules that apply to all work:
 | Route | Page |
 |---|---|
 | `/` | Landing |
-| `/login`, `/register`, `/forgot-password`, `/reset-password` | Demo-mode auth |
+| `/demo` | Entry to the no-account sample workspace (redirects to `/home?demo=1`) |
+| `/login`, `/register`, `/forgot-password`, `/reset-password` | Sign-in and sign-up (recovery pages are still demo-only; no email yet) |
 | `/privacy-policy`, `/terms-of-service`, `/cookie-and-local-storage-policy` | Draft legal pages from `docs/*.md` |
 | `/home` | Workspace Home |
 | `/projects`, `/projects/:projectId` | Projects (cards, Timeline) and the project page (Overview, Work, Specs, Files, History) |
@@ -50,6 +51,8 @@ Old workspace paths redirect: `/dashboard` to `/home`, `/milestones` to `/projec
 - User-facing guide (single source for the Help page): [`docs/individual-workspace-guide.md`](docs/individual-workspace-guide.md).
 
 ## Decisions on record
+
+- **The demo is permanent (owner, 2026-11-16), on the website and in the mobile app, including in production.** It is how a curious visitor sees the product without an account. Rules: it runs on the bundled sample data and sends nothing to the server; it stores nothing in the browser (the `?demo` marker lives in the address and `navigate()` carries it along, so reloads and shared links stay in the demo); it is always labelled (Demo chip, banner, "Preview only" dialogs); it must stay accessible (keyboard, screen reader, phone width); and every new workspace feature must either work in demo mode or open a "Preview only" dialog there. Entry points: landing page (header and two buttons), sign-in page, 404 page, and `/demo`.
 
 - The workspace is organised by what the person is doing: five destinations (Home, Projects, Tasks, Library, Insights), Account in the rail footer menu, Quick add and the command palette (`Q`, `Ctrl/Cmd+K`) always reachable. There is no page footer; legal links are in the account menu.
 - Ten record types became seven: assets and documents merged into **File**, revisions became **Changes**, deliverables became a **Final file** flag.

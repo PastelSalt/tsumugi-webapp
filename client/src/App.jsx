@@ -24,6 +24,9 @@ const staticRoutes = {
   '/cookie-and-local-storage-policy': CookiePolicyPage,
 }
 
+// /demo is the stable, shareable way into the sample workspace (no account, nothing saved).
+const demoEntry = '/demo'
+
 const workspacePaths = ['/home', '/projects', '/tasks', '/library', '/insights', '/account', '/help']
 
 // Paths from the earlier ten-module workspace keep working by redirecting to their new home.
@@ -47,6 +50,7 @@ function Route({ pathname }) {
   const Page = staticRoutes[pathname]
   if (Page) return <Page />
 
+  if (pathname === demoEntry) return <Redirect to="/home?demo=1" />
   if (legacyRedirects[pathname]) return <Redirect to={legacyRedirects[pathname]} />
   if (workspacePaths.includes(pathname) || /^\/projects\/[^/]+$/.test(pathname)) return <WorkspaceApp pathname={pathname} />
   return <NotFoundPage />

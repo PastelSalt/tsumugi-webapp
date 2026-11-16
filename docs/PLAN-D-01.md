@@ -78,7 +78,7 @@ This is close to the backend's shape by design: the app was ported from the same
 
 1. The **release** manifest gains `INTERNET` (only). No other permissions.
 2. Networking and storage code lives in one folder (for example `lib/core/net/` and `lib/core/store/`); `privacy_test.dart` is updated to allow `dio`/`cookie_jar` and the chosen storage package **only there**, and still bans analytics and Firebase unless that is decided too.
-3. **Demo mode stays.** The Welcome screen's "Continue as demo user" keeps running on bundled fixtures with no network (as the website keeps `/home?demo`), so the play-demo promise still holds for people who never sign in.
+3. **Demo mode stays, permanently (owner decision 2026-11-16, web and mobile, production included).** The Welcome screen's "Continue as demo user" keeps running on bundled fixtures with no network, as the website's `/demo` does, so the play-demo promise still holds for people who never sign in. The mobile repository should record this in its `CONTEXT.md` "Decisions on record" as a feature that stays in release builds (today the play-demo rule describes the whole app, which is why the demo could be mistaken for scaffolding), and `privacy_test.dart` should gain a test that the demo path makes no network calls.
 4. Privacy copy changes: the bundled legal drafts and Account's "this demo stores nothing" text must say what is stored (session, cached workspace) and where.
 
 ---

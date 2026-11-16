@@ -120,7 +120,7 @@ Each step: add endpoint functions and hooks, switch the module's hooks to the AP
 - [ ] Auth pages wired; route guards; verification/reset flows; theme sync (Phase 2).
 - [ ] Projects, tasks, home, quick add, calendar, undo migration (Phase 3).
 - [ ] Specs, library, documents, history, insights, palette migration (Phases 4–7).
-- [ ] Demo mode flag and `/demo` path; remove demo banners in real mode.
+- [x] Demo mode and `/demo` path; demo banners are removed in real mode.
 - [ ] Update `docs/cookie-and-local-storage-policy.md` storage inventory and the user guide wording ("saved" instead of "preview"); keep `LOG.md`, `CODEMAP.md`, `README.md` current.
 - [ ] Delete dead code after the last cut-over (fixtures only in demo mode).
 
@@ -134,7 +134,7 @@ Each step: add endpoint functions and hooks, switch the module's hooks to the AP
 
 ## 12. Open questions
 
-- Whether to keep a public demo at all once real sign-up exists (default: yes, as a no-account tour).
+- ~~Whether to keep a public demo at all once real sign-up exists~~ **Decided 2026-11-16: yes, permanently, in production, on web and mobile** (see PLAN-C-01 C1-27).
 - Whether to convert the client to TypeScript later to benefit from generated types (not required).
 - Offline support or queued writes (not in v0.1).
 
@@ -150,7 +150,7 @@ Each step: add endpoint functions and hooks, switch the module's hooks to the AP
 - Live mode in `data/store.js`: the whole workspace loads from `GET /workspace/snapshot`; task changes are optimistic with Undo; other writes save then refresh.
 - The former "Preview only" actions are real: edit task/project/milestone, add milestone/requirement/file/link/note, link work, tick criteria and subtasks, mark met/verified/final/reviewed, edit and finalize documents, download.
 - Account page: devices and sign out, recent activity, Recently deleted (restore), your data (export JSON, calendar .ics, storage use, rename workspace), delete account; a Repeat field and chip for tasks.
-- Demo mode (sample data, nothing saved) remains at `/home?demo`.
+- Demo mode (sample data, nothing saved) is a permanent feature at `/demo`; the `?demo` marker is carried in the address by `navigate()` so reloads and shared links stay in the demo, with a Demo chip and an explanatory banner (no browser storage).
 
 **Not built yet**
 

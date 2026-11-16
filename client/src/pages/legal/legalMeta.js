@@ -31,4 +31,11 @@ export const legalDocuments = {
  * Everything the client writes to cookies, localStorage, or sessionStorage.
  * Update this list in the same change as any feature that stores data in the browser.
  */
-export const storageInventory = []
+export const storageInventory = [
+  {
+    name: 'tsumugi_sid',
+    purpose: 'Keeps you signed in. Set by the server only when you log in or create an account; it holds a random token, not your details. The demo does not set it.',
+    duration: 'Up to 30 days, renewed while you use the app, removed when you log out',
+    category: 'Strictly necessary (cookie)',
+  },
+]

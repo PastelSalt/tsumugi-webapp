@@ -62,7 +62,7 @@ It is built for people who make things, and for work that does not fit a single 
 - **History** of every meaningful change, with before/after comparison for documents.
 - **Repeating tasks** (daily, weekly, monthly, yearly): finish one and the next is scheduled for you.
 - **Recently deleted** with restore for 30 days, **account tools** (devices, activity, download all your data as JSON, calendar export, delete account).
-- **Landing page, sign-in and sign-up pages, and draft legal pages.** A no-account sample workspace is still available at `/home?demo`.
+- **Landing page, sign-in and sign-up pages, and draft legal pages.** A no-account **sample workspace** is a permanent part of the product: open `/demo` (see below).
 - **Light, dark, or follow-my-device** theme, restrained motion that respects `prefers-reduced-motion`, and keyboard-friendly navigation.
 
 ### Coming next
@@ -94,6 +94,15 @@ Open **http://localhost:5173**, choose **Create account**, and start a project. 
 | Settings | Optional `Server/.env` (see `Server/.env.example`), for example `MONGODB_URI` to use a MongoDB you installed yourself |
 
 Both folders are ignored by git. To start fresh, stop the app and delete them.
+
+### Try the demo (no account)
+
+Visitors who just want to see how Tsumugi works can open **`/demo`** (the landing page, the sign-in pages, and the 404 page all link to it). It shows a complete sample workspace on built-in sample data:
+
+- Nothing is saved or sent, and nothing is stored in the browser. Changes (completing tasks, Quick add, a template project) last until you reload; actions that would write something real open a clearly labelled "Preview only" dialog.
+- The address keeps a `?demo` marker while you move around, so a reload or a copied link stays in the demo.
+- A "Demo" chip and a banner say so at all times, with links to create an account or leave. The sample date is fixed at 12 Nov 2026.
+- The demo is **permanent**: it stays in production, and the mobile app keeps its own demo too ([PLAN-C-01 C1-27](docs/PLAN-C-01.md)).
 
 ### Scripts
 

@@ -357,3 +357,7 @@ This file records actions made in the repository. Entries are chronological; eac
 - **Validation:** Documentation-only changes; no build or test command was required. No license was chosen at this point; MIT was added afterward (see below).
 
 - **Added** `LICENSE` (MIT, copyright Moeko Works) and a license badge and mention in `README.md`.
+
+- **Created** the backend plan set in `docs/plan/backend/`: master plan `PLAN-B-00.md` (goals, decision record, architecture, module index, shared domain model, delivery phases, release criteria, risks, open questions) and 19 module plans `PLAN-B-01` to `PLAN-B-19` (foundation, API conventions, data model, authentication, users/workspaces, projects, milestones, tasks, requirements, files/storage, documents, changes/links/traceability, Home/Insights/search, security, testing, deployment/operations, frontend integration, teams, notifications/jobs). Plans 18 and 19 are future designs.
+- **Updated** `README.md`, `CODEMAP.md`, and `CONTEXT.md` to index and point to the backend plans.
+- **Validation:** Documentation-only change; all cross-links between plans were checked to resolve to existing files. No code was written and no build or test command was required.

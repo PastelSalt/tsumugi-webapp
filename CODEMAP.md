@@ -31,7 +31,11 @@ This document is the maintained index of the current codebase. Update it when fi
 | `docs/plan/frontend/PLAN-A-04L.md` | Quick add, project templates, first run, and command palette |
 | `docs/testing/ux-walkthrough-checklist.md` | Checklist for the keyboard, screen-reader, zoom, motion, and first-impression checks that need a person |
 | `docs/plan/frontend/PLAN-A-05.md` | UX plan (planning only): standards review, findings S1 to S11, backlog W1 to W19, decisions X1 to X8, testing plan |
-| `docs/plan/backend/` | Reserved location for future plan-B backend plans |
+| `docs/plan/backend/PLAN-B-00.md` | Backend master plan: goals, decision record (D-01 to D-18), architecture, module index and dependencies, shared domain model, delivery phases, release criteria, risks, open questions |
+| `docs/plan/backend/PLAN-B-01.md` to `PLAN-B-05.md` | Foundation (layout, config, errors, DB connection), API conventions, data model and persistence, authentication and sessions, users/workspaces/preferences |
+| `docs/plan/backend/PLAN-B-06.md` to `PLAN-B-13.md` | Domain modules: projects, milestones, tasks, requirements, files and storage, documents, changes/links/traceability, Home/Insights/search |
+| `docs/plan/backend/PLAN-B-14.md` to `PLAN-B-17.md` | Cross-cutting: security and privacy, testing and quality, deployment and operations, frontend integration and fixture migration |
+| `docs/plan/backend/PLAN-B-18.md`, `PLAN-B-19.md` | Future designs: teams and collaboration, notifications/recurrence/background jobs |
 | `docs/` | Draft legal policies for owner/legal review, and `individual-workspace-guide.md` (user guide, rendered at `/help`) |
 | `docs/plan/frontend/` | Frontend plan-A documents for landing, legal, auth, authenticated workspace, and protected user pages |
 | `docs/plan/backend/` | Reserved location for future backend plan-B documents |

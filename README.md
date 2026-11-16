@@ -116,7 +116,7 @@ Add `?dev` to any URL for the developer-tools bar (preview states, reset sample 
 | **6. Deploy** | Frontend and API on Vercel, managed database and storage | ⬜ Planned |
 | **7. Teams** | Team workspace, roles, sharing, notifications | ⬜ Later |
 
-Detailed backend plans will live in [`docs/plan/backend/`](docs/plan/backend/).
+The full backend plan is in [`docs/plan/backend/`](docs/plan/backend/). Start with the master plan, [PLAN-B-00](docs/plan/backend/PLAN-B-00.md), which indexes one detailed plan per module (foundation, API conventions, data model, authentication, workspaces, projects, milestones, tasks, requirements, files, documents, traceability, insights, security, testing, deployment, and frontend integration).
 
 ## 🏗️ Architecture
 
@@ -157,6 +157,7 @@ Detailed backend plans will live in [`docs/plan/backend/`](docs/plan/backend/).
 | [RESEARCH.md](RESEARCH.md) | Why the workspace is structured the way it is |
 | [docs/individual-workspace-guide.md](docs/individual-workspace-guide.md) | The user guide (also shown at `/help`) |
 | [docs/plan/frontend/](docs/plan/frontend/) | Frontend plans (`PLAN-A-*`) with implementation status |
+| [docs/plan/backend/PLAN-B-00.md](docs/plan/backend/PLAN-B-00.md) | Backend master plan and index of the per-module plans (`PLAN-B-01` to `PLAN-B-19`) |
 | [docs/testing/ux-walkthrough-checklist.md](docs/testing/ux-walkthrough-checklist.md) | Manual accessibility and UX checks |
 | [client/README.md](client/README.md) | Client commands and conventions |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | How to contribute |

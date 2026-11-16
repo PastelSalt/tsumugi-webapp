@@ -61,5 +61,5 @@ Old workspace paths redirect: `/dashboard` to `/home`, `/milestones` to `/projec
 - Not built from the plans: Account view tabs (04K; Account is one page of cards), `workspaceId` and `canAccess()` in the fixtures, a task row menu, delete and Edit for tasks.
 - Not yet done: user testing against the success measures in PLAN-A-04 section 14, a screen-reader pass, reduced-motion review, and checks at 390 and 1536px.
 - Legal pages are drafts (`LEGAL_STATUS = 'draft'`, `noindex`); `npm run check:legal` warns about unresolved placeholders.
-- Backend (`Server/`) is only a placeholder `package.json`. Backend plans go in `docs/plan/backend/` as PLAN-B documents.
+- Backend (`Server/`) is only a placeholder `package.json`. The backend is fully planned (not built) in `docs/plan/backend/`: start with `PLAN-B-00` (master plan, decisions D-01 to D-18, delivery phases, open questions Q1 to Q9), then the module plans `PLAN-B-01` to `PLAN-B-19`. The first build step is Phase 1 (PLAN-B-01, 02, 03, plus baselines of 14, 15, 16).
 - Open product questions are in RESEARCH.md section 8 (one individual workspace per account or several, converting to a team later, read-only sharing and export).

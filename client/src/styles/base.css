@@ -1,0 +1,374 @@
+:root {
+  --paper: #fffdfd;
+  --canvas: #f8f6fb;
+  --ink: #2f2938;
+  --muted: #655f70;
+  --pink: #c73579;
+  --pink-soft: #ffe8f5;
+  --blue-soft: #e5f4ff;
+  --lilac: #ead9f8;
+  --green: #5c8a6b;
+  --green-soft: #e8efe9;
+  --butter: #f8d95a;
+  --line: #e9e3ed;
+  --shadow: 0 24px 60px -28px rgb(143 31 85 / 0.35);
+  --radius: 28px;
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+  font-family: Fredoka, system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--canvas);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+/* Design tokens aligned with the mobile app (docs: tsumugi-mobile REFERENCE-WEB-ALIGNMENT.md, degree A). Existing names are unchanged. */
+:root {
+  --butter-soft: #fff2cf;
+  --line-strong: #d8d0e0;       /* decorative edges only (about 1.5:1) */
+  --control-border: #857d90;    /* edges of controls: 3.9:1 on paper (WCAG 1.4.11) */
+  --on-accent: #ffffff;
+
+  /* status tones: one place, used by badges, due text, and alerts */
+  --tone-neutral-bg: #f1eef5;  --tone-neutral-fg: #4a4455;
+  --tone-info-bg: #e5f4ff;     --tone-info-fg: #1d5f80;
+  --tone-progress-bg: #ece6fb; --tone-progress-fg: #5a45a8;
+  --tone-warning-bg: #fff2cf;  --tone-warning-fg: #7a5600;
+  --tone-danger-bg: #ffe8f5;   --tone-danger-fg: #a3205c;
+  --tone-success-bg: #e8efe9;  --tone-success-fg: #2f6a42;
+
+  /* roles (use these in new CSS instead of palette names) */
+  --background: var(--canvas);  --surface: var(--paper);  --on-surface: var(--ink);
+  --on-surface-muted: var(--muted);  --accent: var(--pink);  --accent-container: var(--pink-soft);
+  --danger: var(--tone-danger-fg);   --warning: var(--tone-warning-fg);
+  --success: var(--tone-success-fg); --info: var(--tone-info-fg);
+
+  /* motion */
+  --motion-press: 80ms;  --motion-fast: 120ms;  --motion-short: 200ms;
+  --motion-tab: 240ms;   --motion-page: 300ms;  --motion-number: 400ms;
+  --motion-reduced: 100ms;
+  --ease-enter: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --ease-standard: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-exit: cubic-bezier(0.32, 0, 0.67, 0);
+}
+
+/* Dark palette: opt-in only (set data-theme="dark" on the root). It does not follow the device yet because the
+   landing art has no dark variants. */
+:root[data-theme='dark'] {
+  --paper: #1f1b26;  --canvas: #17141c;  --ink: #f3eef8;  --muted: #b9b2c4;
+  --pink: #f08cbb;   --pink-soft: #3b2233; --blue-soft: #1e2e3a; --lilac: #2f2540;
+  --green: #8fc2a0;  --green-soft: #22302a; --butter: #f8d95a;  --butter-soft: #3a3320;
+  --line: #332d3c;   --line-strong: #453e50; --control-border: #827a92; --on-accent: #17141c;
+  --tone-neutral-bg: #2c2733;  --tone-neutral-fg: #d9d2e3;
+  --tone-info-bg: #1e2e3a;     --tone-info-fg: #8fcbea;
+  --tone-progress-bg: #2f2540; --tone-progress-fg: #c9b9f5;
+  --tone-warning-bg: #3a3320;  --tone-warning-fg: #f2ce6b;
+  --tone-danger-bg: #3b2233;   --tone-danger-fg: #ff9dc4;
+  --tone-success-bg: #22302a;  --tone-success-fg: #a9d8b8;
+}
+
+.button--small {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: fit-content;
+  padding: 9px 12px;
+  font-size: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background-color: var(--canvas);
+}
+
+body::before {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  content: '';
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Cpath d='M0 24h96M0 72h96M24 0v96M72 0v96' fill='none' stroke='%23ead9f8' stroke-width='1'/%3E%3Ccircle cx='24' cy='24' r='2' fill='%23f5bbda'/%3E%3Ccircle cx='72' cy='72' r='2' fill='%23f5bbda'/%3E%3C/svg%3E");
+  background-position: 0 calc(var(--scroll-progress, 0) * 22px);
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--pink);
+  outline-offset: 4px;
+}
+
+section {
+  scroll-margin-top: 110px;
+}
+
+.sr-only,
+.skip-link {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link:focus {
+  z-index: 100;
+  top: 16px;
+  left: 16px;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 10px 16px;
+  clip: auto;
+  border-radius: 999px;
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  text-decoration: none;
+}
+
+.brand__mark {
+  display: grid;
+  width: 31px;
+  height: 31px;
+  place-items: center;
+  border-radius: 50% 50% 50% 8px;
+  color: var(--on-accent);
+  background: var(--pink);
+  font-size: 12px;
+  letter-spacing: -0.08em;
+  transform: rotate(-8deg);
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  padding: 15px 22px;
+  text-decoration: none;
+  color: var(--ink);
+  font-weight: 700;
+  transition: transform 200ms var(--ease-bounce), box-shadow 200ms ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+}
+
+.button--small {
+  padding: 10px 15px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.button--primary {
+  color: var(--paper);
+  background: var(--ink);
+  box-shadow: 4px 5px 0 var(--pink);
+}
+
+.button--secondary {
+  color: var(--ink);
+  background: var(--canvas);
+  box-shadow: 2px 3px 0 var(--line);
+}
+
+.button--dark {
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.text-link {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  color: var(--ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.text-link span {
+  color: var(--pink);
+  transition: transform 200ms ease;
+}
+
+.text-link:hover span {
+  transform: translate(3px, 3px);
+}
+
+.text-link--button {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.section-shell {
+  width: min(1160px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.eyebrow {
+  margin: 0 0 18px;
+  color: var(--pink);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2 {
+  font-family: Fredoka, system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+}
+
+h1 {
+  max-width: 720px;
+  margin-bottom: 28px;
+  font-size: clamp(58px, 8vw, 112px);
+}
+
+h1 em {
+  color: var(--pink);
+  font-style: normal;
+}
+
+h2 {
+  margin-bottom: 24px;
+  font-size: clamp(44px, 6vw, 82px);
+}
+
+h3 {
+  margin-bottom: 12px;
+  font-size: 20px;
+  letter-spacing: -0.03em;
+}
+
+.reveal {
+  opacity: 1;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.text-link svg,
+.button svg {
+  flex: none;
+  transition: transform 200ms var(--ease-bounce);
+}
+
+.text-link:hover svg,
+.button:hover svg {
+  transform: translate(3px, -3px);
+}
+
+@keyframes float-pink { 0%, 100% { transform: translate3d(0, 0, 0) rotate(0); } 50% { transform: translate3d(-14px, 18px, 0) rotate(5deg); } }
+
+@keyframes float-blue { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(18px, -12px, 0); } }
+
+@media (max-width: 900px) {
+  .button--small {
+    padding: 9px 11px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 620px) {
+  .section-shell {
+    width: min(100% - 32px, 560px);
+  }
+  .policy-page,
+  .auth-page {
+    padding-top: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Visual audit fix: standalone text links meet the 24px target size. */
+.text-link, .auth-support-link, .hero__scroll { display: inline-flex; align-items: center; min-height: 24px; }
+
+/* Visual audit fix: footer links, demo state previewer, and heading anchors meet 24px targets. */
+.site-footer a, .public-footer a, footer nav a { display: inline-flex; align-items: center; min-height: 24px; }
+.policy-section__anchor { display: inline-flex; align-items: center; justify-content: center; min-width: 24px; }
+details > summary:where(:not(.button)) { min-height: 24px; }
+
+/* Quiet button: text only, for actions that must not compete with content (one loud button per screen). */
+.button--quiet { min-height: 40px; padding: 8px 12px; border-color: transparent; color: var(--pink); background: transparent; box-shadow: none; }
+.button--quiet:hover { background: var(--pink-soft); }
+
+/* Dark theme details (the tokens are above). Native controls and scrollbars follow the theme. */
+:root[data-theme='dark'] { color-scheme: dark; }
+:root[data-theme='dark'] body::before { opacity: 0.12; }

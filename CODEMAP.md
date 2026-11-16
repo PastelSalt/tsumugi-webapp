@@ -38,7 +38,7 @@ This document is the maintained index of the current codebase. Update it when fi
 | `docs/plan/backend/PLAN-B-18.md`, `PLAN-B-19.md` | Future designs: teams and collaboration, notifications/recurrence/background jobs |
 | `docs/` | Draft legal policies for owner/legal review, and `individual-workspace-guide.md` (user guide, rendered at `/help`) |
 | `docs/plan/frontend/` | Frontend plan-A documents for landing, legal, auth, authenticated workspace, and protected user pages |
-| `docs/plan/backend/` | Reserved location for future backend plan-B documents |
+| `docs/plan/backend/` | Backend plan-B documents (planning only; nothing implemented yet) |
 | `Server/` | Initial server package configuration |
 | `client/` | React + Vite application |
 

@@ -18,7 +18,7 @@ Related: [PLAN-B-00 open questions (section 13)](plan/backend/PLAN-B-00.md#13-op
 | C. Legal and public-release tasks | C1-14 to C1-18 | Making the repository public, publishing the legal pages |
 | D. Checks that need real people or devices | C1-19 to C1-22 | Confidence in accessibility and usability |
 | E. Optional choices (defaults are fine) | C1-23 to C1-26 | Nothing; I can proceed with the default |
-| F. Mobile app (Flutter) | C1-27 to C1-29 | Connecting the Android app to the backend, notifications, store release |
+| F. Mobile app (Flutter) | C1-27 (settled), C1-28, C1-29 | Connecting the Android app to the backend, notifications, store release |
 
 ---
 
@@ -175,7 +175,9 @@ These are listed in the frontend plans and testing checklist; I cannot do them f
 
 Found while reviewing `../tsumugi-mobile` for [PLAN-D-01](PLAN-D-01.md). These need the owner because the mobile app has its own recorded decisions.
 
-### C1-27 🔴 Lift or narrow the mobile "play-demo" rule
+### C1-27 ✅ Lift or narrow the mobile "play-demo" rule (settled 2026-11-16)
+
+> **Fully decided 2026-11-16 (owner): yes, the mobile app may use the network after sign-in.** Together with the demo decision below, C1-27 is closed. The mobile update can start against the local backend (debug builds). Release builds still wait on HTTPS and a public address (C1-02, C1-03).
 
 > **Decided 2026-11-16 (owner): the demo stays, permanently, on both the website and the mobile app, including in production.** The website demo is built and reload-proof at `/demo`. For mobile, the demo ("Continue as demo user") keeps running on bundled sample data with no network. What is still open is only the second half below: whether signed-in use may network.
 
@@ -217,3 +219,4 @@ When you decide an item, tell me the item number and the decision. I will: (1) m
 | # | Decision | Date |
 | --- | --- | --- |
 | C1-27 (part) | The demo stays on both web and mobile, permanently, including in production | 2026-11-16 |
+| C1-27 (rest) | The mobile app may use the network (and local storage) after sign-in; the demo path stays offline | 2026-11-16 |

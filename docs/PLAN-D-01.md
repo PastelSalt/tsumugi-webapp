@@ -72,7 +72,9 @@ This is close to the backend's shape by design: the app was ported from the same
 
 ---
 
-## 3. Decision required before any networking (play-demo)
+## 3. Decision on the play-demo rule (settled 2026-11-16)
+
+> **The owner has decided: the mobile app may use the network and local storage after sign-in, and the demo stays offline permanently.** Nothing below is waiting on a decision any more; it describes how to carry the decision out. Work can start against the local backend in debug builds; release builds still need HTTPS and a public address (D-01-B).
 
 `mobile/CONTEXT.md` records a rule that applies to "all future work": the app never gets a backend or online service, never saves anything on the device, and requests no permissions; `test/privacy_test.dart` enforces it. A backend-connected app **contradicts that rule**, so the owner has to lift or narrow it (item **C1-27** in [PLAN-C-01](PLAN-C-01.md)). Suggested narrowing, so the privacy promise stays checkable:
 
@@ -503,7 +505,7 @@ Reset everything: stop the API, delete `Server/.data` and `Server/uploads`. Test
 
 ## 21. Open questions for the mobile side
 
-1. **Lift or narrow the play-demo rule?** (C1-27; everything networked depends on it.)
+1. ~~Lift or narrow the play-demo rule?~~ **Settled 2026-11-16:** network and storage after sign-in are allowed; the demo stays offline (C1-27).
 2. Offline scope for v1: read-only cache, or full offline writes with an outbox? (Decides how soon D-01-C and D-01-E are needed.)
 3. Token auth (D-01-A) before the first internal build, or cookies for now?
 4. Should `textScale` and vibration sync across devices (D-01-M), or stay per-device?

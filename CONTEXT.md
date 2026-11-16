@@ -52,6 +52,7 @@ Old workspace paths redirect: `/dashboard` to `/home`, `/milestones` to `/projec
 
 ## Decisions on record
 
+- **Mobile may use the network after sign-in (owner, 2026-11-16).** The mobile app's "play-demo" rule is narrowed: only the signed-in path networks and stores; the demo path stays offline. The mobile update follows `docs/PLAN-D-01.md`; the mobile repository itself is edited by whoever owns it (this repository only documents the backend side).
 - **The demo is permanent (owner, 2026-11-16), on the website and in the mobile app, including in production.** It is how a curious visitor sees the product without an account. Rules: it runs on the bundled sample data and sends nothing to the server; it stores nothing in the browser (the `?demo` marker lives in the address and `navigate()` carries it along, so reloads and shared links stay in the demo); it is always labelled (Demo chip, banner, "Preview only" dialogs); it must stay accessible (keyboard, screen reader, phone width); and every new workspace feature must either work in demo mode or open a "Preview only" dialog there. Entry points: landing page (header and two buttons), sign-in page, 404 page, and `/demo`.
 
 - The workspace is organised by what the person is doing: five destinations (Home, Projects, Tasks, Library, Insights), Account in the rail footer menu, Quick add and the command palette (`Q`, `Ctrl/Cmd+K`) always reachable. There is no page footer; legal links are in the account menu.

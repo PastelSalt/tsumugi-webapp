@@ -1,120 +1,180 @@
-# Tsumugi (CTINASSL Activity)
+<div align="center">
 
-> **Weaving ideas into finished work.**
+# 🧵 Tsumugi つむぎ
 
-Tsumugi, also known as Project Garden, is a planned creative and technical production-management platform by Moeko Works. It is intended to help individuals and teams plan, organize, track, and preserve projects from concept through completion.
+### Weaving ideas into finished work.
 
-The platform is designed for software development, creative writing and visual novel production, academic research, multimedia production, and personal or multidisciplinary projects. Unlike a conventional task manager, Tsumugi connects objectives, requirements, milestones, tasks, assets, documentation, revisions, and deliverables into one traceable production lifecycle.
+A creative and technical production-management platform, built by **Moeko Works**.
 
-## Project status
+<p>
+  <img alt="Status: pre-alpha" src="https://img.shields.io/badge/status-pre--alpha-f4a6c0?style=flat-square">
+  <img alt="Frontend: React 19" src="https://img.shields.io/badge/react-19-61dafb?style=flat-square&logo=react&logoColor=white">
+  <img alt="Bundler: Vite" src="https://img.shields.io/badge/vite-8-646cff?style=flat-square&logo=vite&logoColor=white">
+  <img alt="Backend: planned" src="https://img.shields.io/badge/backend-planned-b8c0ff?style=flat-square">
+  <img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-a8e6cf?style=flat-square">
+</p>
 
-The repository is a **frontend-only demo** built with Vite and React. The public landing page, demo-mode authentication pages, draft legal pages, and an **individual workspace** (one person, no team features) are implemented on placeholder data. Nothing is saved or sent anywhere; actions that would write open a "Preview only" dialog. There is no backend yet. The product direction and target architecture are in [PROJECT-SPECS.md](PROJECT-SPECS.md).
+[Overview](#-what-is-tsumugi) ·
+[Features](#-features) ·
+[Getting started](#-getting-started) ·
+[Roadmap](#-roadmap) ·
+[Architecture](#-architecture) ·
+[Documentation](#-documentation) ·
+[Contributing](#-contributing)
 
-## Capabilities
+</div>
 
-Implemented in the demo:
+---
 
-- Landing page, auth pages (demo mode), and three draft legal pages.
-- Individual workspace with five destinations: **Home**, **Projects** (list, timeline, and a project page with Overview, Work, Specs, Files, and History), **Tasks** (Today, Upcoming, Calendar, All), **Library** (files, documents, and a reader), and **Insights**, plus **Account** and **Help**.
-- Quick add (`Q`), a command palette (`Ctrl/Cmd+K`), project templates, a first-run checklist, and session-only additions.
-- Explicit links between objectives, requirements, tasks, files, and changes, shown as "Why it exists / What it becomes" on every record.
+## 🌸 What is Tsumugi?
 
-Planned (not implemented): real authentication, persistence, file storage, a backend API, a **team workspace** (people, roles, sharing), notifications, and recurring tasks.
+*Tsumugi* (つむぎ) is spun silk: many loose threads drawn together into one cloth. That is the idea behind the product.
 
-## Application routes
+Most task managers answer one question: *what do I need to do?* Tsumugi also answers **why it exists** and **what it became**. It links objectives, requirements, milestones, tasks, files, and changes into one traceable production lifecycle, so you can follow any piece of work from the reason it started to the deliverable it produced.
 
-| Route | Status | Purpose |
-| --- | --- | --- |
-| `/` | Implemented | Public landing page |
-| `/privacy-policy`, `/terms-of-service`, `/cookie-and-local-storage-policy` | Implemented (drafts) | Legal pages rendered from `docs/*.md` |
-| `/login`, `/register`, `/forgot-password`, `/reset-password` | Implemented (demo mode) | Authentication layouts; nothing typed is read or sent |
-| `/home` | Implemented | What needs attention today |
-| `/projects`, `/projects/:projectId` | Implemented | Project list and timeline; the project page (`?view=overview\|work\|specs\|files\|history`) |
-| `/tasks` | Implemented | Tasks (`?view=today\|upcoming\|calendar\|all`) |
-| `/library` | Implemented | Files and documents; `?doc=` opens the reader |
-| `/insights` | Implemented | Progress, coverage, overdue |
-| `/account` | Implemented (preview only) | Profile and preferences |
-| `/help` | Implemented | The individual workspace guide |
-| `/dashboard`, `/milestones`, `/requirements`, `/revisions`, `/assets`, `/documentation`, `/reports`, `/settings` | Redirects | Old workspace paths forward to the routes above |
+It is built for people who make things, and for work that does not fit a single template:
 
-## Target architecture
+| | |
+|---|---|
+| 💻 **Software** | Requirements → tasks → releases |
+| ✍️ **Creative writing & visual novels** | Outline → chapters → revisions → final cut |
+| 🎓 **Academic research** | Proposal → sources → analysis → publication |
+| 🎬 **Multimedia** | Concept → assets → edits → delivery |
+| 🌱 **Personal & mixed projects** | Whatever shape your work actually has |
 
-The specification calls for a modular MERN-based application:
+> [!NOTE]
+> Tsumugi is in **pre-alpha**. The frontend is a complete, click-through demo running on placeholder data, and the backend is the next thing being built. Nothing you type is saved yet. See the [roadmap](#-roadmap).
 
-- **Frontend:** React, TypeScript, Material UI, Emotion, React Router, TanStack Query, and Vite
-- **Backend:** Node.js, Express, Mongoose, and Zod or an equivalent validation library
-- **Data:** MongoDB Atlas for records and external object storage for binary assets
-- **Deployment:** Vercel for the frontend and an initial serverless API deployment, with MongoDB Atlas and managed object storage
+## ✨ Features
 
-The backend should be organized by business domain, including authentication, users, projects, milestones, tasks, requirements, assets, revisions, documentation, and reports. The design system should use centralized MUI theme tokens and follow the existing Moeko Works portfolio's visual language rather than inventing an unrelated palette.
+### Available in the current demo
 
-## Current repository structure
+- **Individual workspace** with five destinations: **Home**, **Projects**, **Tasks**, **Library**, and **Insights**, plus **Account** and **Help**.
+- **Traceability** on every record: each item shows *Why it exists* and *What it becomes*, linking objectives → requirements → tasks → files → changes.
+- **Projects** as cards or a timeline, with a project page split into Overview, Work, Specs, Files, and History.
+- **Tasks** in Today, Upcoming, Calendar, and All views, with undo (`Ctrl/Cmd + Z`).
+- **Quick add** (`Q`) with a small natural-language syntax, and a **command palette** (`Ctrl/Cmd + K`).
+- **Library** of files and documents with a built-in reader.
+- **Insights** showing progress, coverage, and what is overdue.
+- **Landing page, demo-mode auth pages, and draft legal pages.**
+- **Light, dark, or follow-my-device** theme, restrained motion that respects `prefers-reduced-motion`, and keyboard-friendly navigation.
 
-```text
-.
-├── PROJECT-SPECS.md   Product specification and target architecture
-├── RESEARCH.md        UX research behind the workspace restructure
-├── INSTRUCTIONS.md    Documentation and development rules
-├── LOG.md             Chronological repository action log
-├── CODEMAP.md         Developer and agent codebase index
-├── CONTEXT.md         Portable handoff for continuing the work
-├── docs/              Legal drafts, the individual workspace guide, and plans
-├── Server/            Initial server package configuration
-└── client/            React + Vite client
-```
+### Coming next
 
-See [CODEMAP.md](CODEMAP.md) for the current implemented source map. Generated directories such as `client/node_modules` and `client/dist` are not part of the maintained source map.
+- 🔐 Real authentication and sessions
+- 🗄️ A persistent backend API and database
+- 📎 File and asset storage
+- 👥 A separate **team workspace** (people, roles, sharing)
+- 🔔 Notifications and recurring tasks
 
-## Requirements
+## 🚀 Getting started
 
-- Node.js with npm
+**Requirements:** [Node.js](https://nodejs.org/) (current LTS) and npm.
 
-## Client
-
-```powershell
-cd client
+```bash
+git clone https://github.com/PastelSalt/tsumugi-webapp.git
+cd tsumugi-webapp/client
 npm install
 npm run dev
 ```
 
-Available client scripts:
+Then open the local address Vite prints (usually `http://localhost:5173`).
 
-- `npm run dev` starts the Vite development server.
-- `npm run build` checks the legal documents for unresolved placeholders, then creates a production build in `client/dist`.
-- `npm run check:legal` runs only the placeholder check (warns while the policies are drafts, fails when `LEGAL_STATUS` is `published`).
-- `npm run lint` runs ESLint.
-- `npm run preview` previews the production build.
+### Client scripts
 
-The current client is a code-split React app with in-app navigation (no full page reloads), a shared public header/footer and page-metadata handling, a 404 page, and these areas:
+Run these from `client/`.
 
-- **Landing page** — long-scroll page with GSAP/ScrollTrigger scenes, Lenis smooth scrolling, pointer effects, and reduced-motion support.
-- **Legal pages** — Privacy Policy, Terms of Service, and Cookie & Local Storage Policy rendered from the Markdown drafts in `docs/`, with contents list, anchors, a draft banner, and a storage inventory. They are drafts and `noindex` until reviewed.
-- **Auth pages** — `/login`, `/register`, `/forgot-password`, `/reset-password` in demo mode: nothing typed is read, stored, or sent. Append `?preview=<state>` (or use the "Preview states" list) to view error and result layouts.
-- **Demo workspace** — an individual workspace with five destinations: Home, Projects (with a project page: Overview, Work, Specs, Files, History), Tasks, Library, and Insights, with Account and Help in the account menu at the bottom of the left rail. Tasks includes a month calendar, and `/help` renders the full guide in `docs/individual-workspace-guide.md`. Press `Q` to quick add a task (single-key shortcuts can be turned off), `Ctrl/Cmd+K` to search or jump, `?` for all shortcuts, and `Ctrl/Cmd+Z` to undo a task change. Everything is drawn from placeholder data; additions made with Quick add or a template last for the session only. Add `?dev` to the URL (or use Account) for the developer-tools bar.
+| Command | What it does |
+|---|---|
+| `npm run dev` | Start the Vite development server |
+| `npm run build` | Check legal drafts for unresolved placeholders, then build to `client/dist` |
+| `npm run preview` | Preview the production build |
+| `npm run lint` | Run ESLint |
+| `npm run check:legal` | Run only the legal placeholder check |
 
-Real authentication, backend integration, analytics, durable sessions, saving, and final legal publication remain unimplemented.
+### Try it out
 
-## Server
+| Key | Action |
+|---|---|
+| `Q` | Quick add a task, e.g. `Proof chapter one #garden fri !` |
+| `Ctrl/Cmd + K` | Search or jump anywhere |
+| `?` | Show all shortcuts |
+| `Ctrl/Cmd + Z` | Undo a task change |
 
-The `Server/` directory currently contains only the initial CommonJS `package.json`. No Express application, API routes, database integration, authentication, or server runtime entry point is implemented yet.
+Add `?dev` to any URL for the developer-tools bar (preview states, reset sample data).
 
-## Documentation
+## 🗺️ Roadmap
 
-- [PROJECT-SPECS.md](PROJECT-SPECS.md) defines the product requirements and target architecture.
-- [RESEARCH.md](RESEARCH.md) analyses why the earlier workspace UI felt overwhelming and proposes simplifications (implemented in PLAN-A-04 Revision 3).
-- [CONTEXT.md](CONTEXT.md) is the portable handoff: routes, decisions, known gaps.
-- [docs/individual-workspace-guide.md](docs/individual-workspace-guide.md) is the full user guide for the individual workspace; it is also rendered at `/help`.
-- [INSTRUCTIONS.md](INSTRUCTIONS.md) defines repository maintenance rules.
-- [LOG.md](LOG.md) records actions made in the codebase.
-- [CODEMAP.md](CODEMAP.md) describes the current files, responsibilities, and data flow.
-- Draft legal documents are stored in [docs/](docs/) and require owner/legal review before publication.
-- [client/README.md](client/README.md) covers the client commands and conventions.
-- Frontend plans are organized under [docs/plan/frontend/](docs/plan/frontend/).
-- Backend plans will be organized under [docs/plan/backend/](docs/plan/backend/) when created.
-- [PLAN-A-01.md](docs/plan/frontend/PLAN-A-01.md) covers the landing page.
-- [PLAN-A-02.md](docs/plan/frontend/PLAN-A-02.md) covers the legal pages.
-- [PLAN-A-03.md](docs/plan/frontend/PLAN-A-03.md) covers authentication pages.
-- [PLAN-A-04.md](docs/plan/frontend/PLAN-A-04.md) covers the individual workspace structure and UI (Revision 3, implemented; later changes are in its section 19).
-- [docs/testing/ux-walkthrough-checklist.md](docs/testing/ux-walkthrough-checklist.md) lists the checks that need a person (keyboard, screen reader, zoom, motion).
-- [PLAN-A-05.md](docs/plan/frontend/PLAN-A-05.md) is the UX plan (most items built; section 15 has the status): research, a check of the build against web standards, a prioritised backlog, and a user-testing plan.
-- [PLAN-A-04A.md](docs/plan/frontend/PLAN-A-04A.md) through [PLAN-A-04L.md](docs/plan/frontend/PLAN-A-04L.md) contain the page and cross-cutting plans (Home, Projects, Project page, Work, Tasks, Specs, Library, History, Documents, Insights, Account, and Quick add, templates, first run, palette). Each carries an implementation-status section listing what was built and what was not.
+| Phase | Focus | Status |
+|---|---|---|
+| **1. Frontend demo** | Landing, auth layouts, legal drafts, individual workspace | ✅ Done |
+| **2. Backend foundation** | Express API, MongoDB models, validation, project structure by domain | 🔜 Next |
+| **3. Real accounts** | Registration, login, sessions, password reset | ⬜ Planned |
+| **4. Persistence** | Projects, tasks, requirements, changes saved for real | ⬜ Planned |
+| **5. Files** | Object storage for assets and documents | ⬜ Planned |
+| **6. Deploy** | Frontend and API on Vercel, managed database and storage | ⬜ Planned |
+| **7. Teams** | Team workspace, roles, sharing, notifications | ⬜ Later |
+
+Detailed backend plans will live in [`docs/plan/backend/`](docs/plan/backend/).
+
+## 🏗️ Architecture
+
+**Today**
+
+- **Frontend:** React 19, Vite, plain JavaScript/JSX, GSAP and Lenis for motion, Lucide icons, Fredoka typeface.
+- **Routing:** a small history-API router (`client/src/app/router.js`) with a route table in `client/src/App.jsx`; each route group is its own lazy chunk.
+- **Data:** in-browser placeholder fixtures (`client/src/pages/workspace/data/`). Session-only additions are lost on reload by design.
+
+**Target** (see [PROJECT-SPECS.md](PROJECT-SPECS.md))
+
+- **Backend:** Node.js, Express, Mongoose, and schema validation, organized by business domain (auth, users, projects, milestones, tasks, requirements, assets, revisions, documentation, reports).
+- **Data:** MongoDB Atlas for records, external object storage for binary files.
+- **Deployment:** Vercel for the frontend and an initial serverless API.
+
+### Repository layout
+
+```text
+.
+├── client/            React + Vite frontend
+├── Server/            Backend (package scaffold only, so far)
+├── docs/              Legal drafts, user guide, plans, testing checklists
+├── PROJECT-SPECS.md   Product specification and target architecture
+├── RESEARCH.md        UX research behind the workspace design
+├── CODEMAP.md         Index of the current source code
+├── CONTEXT.md         Handoff notes for picking the work back up
+├── INSTRUCTIONS.md    Documentation and development rules
+└── LOG.md             Chronological change log
+```
+
+## 📚 Documentation
+
+| Read this | To learn about |
+|---|---|
+| [PROJECT-SPECS.md](PROJECT-SPECS.md) | Product requirements and target architecture |
+| [CODEMAP.md](CODEMAP.md) | What each file does and how data flows |
+| [CONTEXT.md](CONTEXT.md) | Current state, decisions on record, known gaps |
+| [RESEARCH.md](RESEARCH.md) | Why the workspace is structured the way it is |
+| [docs/individual-workspace-guide.md](docs/individual-workspace-guide.md) | The user guide (also shown at `/help`) |
+| [docs/plan/frontend/](docs/plan/frontend/) | Frontend plans (`PLAN-A-*`) with implementation status |
+| [docs/testing/ux-walkthrough-checklist.md](docs/testing/ux-walkthrough-checklist.md) | Manual accessibility and UX checks |
+| [client/README.md](client/README.md) | Client commands and conventions |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | How to contribute |
+| [LOG.md](LOG.md) | Full history of changes |
+
+> The Privacy Policy, Terms of Service, and Cookie & Local Storage Policy in [`docs/`](docs/) are **drafts** awaiting owner and legal review. They are not legal advice and are marked `noindex` in the app.
+
+## 🤝 Contributing
+
+Contributions, bug reports, and ideas are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) first; it covers setup, the checks to run, and the documentation rules this project follows.
+
+## 💜 About Moeko Works
+
+Tsumugi is made by **Moeko Works**, a small studio building gentle, well-crafted tools for makers. *Project Garden* is the product's working codename and appears in the demo's sample data.
+
+---
+
+<div align="center">
+
+Made with care, one thread at a time. 🧵
+
+</div>

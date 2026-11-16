@@ -18,7 +18,7 @@ Rules that apply to all work:
 
 ## Product and repository
 
-- Product: **Tsumugi**, a creative and technical production-management platform by Moeko Works. Repository: `PastelSalt/CTINASSL_Activity`.
+- Product: **Tsumugi**, a creative and technical production-management platform by Moeko Works. Repository: `PastelSalt/tsumugi-webapp` (imported from the original class activity repository; its history was not carried over). The project is now developed as a Moeko Works product and is planned to be open source.
 - Stack: Vite, React 19, JavaScript/JSX, GSAP (landing, auth, legal, restrained workspace motion), Lenis (landing only), Lucide, Fredoka.
 - Routing is a small history-API router in `client/src/app/router.js` and a route table in `client/src/App.jsx` (not React Router).
 - Client commands run from `client/`: `npm run dev`, `npm run lint`, `npm run build`, `npm run preview`, `npm run check:legal`.

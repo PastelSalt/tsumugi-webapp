@@ -2,6 +2,8 @@
 
 This file records actions made in the repository. Entries are chronological; each entry includes the date, affected paths, action, and result.
 
+> Entries dated 2026-11-11 to 2026-11-14 were written in the original class activity repository before it was imported here as a new repository. Newest entries for this repository are at the bottom.
+
 ## 2026-11-11
 
 - **Created** `INSTRUCTIONS.md` with repository rules for maintaining the development log, code map, and project documentation.
@@ -345,3 +347,11 @@ This file records actions made in the repository. Entries are chronological; eac
 - **Implemented** PLAN-A-05 third batch (owner: "keep continuing"). **W12** theme switch (Follow my device / Light / Dark) in Account > Appearance, applied to the workspace only: `WorkspaceProvider.jsx` sets `data-theme` on the root while mounted; `workspace.css`, `workspace-pages.css`, `forms.css`, and `base.css` moved from hard-coded colours to tokens (white text on ink becomes `--paper`, text on pink becomes `--on-accent`, 17 hex values mapped to tone, surface, and line tokens, `color-mix` for translucent surfaces); `color-scheme: dark` and a dimmed page pattern in dark. **W15** small motion pass: a **Done this visit** group on Today so completed tasks stay visible and arrive with a short rise, headline cross-fade on Home, Calendar month cross-fade (grid re-keyed; keyboard movement re-tested), press scale on the status circle; reduced motion swaps to a 100 ms fade. Verified: contrast audit in light (11 pages plus the palette) and dark (11 pages plus Quick add, palette, shortcuts, New project, filter, menu, toast, preview dialog) with no failures after disabling transitions in the audit (the hidden browser pane freezes transitions and gave false 1.2:1 readings); the Done group appears and Undo removes it; calendar keys still work after the re-key; `data-theme` is removed on the sign-in page. Lint and build pass. Not verified: the motion by eye, dark on phone widths, screen reader and keyboard-only walkthroughs.
 
 - **Implemented** PLAN-A-05 fourth batch (owner: keep continuing with everything that does not need their intervention). **W19** a "Changes this visit" list with Undo on Home (history entries now carry their message). **W16** icon rail from 768px (rail and phone-bar media queries moved from 1024 to 768; page padding stays 24px until 1024; toast offset only below 768). **PLAN-A-04F** Specs Coverage matrix (`?mode=coverage`, text plus icon gaps). **PLAN-A-04H** comparison empty state for changes without a diff. **New** `docs/testing/ux-walkthrough-checklist.md` for the checks that need a person (keyboard only, screen reader, zoom, motion and theme, first impressions, how to record results). Audit at 768 and 375px found coverage-matrix links under 32px and a 11px code chip (`.req-id` now 12px); fixed. Verified: changes list and Undo, 768px rail layout, matrix, comparison empty state. Not done and needs a person: the walkthroughs, W10 by hand, W17 sessions, W18 (Home title test); W14 waits for session results.
+
+## 2026-11-16 (new repository)
+
+- **Imported** the codebase from `PastelSalt/CTINASSL_Activity` into a new repository (`tsumugi-webapp`) with a fresh single-commit history; the original repository was not modified.
+- **Rewrote** `README.md` as an open-source project README for Moeko Works (overview, features, setup, roadmap, architecture, documentation index).
+- **Created** `CONTRIBUTING.md` with setup, checks, conventions, and documentation rules.
+- **Updated** `PROJECT-SPECS.md` (legacy "Moesoft" brand replaced with Moeko Works), `CONTEXT.md` (new repository name), and `client/README.md` (title).
+- **Validation:** Documentation-only changes; no build or test command was required. No `LICENSE` file added yet; the owner has not chosen one.

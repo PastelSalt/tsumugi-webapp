@@ -4,14 +4,14 @@
 > **Implementation divergence (updated 2026-11-14).** This is the original product specification and target architecture. The frontend demo deliberately differs in structure: the authenticated app is an **individual workspace** with five destinations (`/home`, `/projects`, `/tasks`, `/library`, `/insights`) plus `/account` and `/help`. `/dashboard` became `/home`; Milestones, Requirements, Revisions, Assets, Documentation, Reports, and Settings were folded into Projects, Library, Insights, and Account (the old paths redirect). Assets and documents are one **File** concept; revisions are **Changes**; deliverables are a **Final file** flag. Team features (members, roles, sharing) are deferred to a separate team workspace type. See `README.md`, `RESEARCH.md`, and `docs/plan/frontend/PLAN-A-04.md`. Sections below that name the old routes describe the target backend and remain the specification.
 
 > **Weaving ideas into finished work.**  
-> A creative and technical production management platform by Moesoft.
+> A creative and technical production management platform by Moeko Works.
 
 | Field | Specification |
 |---|---|
 | Project name | Tsumugi (つむぎ) |
 | Working codename | Project Garden |
 | Product category | Creative & Technical Production Management |
-| Organization / brand | Moesoft |
+| Organization / brand | Moeko Works |
 | Primary purpose | Plan, organize, track, and preserve the production lifecycle of projects |
 | Frontend deployment | Vercel |
 | Architecture | MERN-based modular application |
@@ -708,7 +708,7 @@ The following principles should guide design and implementation:
 
 ## 17. Final Product Definition
 
-**Tsumugi** is a MERN-based creative and technical production management platform developed under Moesoft. It provides a centralized workspace for managing software, writing, research, multimedia, and personal projects through configurable workflows, milestones, tasks, requirements, assets, documentation, revisions, and deliverables.
+**Tsumugi** is a MERN-based creative and technical production management platform developed under Moeko Works. It provides a centralized workspace for managing software, writing, research, multimedia, and personal projects through configurable workflows, milestones, tasks, requirements, assets, documentation, revisions, and deliverables.
 
 Its interface follows the established visual identity of the user's portfolio, uses Material UI as its primary frontend component framework, and adopts the public landing page → authentication → protected dashboard architecture established by Niwa.
 

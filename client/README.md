@@ -1,4 +1,4 @@
-# Tsumugi client
+# Tsumugi client (Moeko Works)
 
 React 19 + Vite frontend for Tsumugi. See the [repository README](../README.md) for the product overview and [CODEMAP.md](../CODEMAP.md) for the file index.
 

@@ -408,3 +408,8 @@ This file records actions made in the repository. Entries are chronological; eac
 ## 2026-11-16 (mobile networking decision)
 
 - **Decided** (owner): the mobile app may use the network and local storage after sign-in; the demo path stays offline. PLAN-C-01 C1-27 is now settled (closed), PLAN-D-01 section 3 and open question 1 updated, and `CONTEXT.md` records it. No code changed. The mobile update can start against the local backend (debug builds only); release builds still wait on HTTPS and a public address (C1-02, C1-03).
+
+## 2026-11-16 (mobile integration started)
+
+- **Coded** the first slice of the mobile update in `../tsumugi-mobile` using `docs/PLAN-D-01.md` (owner: "we can start with coding the mobile"): networking foundation, sign-in and sign-up, live workspace, task writes with Undo, New project, sign-out; the demo stays offline. Details are in the mobile repo's `LOG.md`. The mobile repository's changes are **not committed** (only the website repo was asked to be committed).
+- **Added** `docs/PLAN-D-01.md` section 22 (what was built, what was checked, what is still preview-only, backend findings, new item D-01-O). **Validation:** mobile `flutter analyze` clean, 271 tests pass (2 live-server tests skipped by default; run and passed against this backend), debug APK builds. No website code changed.

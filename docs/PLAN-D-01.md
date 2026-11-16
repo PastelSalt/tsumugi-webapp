@@ -516,3 +516,23 @@ Reset everything: stop the API, delete `Server/.data` and `Server/uploads`. Test
 9. Add recurrence UI (the backend has repeating tasks; the app has none)?
 
 Send answers and anything surprising; we will update this document and the matching `PLAN-B` module plans.
+
+---
+
+## 22. Mobile status (2026-11-16)
+
+The first slice of this plan is built in `../tsumugi-mobile` (not committed there yet; see its `LOG.md`). It followed sections 3, 4, 10 and 11, with these differences and findings worth knowing:
+
+**Built:** Dio client in `lib/core/net/` that keeps **only the `tsumugi_sid` cookie value** in secure storage (Android Keystore) and sends it back as a `Cookie` header, so no cookie-jar package is needed; sign-in, sign-up, resuming a saved session at launch, one-request workspace load (snapshot + templates), the account's time zone and server "today" (`setClock`), requirement keys, task actions (complete, status, reschedule, block, priority, edit, subtasks, delete, Quick add) saved to the server with the existing Undo also undone there, New project from a template, sign-out, plain-words error messages, and the permanent offline demo. Release manifest asks for `INTERNET` only; the debug manifest alone allows plain http.
+
+**Checked against the real server (live test, passed):** register, template project, Quick add, complete, Undo, a rejected value (`400`), a document parsing into the app's model, sign-out, sign-in again, account deletion. Also 29 new unit and widget tests against an in-memory server built from the real samples in `docs/samples/`. A debug APK builds. **Not checked:** on a phone or emulator (none was connected), a release build, TalkBack.
+
+**Findings for the backend (feeds section 15):**
+- The first sign-in of a new account has the server time zone `UTC` until the app sends the device zone; the app now sets it once at sign-up and, after sign-in, only if the account still has the `UTC` placeholder. A server-side default from a client-supplied zone header would be tidier (new item D-01-O).
+- Without idempotency keys (D-01-D) a retried **create** can duplicate. The app does not retry creates; failed saves are reported and the server's version is reloaded.
+- Without incremental sync (D-01-C) every write is followed by a full snapshot reload (about 45 KB for the demo workspace). Fine for now, wasteful on mobile data at scale.
+- Still preview-only in the app when signed in: editing a project, milestone and requirement writes, file and note creation, the reader's Edit, History "reviewed", preferences sync, password change, pull-to-refresh, an offline outbox.
+
+| ID | Need | Proposed work |
+| --- | --- | --- |
+| D-01-O | New accounts start in the wrong time zone | Accept an optional `timeZone` on `POST /auth/login`, or a client-zone header, and set it once if the account still has the placeholder |

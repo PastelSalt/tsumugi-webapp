@@ -1,0 +1,23 @@
+/* Forms and states added when the workspace became real (PLAN-B-17). Uses the existing design tokens. */
+.live-gate { display: grid; place-items: center; gap: 1rem; min-height: 60vh; padding: 2rem; text-align: center; }
+
+.ws-modal--form { width: min(640px, calc(100vw - 2rem)); }
+.ws-form { display: grid; gap: 0.9rem; }
+.ws-form textarea, .ws-form select, .ws-form input[type="date"], .ws-form input[type="url"], .ws-form input[type="file"] {
+  width: 100%; font: inherit; color: inherit; background: var(--surface, #fff);
+  border: 1.5px solid var(--control-border, currentColor); border-radius: 12px; padding: 0.6rem 0.75rem; min-height: 44px;
+}
+.ws-form textarea { resize: vertical; line-height: 1.5; }
+.ws-form__editor { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.9rem; }
+.ws-form__row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.75rem; }
+.ws-form__group { border: 1.5px solid var(--control-border, currentColor); border-radius: 12px; padding: 0.6rem 0.9rem 0.9rem; display: grid; gap: 0.4rem; max-height: 220px; overflow: auto; }
+.ws-form__group legend { padding: 0 0.4rem; font-weight: 600; }
+.ws-form .ws-modal__actions { flex-wrap: wrap; }
+.ws-form .ws-modal__actions > :first-child:not(:last-child):not(.button--secondary) { margin-right: auto; }
+
+.ws-toast--error { border-color: #b3261e; }
+.ws-toast--error .ws-toast__text::before { content: "Couldn’t save: "; font-weight: 600; }
+.auth-live-hint { font-size: 0.85rem; }
+
+.checklist__toggle { display: inline-flex; align-items: center; gap: 0.5rem; background: none; border: 0; padding: 0.25rem 0; font: inherit; color: inherit; text-align: left; cursor: pointer; min-height: 32px; }
+.checklist__toggle:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; border-radius: 6px; }

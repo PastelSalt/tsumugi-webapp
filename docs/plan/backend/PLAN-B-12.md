@@ -1,6 +1,8 @@
 # PLAN-B-12 — Changes, Links, and Traceability
 
-**Status:** Proposed · **Phase:** 6 (link service needed earlier, delivered with Phase 3) · **Depends on:** [03](PLAN-B-03.md) and event emitters in 06–11 · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
+> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). Validated links and recorded History work; the dedicated trace endpoints are not built. See [Implementation status](#implementation-status-mvp) at the end.
+
+**Status:** 🟡 Partly done (MVP) · **Phase:** 6 (link service needed earlier, delivered with Phase 3) · **Depends on:** [03](PLAN-B-03.md) and event emitters in 06–11 · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [08 Tasks](PLAN-B-08.md) · [09 Requirements](PLAN-B-09.md) · [10 Files](PLAN-B-10.md) · [11 Documents](PLAN-B-11.md) · [13 Insights](PLAN-B-13.md) · frontend [PLAN-A-04H](../frontend/PLAN-A-04H.md) (History)
 
 ## 1. Purpose and scope
@@ -177,3 +179,23 @@ Link validation matrix (every illegal pair, cross-project, duplicates, self, arc
 - Whether to allow a manual "note" Change (a person's own history entry). Default: no for v0.1.
 - Whether Change summaries should be regenerated when records are renamed. Default: no; history records what was true at the time.
 - Whether a Final file should be linked to a **milestone** as the milestone's deliverable (the demo uses `milestoneId` on files; kept as a foreign key).
+
+---
+
+## Implementation status (MVP)
+
+**🟡 Partly done (MVP)** · local MVP, built 2026-11-16 · Validated links and recorded History work; the dedicated trace endpoints are not built.
+
+**Built**
+
+- Links service with the closed relation set, same-project and existence validation, set replacement, batched reads (`services/links.js`).
+- Changes recorded by the services with plain summaries and linked requirements/tasks; History list, reviewed flag, document diffs from stored versions (`services/changes.js`, `shape.js`).
+- Frontend History and the "Why it exists / What it becomes" panels run on real links.
+
+**Not built yet**
+
+- `GET /records/:type/:id/trace` and `/links`, gap-catalogue endpoint, change coalescing, atomic recording with the write (no transactions locally), integrity checker.
+
+**Deviations and notes**
+
+- Services call `recordChange()` directly; the in-process event bus described in the plan is not implemented.

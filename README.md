@@ -44,54 +44,67 @@ It is built for people who make things, and for work that does not fit a single 
 | 🌱 **Personal & mixed projects** | Whatever shape your work actually has |
 
 > [!NOTE]
-> Tsumugi is in **pre-alpha**. The frontend is a complete, click-through demo running on placeholder data, and the backend is the next thing being built. Nothing you type is saved yet. See the [roadmap](#-roadmap).
+> Tsumugi is in **pre-alpha, local MVP**. It runs on your own computer: a MongoDB database stored in this folder, an Express API, and the React app. Accounts, projects, tasks, requirements, files, and documents are saved for real. There is no email, no sign-in with other services, and no hosted deployment yet. See the [roadmap](#-roadmap).
 
 ## ✨ Features
 
-### Available in the current demo
+### Working now (local MVP)
 
+- **Real accounts** with email and password, saved on your computer. Each account has its own individual workspace.
 - **Individual workspace** with five destinations: **Home**, **Projects**, **Tasks**, **Library**, and **Insights**, plus **Account** and **Help**.
 - **Traceability** on every record: each item shows *Why it exists* and *What it becomes*, linking objectives → requirements → tasks → files → changes.
 - **Projects** as cards or a timeline, with a project page split into Overview, Work, Specs, Files, and History.
 - **Tasks** in Today, Upcoming, Calendar, and All views, with undo (`Ctrl/Cmd + Z`).
 - **Quick add** (`Q`) with a small natural-language syntax, and a **command palette** (`Ctrl/Cmd + K`).
-- **Library** of files and documents with a built-in reader.
+- **Library** of uploaded files, links, and Markdown documents with version history, comparison, and a built-in reader.
+- **Requirements** with acceptance criteria that you tick off; a requirement can only be marked met when every criterion is.
 - **Insights** showing progress, coverage, and what is overdue.
-- **Landing page, demo-mode auth pages, and draft legal pages.**
+- **History** of every meaningful change, with before/after comparison for documents.
+- **Landing page, sign-in and sign-up pages, and draft legal pages.** A no-account sample workspace is still available at `/home?demo`.
 - **Light, dark, or follow-my-device** theme, restrained motion that respects `prefers-reduced-motion`, and keyboard-friendly navigation.
 
 ### Coming next
 
-- 🔐 Real authentication and sessions
-- 🗄️ A persistent backend API and database
-- 📎 File and asset storage
+- ✉️ Email verification and password recovery (needs an email provider)
+- ☁️ Deployment, cloud database, and object storage for files
 - 👥 A separate **team workspace** (people, roles, sharing)
 - 🔔 Notifications and recurring tasks
 
 ## 🚀 Getting started
 
-**Requirements:** [Node.js](https://nodejs.org/) (current LTS) and npm.
+**Requirements:** [Node.js](https://nodejs.org/) 20 or newer (current LTS) and npm. Nothing else: the database is built in.
 
 ```bash
 git clone https://github.com/PastelSalt/tsumugi-webapp.git
-cd tsumugi-webapp/client
-npm install
-npm run dev
+cd tsumugi-webapp
+npm run setup     # installs the server and the client
+npm run dev       # starts the API (port 3001) and the app (port 5173)
 ```
 
-Then open the local address Vite prints (usually `http://localhost:5173`).
+Open **http://localhost:5173**, choose **Create account**, and start a project. To look around first, run `npm run seed` in another terminal and sign in as `demo@tsumugi.local` with the password `demo-password-1` (sample projects, tasks, requirements, documents, and history).
 
-### Client scripts
+**Where your data lives**
 
-Run these from `client/`.
-
-| Command | What it does |
+| What | Where |
 |---|---|
-| `npm run dev` | Start the Vite development server |
-| `npm run build` | Check legal drafts for unresolved placeholders, then build to `client/dist` |
-| `npm run preview` | Preview the production build |
-| `npm run lint` | Run ESLint |
-| `npm run check:legal` | Run only the legal placeholder check |
+| Database | `Server/.data/` (a MongoDB that starts automatically; the first run downloads its engine once, then it works offline) |
+| Uploaded files | `Server/uploads/` |
+| Settings | Optional `Server/.env` (see `Server/.env.example`), for example `MONGODB_URI` to use a MongoDB you installed yourself |
+
+Both folders are ignored by git. To start fresh, stop the app and delete them.
+
+### Scripts
+
+| Command (from the repo root) | What it does |
+|---|---|
+| `npm run setup` | Install dependencies for `Server/` and `client/` |
+| `npm run dev` | Start the API and the web app together |
+| `npm run seed` | Create the demo account and sample data (the API can be running) |
+| `npm test` | Run the server tests (they use a temporary in-memory database) |
+| `npm run lint` | Lint the client |
+| `npm run build` | Check the legal drafts, then build the client to `client/dist` |
+
+Client-only commands (`dev`, `build`, `preview`, `lint`, `check:legal`) also work from `client/`.
 
 ### Try it out
 
@@ -102,42 +115,44 @@ Run these from `client/`.
 | `?` | Show all shortcuts |
 | `Ctrl/Cmd + Z` | Undo a task change |
 
-Add `?dev` to any URL for the developer-tools bar (preview states, reset sample data).
+Add `?dev` to any URL for the developer-tools bar (designed states such as loading, empty, and error).
 
 ## 🗺️ Roadmap
 
 | Phase | Focus | Status |
 |---|---|---|
 | **1. Frontend demo** | Landing, auth layouts, legal drafts, individual workspace | ✅ Done |
-| **2. Backend foundation** | Express API, MongoDB models, validation, project structure by domain | 🔜 Next |
-| **3. Real accounts** | Registration, login, sessions, password reset | ⬜ Planned |
-| **4. Persistence** | Projects, tasks, requirements, changes saved for real | ⬜ Planned |
-| **5. Files** | Object storage for assets and documents | ⬜ Planned |
-| **6. Deploy** | Frontend and API on Vercel, managed database and storage | ⬜ Planned |
+| **2. Backend foundation** | Express API, MongoDB models, validation | ✅ Done (local) |
+| **3. Real accounts** | Registration, login, sessions (no email yet) | ✅ Done (local), 🔜 email recovery |
+| **4. Persistence** | Projects, tasks, requirements, documents, history saved for real | ✅ Done (local) |
+| **5. Files** | Uploads, links, Final files | ✅ Done (stored on this computer), 🔜 object storage |
+| **6. Hardening and deploy** | Tests in CI, security review, Vercel, Atlas, managed storage | 🔜 Next |
 | **7. Teams** | Team workspace, roles, sharing, notifications | ⬜ Later |
 
-The full backend plan is in [`docs/plan/backend/`](docs/plan/backend/). Start with the master plan, [PLAN-B-00](docs/plan/backend/PLAN-B-00.md), which indexes one detailed plan per module (foundation, API conventions, data model, authentication, workspaces, projects, milestones, tasks, requirements, files, documents, traceability, insights, security, testing, deployment, and frontend integration).
+Each backend plan is marked done, partly done, or not started at its end (and in [section 16 of the master plan](docs/plan/backend/PLAN-B-00.md#16-implementation-status)). The full backend plan is in [`docs/plan/backend/`](docs/plan/backend/). Start with the master plan, [PLAN-B-00](docs/plan/backend/PLAN-B-00.md), which indexes one detailed plan per module (foundation, API conventions, data model, authentication, workspaces, projects, milestones, tasks, requirements, files, documents, traceability, insights, security, testing, deployment, and frontend integration).
 
 ## 🏗️ Architecture
 
-**Today**
+**Today (local MVP)**
 
-- **Frontend:** React 19, Vite, plain JavaScript/JSX, GSAP and Lenis for motion, Lucide icons, Fredoka typeface.
-- **Routing:** a small history-API router (`client/src/app/router.js`) with a route table in `client/src/App.jsx`; each route group is its own lazy chunk.
-- **Data:** in-browser placeholder fixtures (`client/src/pages/workspace/data/`). Session-only additions are lost on reload by design.
+- **Frontend:** React 19, Vite, plain JavaScript/JSX, GSAP and Lenis for motion, Lucide icons, Fredoka typeface. A small history-API router (`client/src/app/router.js`) and lazy route chunks.
+- **API:** Node.js, Express 5, Mongoose, Zod validation, under `/api/v1`. Cookie sessions (opaque, hashed tokens), strict request validation, one error format, and a tenant guard that scopes every query to the signed-in workspace.
+- **Data:** MongoDB (local, stored in `Server/.data`), with links between records stored as validated edges; uploaded files on local disk.
+- **Bridge:** the app loads the whole workspace as one snapshot (`GET /api/v1/workspace/snapshot`) and saves each change through the API (`client/src/pages/workspace/data/store.js`).
 
-**Target** (see [PROJECT-SPECS.md](PROJECT-SPECS.md))
+**Target** (see [PROJECT-SPECS.md](PROJECT-SPECS.md) and [PLAN-B-00](docs/plan/backend/PLAN-B-00.md))
 
-- **Backend:** Node.js, Express, Mongoose, and schema validation, organized by business domain (auth, users, projects, milestones, tasks, requirements, assets, revisions, documentation, reports).
 - **Data:** MongoDB Atlas for records, external object storage for binary files.
 - **Deployment:** Vercel for the frontend and an initial serverless API.
+- **Hardening:** TypeScript, CI, Argon2id, persistent rate limits, email flows.
 
 ### Repository layout
 
 ```text
 .
 ├── client/            React + Vite frontend
-├── Server/            Backend (package scaffold only, so far)
+├── Server/            Express + MongoDB API (src/, test/, scripts/)
+├── scripts/           Root helper scripts (npm run dev)
 ├── docs/              Legal drafts, user guide, plans, testing checklists
 ├── PROJECT-SPECS.md   Product specification and target architecture
 ├── RESEARCH.md        UX research behind the workspace design
@@ -160,6 +175,7 @@ The full backend plan is in [`docs/plan/backend/`](docs/plan/backend/). Start wi
 | [docs/plan/backend/PLAN-B-00.md](docs/plan/backend/PLAN-B-00.md) | Backend master plan and index of the per-module plans (`PLAN-B-01` to `PLAN-B-19`) |
 | [docs/testing/ux-walkthrough-checklist.md](docs/testing/ux-walkthrough-checklist.md) | Manual accessibility and UX checks |
 | [client/README.md](client/README.md) | Client commands and conventions |
+| [Server/README.md](Server/README.md) | API setup, endpoints, and conventions |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | How to contribute |
 | [LOG.md](LOG.md) | Full history of changes |
 

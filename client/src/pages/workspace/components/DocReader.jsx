@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ArrowLeft } from 'lucide-react'
 import { parseDocument, renderBlocks } from '../../../lib/markdown'
-import { get } from '../data/selectors'
+import { get, reqLabel } from '../data/selectors'
 import { formatDate } from '../data/format'
 import { StatusBadge, RelationChip } from './badges'
 import { LensBlock } from './records'
@@ -26,7 +26,7 @@ export default function DocReader({ doc, backHref = '/library' }) {
             <button type="button" aria-pressed={mode === 'preview'} onClick={() => setMode('preview')}>Preview</button>
             <button type="button" aria-pressed={mode === 'source'} onClick={() => setMode('source')}>Source</button>
           </div>
-          <PreviewAction label="Edit" variant="primary" />
+          <PreviewAction label="Edit" variant="primary" record={doc} />
         </div>
       </header>
       <div className="reader__layout">
@@ -41,7 +41,7 @@ export default function DocReader({ doc, backHref = '/library' }) {
         </div>
       </div>
       <LensBlock
-        why={doc.requirementIds.map((id) => <RelationChip type="Requirement" id={id} label={id} key={id} />)}
+        why={doc.requirementIds.map((id) => <RelationChip type="Requirement" id={id} label={reqLabel(id)} key={id} />)}
         becomes={doc.taskIds.map((id) => <RelationChip type="Task" id={id} key={id} />)}
         emptyWhy="Not linked to a requirement." emptyBecomes="Not linked to a task."
       />

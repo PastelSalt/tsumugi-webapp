@@ -85,7 +85,11 @@ export function recents(limit = 6) {
 }
 
 /* ---------- Specs ---------- */
-export const isFinalFile = (file) => (file.body ? file.status === 'Final' : Boolean(file.isFinal))
+/** Markdown documents carry a `body` (possibly empty); uploaded files and links never do. */
+export const isDoc = (file) => file != null && 'body' in file
+export const isFinalFile = (file) => (isDoc(file) ? file.status === 'Final' : Boolean(file.isFinal))
+/** What people read for a requirement: its key (REQ-001) in live data, its id in the sample data. */
+export const reqLabel = (id) => get('requirement', id)?.key ?? id
 export const criteriaProgress = (req) => ({ met: req.acceptance.filter((c) => c.met).length, total: req.acceptance.length })
 
 /** What a requirement is linked to, and which links are still missing (a "lens" on the record). */
@@ -116,7 +120,7 @@ export function recordHref(type, id) {
   if (type === 'Task') return `/tasks?select=${id}`
   const record = get(type.toLowerCase(), id)
   if (!record) return '/home'
-  if (type === 'File') return record.body ? `/library?doc=${id}` : `/library?select=${id}`
+  if (type === 'File') return isDoc(record) ? `/library?doc=${id}` : `/library?select=${id}`
   const view = { Requirement: 'specs', Milestone: 'work', Change: 'history' }[type]
   return `/projects/${record.projectId}?view=${view}&select=${id}`
 }

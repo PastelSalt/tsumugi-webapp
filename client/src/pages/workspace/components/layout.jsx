@@ -19,16 +19,23 @@ const PREVIEW_COPY = {
   Edit: ['Editing documents isn’t in the demo yet', 'In the real product you would edit the Markdown and save a new version, which appears in History. In the demo you can read the document and view its source.'],
 }
 
-/** Button that opens the preview-only dialog (PLAN-A-04 section 1). Never performs the action. */
-export function PreviewAction({ label, icon: Icon = ArrowUpRight, title, body, variant = 'secondary', iconOnlyOnMobile = false }) {
-  const { preview } = useWorkspace()
+/**
+ * In demo mode: a button that opens the preview-only dialog (PLAN-A-04 section 1) and never performs the action.
+ * When signed in: the same button performs the action (or opens its form) on `record` (PLAN-B-17 section 5).
+ */
+export function PreviewAction({ label, icon: Icon = ArrowUpRight, title, body, variant = 'secondary', iconOnlyOnMobile = false, record }) {
+  const { preview, runAction } = useWorkspace()
   return (
     <button
       className={`button button--small ${variant === 'primary' ? 'button--primary' : variant === 'quiet' ? 'button--quiet' : 'button--secondary'}${iconOnlyOnMobile ? ' ws-action--collapse' : ''}`}
       type="button"
       aria-haspopup="dialog"
       aria-label={iconOnlyOnMobile ? label : undefined}
-      onClick={() => { const copy = PREVIEW_COPY[label]; preview(title || copy?.[0] || `${label} isn’t in the demo yet`, body || copy?.[1] || 'This shows where the action will live. Nothing is created, changed, or saved in the demo.') }}
+      onClick={() => {
+        if (runAction(label, record)) return
+        const copy = PREVIEW_COPY[label]
+        preview(title || copy?.[0] || `${label} isn’t in the demo yet`, body || copy?.[1] || 'This shows where the action will live. Nothing is created, changed, or saved in the demo.')
+      }}
     >
       <Icon size={16} aria-hidden="true" /><span>{label}</span>
     </button>

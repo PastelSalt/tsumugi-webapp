@@ -6,23 +6,23 @@ Thanks for your interest in Tsumugi, a Moeko Works project. This guide covers ho
 
 ```bash
 git clone https://github.com/PastelSalt/tsumugi-webapp.git
-cd tsumugi-webapp/client
-npm install
-npm run dev
+cd tsumugi-webapp
+npm run setup   # installs Server/ and client/
+npm run dev     # API on :3001 and the app on :5173; the database is built in
+npm run seed    # optional demo account (demo@tsumugi.local / demo-password-1)
 ```
 
-You need Node.js (current LTS) and npm.
+You need Node.js 20 or newer and npm. No separate database install is needed.
 
 ## Before you open a pull request
 
-From `client/`:
-
 ```bash
-npm run lint
-npm run build
+npm test        # server tests (in-memory database)
+npm run lint    # client lint
+npm run build   # client build (also checks the legal drafts)
 ```
 
-Both must pass. Also look at the pages you changed in a browser at phone and desktop widths, and check that motion respects `prefers-reduced-motion`.
+All three must pass. Also look at the pages you changed in a browser, signed in and in the demo (`/home?demo`), at phone and desktop widths, and check that motion respects `prefers-reduced-motion`.
 
 ## Conventions
 
@@ -41,7 +41,7 @@ Documentation is part of the change. See [INSTRUCTIONS.md](INSTRUCTIONS.md); in 
 
 ## Backend work
 
-The backend in `Server/` is not built yet. Plans go in `docs/plan/backend/` as `PLAN-B-*` documents; please discuss a design in an issue before large backend changes.
+The backend lives in `Server/` (see [Server/README.md](Server/README.md)). Plans are in `docs/plan/backend/` as `PLAN-B-*` documents and each ends with an implementation status; update it when you build or change a module. Every endpoint needs a test that includes the "another user gets 404" case. Please discuss a design in an issue before large backend changes.
 
 ## Reporting issues
 

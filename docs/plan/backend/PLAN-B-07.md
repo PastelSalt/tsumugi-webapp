@@ -1,6 +1,8 @@
 # PLAN-B-07 — Milestones
 
-**Status:** Proposed · **Phase:** 3 · **Depends on:** [06](PLAN-B-06.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
+> **Implementation status (2026-11-16):** ✅ Done (MVP). Milestones are fully usable; the dedicated timeline endpoint is not needed by the current UI. See [Implementation status](#implementation-status-mvp) at the end.
+
+**Status:** ✅ Done (MVP) · **Phase:** 3 · **Depends on:** [06](PLAN-B-06.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [08 Tasks](PLAN-B-08.md) · [09 Requirements](PLAN-B-09.md) · [13 Derived metrics](PLAN-B-13.md) · frontend [PLAN-A-04D](../frontend/PLAN-A-04D.md) (Work), timeline view in [PLAN-A-04B](../frontend/PLAN-A-04B.md)
 
 ## 1. Purpose and scope
@@ -110,3 +112,19 @@ State derivation across the four cases and time zones (a milestone due "today" i
 
 - Whether `afterId` should become a many-to-many predecessor list (needs a UI; deferred).
 - Whether a milestone's `blocked` flag should be derived from blocked tasks (default: independent flag, as in the demo).
+
+---
+
+## Implementation status (MVP)
+
+**✅ Done (MVP)** · local MVP, built 2026-11-16 · Milestones are fully usable; the dedicated timeline endpoint is not needed by the current UI.
+
+**Built**
+
+- Create, list, update (including done/reopen and blocked), delete (detaches tasks, requirements, files).
+- Date rules, phase check, and dependency cycle prevention (`services/milestones.js`).
+- Frontend: Add/Edit milestone dialogs, Mark done/Reopen.
+
+**Not built yet**
+
+- `GET /projects/:id/timeline`, `complete` with `completeOpenTasks`, restore for milestones, per-project cap, server-side `state` and `progress` fields.

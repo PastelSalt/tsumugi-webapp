@@ -3,9 +3,12 @@ import PreviewDialog from '../../components/forms/PreviewDialog'
 import { WorkspaceContext } from './context'
 import { useMediaQuery } from '../../hooks/useMediaQuery'
 import Toast from './components/Toast'
-import { canUndo, undoLast } from './data/store'
+import { canUndo, handle, isLive, undoLast } from './data/store'
+import { DIALOGS, IMMEDIATE } from './data/liveActions'
+import { updateMe, useSession } from '../../lib/session'
 
 // Quick add, the palette, and the template picker load on first use (PLAN-A-04L section 6).
+const ActionDialog = lazy(() => import('./quickadd/ActionDialogs'))
 const QuickAdd = lazy(() => import('./quickadd/QuickAdd'))
 const CommandPalette = lazy(() => import('./quickadd/CommandPalette'))
 const NewProjectDialog = lazy(() => import('./quickadd/NewProjectDialog'))
@@ -20,13 +23,21 @@ export default function WorkspaceProvider({ children }) {
   const [palette, setPalette] = useState({ open: false, mounted: false })
   const [newProject, setNewProject] = useState({ open: false, mounted: false })
   const [shortcutsHelp, setShortcutsHelp] = useState({ open: false, mounted: false })
-  // Single-key shortcuts can be turned off (WCAG 2.1.4). Held in memory only; modifier shortcuts always work.
-  const [shortcuts, setShortcuts] = useState(true)
-  const [demoNote, setDemoNote] = useState(true)
-  const [weekStart, setWeekStart] = useState('monday') // applies at once to the Calendar; in memory only
+  // Preferences are saved to the account when signed in; in the demo they live in memory only.
+  const { user } = useSession()
+  const prefs = isLive() ? user?.preferences : null
+  const save = useCallback((patch) => { if (isLive()) updateMe({ preferences: patch }).catch(handle) }, [])
+  // Single-key shortcuts can be turned off (WCAG 2.1.4). Modifier shortcuts always work.
+  const [shortcuts, setShortcutsState] = useState(prefs?.shortcuts ?? true)
+  const [demoNote, setDemoNote] = useState(!isLive())
+  const [weekStart, setWeekStartState] = useState(prefs?.weekStart ?? 'monday') // applies at once to the Calendar
   // Theme: System follows the device. Applied to the root only while the workspace is mounted, so the landing,
-  // auth, and legal pages stay light. In memory only: nothing is stored.
-  const [theme, setTheme] = useState('system')
+  // auth, and legal pages stay light.
+  const [theme, setThemeState] = useState(prefs?.theme ?? 'system')
+  const setShortcuts = useCallback((v) => { setShortcutsState(v); save({ shortcuts: v }) }, [save])
+  const setWeekStart = useCallback((v) => { setWeekStartState(v); save({ weekStart: v }) }, [save])
+  const setTheme = useCallback((v) => { setThemeState(v); save({ theme: v }) }, [save])
+  const [actionDialog, setActionDialog] = useState(null)
   const deviceDark = useMediaQuery('(prefers-color-scheme: dark)')
   const resolvedTheme = theme === 'system' ? (deviceDark ? 'dark' : 'light') : theme
   useEffect(() => {
@@ -37,6 +48,13 @@ export default function WorkspaceProvider({ children }) {
 
   /** Opens the preview-only dialog (PLAN-A-04 section 1). Nothing is ever saved. */
   const preview = useCallback((title, body) => setDialog({ title, body }), [])
+  /** Signed in: performs the action or opens its form and returns true. Demo: returns false so the preview dialog shows. */
+  const runAction = useCallback((label, record) => {
+    if (!isLive()) return false
+    if (IMMEDIATE[label]) { IMMEDIATE[label](record); return true }
+    if (DIALOGS.has(label)) { setActionDialog({ label, record }); return true }
+    return false
+  }, [])
   const openQuickAdd = useCallback((projectId = null) => setQuick({ open: true, mounted: true, projectId }), [])
   const openPalette = useCallback(() => setPalette({ open: true, mounted: true }), [])
   const openNewProject = useCallback(() => setNewProject({ open: true, mounted: true }), [])
@@ -57,7 +75,7 @@ export default function WorkspaceProvider({ children }) {
   }, [openPalette, openQuickAdd, openShortcuts, shortcuts])
 
   const dismissDemoNote = useCallback(() => setDemoNote(false), [])
-  const value = useMemo(() => ({ preview, dev, setDev, openQuickAdd, openPalette, openNewProject, openShortcuts, shortcuts, setShortcuts, demoNote, dismissDemoNote, weekStart, setWeekStart, theme, setTheme }), [preview, dev, openQuickAdd, openPalette, openNewProject, openShortcuts, shortcuts, demoNote, dismissDemoNote, weekStart, theme])
+  const value = useMemo(() => ({ preview, runAction, dev, setDev, openQuickAdd, openPalette, openNewProject, openShortcuts, shortcuts, setShortcuts, demoNote, dismissDemoNote, weekStart, setWeekStart, theme, setTheme }), [preview, runAction, dev, openQuickAdd, openPalette, openNewProject, openShortcuts, shortcuts, setShortcuts, demoNote, dismissDemoNote, weekStart, setWeekStart, theme, setTheme])
 
   return (
     <WorkspaceContext.Provider value={value}>
@@ -67,6 +85,7 @@ export default function WorkspaceProvider({ children }) {
       </PreviewDialog>
       <Toast />
       <Suspense fallback={null}>
+        {actionDialog && <ActionDialog action={actionDialog} onClose={() => setActionDialog(null)} />}
         {quick.mounted && <QuickAdd open={quick.open} projectId={quick.projectId} onClose={() => setQuick((q) => ({ ...q, open: false }))} />}
         {palette.mounted && <CommandPalette open={palette.open} onClose={() => setPalette((p) => ({ ...p, open: false }))} onQuickAdd={() => { setPalette((p) => ({ ...p, open: false })); openQuickAdd() }} onNewProject={() => { setPalette((p) => ({ ...p, open: false })); openNewProject() }} onShortcuts={() => { setPalette((p) => ({ ...p, open: false })); openShortcuts() }} />}
         {shortcutsHelp.mounted && <ShortcutsDialog open={shortcutsHelp.open} onClose={() => setShortcutsHelp((h) => ({ ...h, open: false }))} />}

@@ -1,6 +1,8 @@
 # PLAN-B-18 — Teams and Collaboration (Future Design)
 
-**Status:** Design only · **Phase:** Later (after v0.1) · **Depends on:** [05](PLAN-B-05.md), [12](PLAN-B-12.md), [14](PLAN-B-14.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
+> **Implementation status (2026-11-16):** ⬜ Not started. Future design. Not built; only the seams exist (every record has `workspaceId`, the tenant guard, `404` for foreign records). See [Implementation status](#implementation-status-mvp) at the end.
+
+**Status:** ⬜ Not started· **Phase:** Later (after v0.1) · **Depends on:** [05](PLAN-B-05.md), [12](PLAN-B-12.md), [14](PLAN-B-14.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [19 Notifications](PLAN-B-19.md) · [PROJECT-SPECS.md](../../../PROJECT-SPECS.md) sections 14 and 3.4 · [RESEARCH.md](../../../RESEARCH.md) section 8
 
 > **Do not build any of this for v0.1.** This plan exists so that decisions made now (workspace scoping, `canAccess`, `404` on foreign records, stable ids) do not have to be undone later. Its only v0.1 deliverables are the **seams** listed in section 2.
@@ -106,3 +108,17 @@ A workspace switcher, a People area (team workspaces only), assignee pickers, co
 - Project-level permissions in the first team release or later.
 - Whether multi-assignee tasks are needed, or one assignee with watchers.
 - Whether comments need rich attachments (default: Markdown text only).
+
+---
+
+## Implementation status (MVP)
+
+**⬜ Not started** · local MVP, built 2026-11-16 · Future design. Not built; only the seams exist (every record has `workspaceId`, the tenant guard, `404` for foreign records).
+
+**Built**
+
+- Seams only (see section 2 of this plan).
+
+**Not built yet**
+
+- Everything else. Team accounts are a separate matter, as decided.

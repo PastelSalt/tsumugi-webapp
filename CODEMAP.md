@@ -38,17 +38,29 @@ This document is the maintained index of the current codebase. Update it when fi
 | `docs/plan/backend/PLAN-B-18.md`, `PLAN-B-19.md` | Future designs: teams and collaboration, notifications/recurrence/background jobs |
 | `docs/` | Draft legal policies for owner/legal review, and `individual-workspace-guide.md` (user guide, rendered at `/help`) |
 | `docs/plan/frontend/` | Frontend plan-A documents for landing, legal, auth, authenticated workspace, and protected user pages |
-| `docs/plan/backend/` | Backend plan-B documents (planning only; nothing implemented yet) |
-| `Server/` | Initial server package configuration |
+| `docs/plan/backend/` | Backend plan-B documents; each ends with an implementation status (done, partly done, or not started) |
+| `Server/` | Express + MongoDB API (local MVP): `src/`, `test/`, `scripts/seed.js` |
+| `scripts/dev.mjs`, `package.json` | Root helpers: `npm run setup`, `dev` (API + app together), `seed`, `test`, `lint`, `build` |
 | `client/` | React + Vite application |
 
 ## Server
 
+Plain JavaScript (ESM), Express 5, Mongoose, Zod. Local-first: see [Server/README.md](Server/README.md).
+
 | Path | Responsibility |
 | --- | --- |
-| `Server/package.json` | CommonJS package metadata and placeholder test script |
-
-No server runtime entry point, routes, or application modules are currently present.
+| `Server/package.json` | Dependencies and scripts (`dev`, `seed`, `test`) |
+| `Server/src/server.js` | Local entry: connects, purges projects deleted over 30 days ago, listens on port 3001 |
+| `Server/src/app.js` | `createApp()`: headers, JSON parsing, cookies, Origin check, routers, one error handler |
+| `Server/src/config.js`, `db.js`, `errors.js`, `http.js` | Environment and limits; database connection (`MONGODB_URI` or a persistent local MongoDB in `Server/.data`); `AppError`; Zod `validate()` and response helpers |
+| `Server/src/middleware.js` | Session loader, `requireAuth`, Origin check, in-memory rate limit |
+| `Server/src/models.js` | Schemas: users, sessions, workspaces, projects, milestones, tasks, requirements, files, documents and versions, changes, links, counters |
+| `Server/src/lib/` | `dates.js` (time-zone aware "today"), `password.js` (scrypt, tokens), `serialize.js`, `templates.js` |
+| `Server/src/services/` | Business rules: `auth`, `projects`, `milestones`, `tasks`, `requirements`, `library` (files and documents), `links`, `changes`, `insights` (Home, Insights, search, snapshot), `shape` (records in the shape the frontend uses), `common` (tenant guard `scope()`, `loadProject`) |
+| `Server/src/routes/` | `auth.js`, `work.js` (workspace-wide, projects, milestones, tasks, requirements), `library.js` (files, documents, history) |
+| `Server/scripts/seed.js` | Loads the frontend sample data into a demo account |
+| `Server/test/` | Vitest + Supertest against an in-memory MongoDB: `auth.test.js`, `work.test.js` |
+| `Server/.data/`, `Server/uploads/` | Local database and uploaded files (git-ignored, generated) |
 
 ## Client
 
@@ -57,13 +69,14 @@ No server runtime entry point, routes, or application modules are currently pres
 | `client/package.json` | React, Vite, ESLint, GSAP, Lenis, Lucide, Fredoka font dependencies and npm scripts |
 | `client/README.md` | Client commands and conventions |
 | `client/index.html` | Browser document shell and Vite entry reference |
-| `client/vite.config.js` | Vite configuration with the React plugin |
+| `client/vite.config.js` | Vite configuration with the React plugin and a `/api` proxy to the local API (keeps one origin so cookies stay first-party) |
 | `client/eslint.config.js` | ESLint flat configuration for JavaScript and JSX |
 | `client/scripts/check-legal.mjs` | Pre-build check for unresolved placeholders in the legal Markdown (`npm run check:legal`); fails only when `LEGAL_STATUS` is `published` |
 | `client/src/main.jsx` | React bootstrap; loads Fredoka (latin 400/700) and base/public styles; mounts `App` |
 | `client/src/App.jsx` | Route table with lazy-loaded route chunks, Suspense fallback, link interception, workspace path list, redirects from the old workspace paths, unknown-route handling |
 | `client/src/app/router.js` | Minimal history-API router: `useLocation`, `navigate`, same-origin link interception, focus-after-navigation flag |
 | `client/src/hooks/` | `usePageMeta` (title/description/robots + heading focus), `usePreviewState` (`?preview=` demo states), `useQueryParam` (view, filter, and selection in the URL), `useMediaQuery` |
+| `client/src/lib/api.js`, `session.js` | API client (envelope unwrapping, `ApiError` with field errors) and the signed-in session store (`bootstrap`, `login`, `register`, `logout`, `updateMe`, `demoRequested`) |
 | `client/src/lib/markdown.jsx` | Small Markdown parser/renderer (no raw HTML) used by the legal pages, the Help page, and the document reader |
 | `client/src/lib/keys.js` | OS-aware keyboard labels (Ctrl or Cmd) |
 | `client/src/lib/pointerFx.js` | Shared pointer effects (cursor, parallax) for landing, auth, and legal pages |
@@ -102,14 +115,16 @@ client/index.html
          (each imports its own stylesheet from src/styles/)
 ```
 
-Vite serves the client during development and bundles the client into `client/dist` for production. In-app links navigate without reloading the document. The server is not connected to the client yet.
+Vite serves the client during development (proxying `/api` to the API on port 3001) and bundles it into `client/dist` for production. In-app links navigate without reloading the document.
+
+Signed-in flow: `WorkspaceApp` checks the session (`lib/session.js`); signed out goes to `/login?next=…`; signed in loads `GET /api/v1/workspace/snapshot` into `pages/workspace/data/store.js` ("live mode"), so the existing selectors work unchanged. Task changes are optimistic with Undo; other writes go through `quickadd/ActionDialogs.jsx` and `data/liveActions.js`, then the snapshot is refreshed. `/home?demo` keeps the no-account sample workspace (fixtures, nothing saved).
 
 ## Current gaps
 
-- Authentication is simulated: login and register are demo-mode pages that never read or send input; real authentication is backend work.
-- The workspace runs on placeholder data. Tasks and projects added with Quick add or a template are session-only; there is no persistence, upload, or export.
+- No email: there is no verification and no password recovery (the recovery pages are still demo-only). See [PLAN-B-04](docs/plan/backend/PLAN-B-04.md).
+- The API is local-only: no deployment, object storage, CI, TypeScript, pagination, or OpenAPI. Each plan in `docs/plan/backend/` lists what is built and what is not.
+- The UI derives progress, health, and coverage from the snapshot with its own selectors; the server has the same definitions (`services/insights.js`) but they are not yet the UI's single source.
+- A single local MongoDB has no transactions, so multi-record deletes and change recording are not atomic.
 - Legal pages remain drafts (`LEGAL_STATUS = 'draft'`, `noindex`) pending owner and legal review; the build warns about unresolved placeholders.
-- Not built from the workspace plans: Account view tabs, `workspaceId` and `canAccess()` in the fixtures, a task row menu, and edit or delete for tasks.
 - Not yet done: user testing, a screen-reader pass, reduced-motion review, and checks at 390 and 1536px.
-- No team workspace exists; it is a planned, separate workspace type.
-- No server runtime exists. `Server/package.json` still uses a placeholder test command.
+- No team workspace exists; it is a planned, separate workspace type (PLAN-B-18).

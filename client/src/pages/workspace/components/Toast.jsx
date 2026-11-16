@@ -24,7 +24,7 @@ export default function Toast() {
   return (
     <div className="ws-toast-region" role="status" aria-live="polite">
       {toast && (
-        <div className="ws-toast" key={toast.key} onPointerEnter={() => setPaused(true)} onPointerLeave={() => setPaused(false)} onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}>
+        <div className={toast.error ? 'ws-toast ws-toast--error' : 'ws-toast'} key={toast.key} onPointerEnter={() => setPaused(true)} onPointerLeave={() => setPaused(false)} onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}>
           <span className="ws-toast__text">{toast.message}</span>
           {toast.canUndo && <button type="button" className="ws-toast__undo" onClick={undoLast}>Undo</button>}
           <button type="button" className="ws-toast__close" aria-label="Dismiss message" onClick={dismissToast}><X size={16} aria-hidden="true" /></button>

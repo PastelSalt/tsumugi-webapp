@@ -1,6 +1,8 @@
 # PLAN-B-19 — Notifications, Recurrence, and Background Jobs (Future Design)
 
-**Status:** Design only (the minimal job runner is built in Phase 5–6 for exports and cleanup) · **Phase:** Later · **Depends on:** [08](PLAN-B-08.md), [16](PLAN-B-16.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
+> **Implementation status (2026-11-16):** ⬜ Not started. Future design. Not built. The only background work today is purging old deleted projects when the server starts. See [Implementation status](#implementation-status-mvp) at the end.
+
+**Status:** ⬜ Not started· **Phase:** Later · **Depends on:** [08](PLAN-B-08.md), [16](PLAN-B-16.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [05 Export](PLAN-B-05.md) · [10 Files](PLAN-B-10.md) · [18 Teams](PLAN-B-18.md) · PROJECT-SPECS section 14 (notifications, background processing)
 
 ## 1. Purpose and scope
@@ -157,3 +159,17 @@ Runner lease and reclaim behavior with a controllable clock; concurrent runners 
 - Push notifications (web push) after the app is installable; needs a service worker and consent UX.
 - Whether to support "snooze" for reminders in the first release.
 - Calendar feeds (ICS) for tasks and milestones (a natural, low-risk follow-up; needs signed, revocable feed tokens).
+
+---
+
+## Implementation status (MVP)
+
+**⬜ Not started** · local MVP, built 2026-11-16 · Future design. Not built. The only background work today is purging old deleted projects when the server starts.
+
+**Built**
+
+- Purge of projects deleted over 30 days ago on server start (`purgeDeleted`).
+
+**Not built yet**
+
+- Job runner, notifications, reminders, recurrence, exports.

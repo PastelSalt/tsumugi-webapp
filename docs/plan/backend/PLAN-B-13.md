@@ -1,6 +1,8 @@
 # PLAN-B-13 — Home, Insights, and Search (Derived Metrics)
 
-**Status:** Proposed · **Phase:** 7 (core helpers built earlier inside 06–09) · **Depends on:** [06](PLAN-B-06.md)–[12](PLAN-B-12.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
+> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). Home, Insights and search exist on the server; the UI still computes its numbers from the snapshot. See [Implementation status](#implementation-status-mvp) at the end.
+
+**Status:** 🟡 Partly done (MVP) · **Phase:** 7 (core helpers built earlier inside 06–09) · **Depends on:** [06](PLAN-B-06.md)–[12](PLAN-B-12.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** frontend [PLAN-A-04A](../frontend/PLAN-A-04A.md) (Home), [PLAN-A-04J](../frontend/PLAN-A-04J.md) (Insights), command palette in [PLAN-A-04L](../frontend/PLAN-A-04L.md)
 
 ## 1. Purpose and scope
@@ -144,3 +146,22 @@ Golden tests: the seeded demo workspace at the demo's fixed date must reproduce 
 - Atlas Search upgrade decision (after measuring text-index quality).
 - Whether to offer a weekly summary email/report later (depends on PLAN-B-19).
 - Whether health should consider overdue milestones too. Default: tasks only, as in the demo.
+
+---
+
+## Implementation status (MVP)
+
+**🟡 Partly done (MVP)** · local MVP, built 2026-11-16 · Home, Insights and search exist on the server; the UI still computes its numbers from the snapshot.
+
+**Built**
+
+- `GET /home`, `GET /insights`, `GET /search` using the documented definitions (`services/insights.js`), with "today" in the person's time zone.
+- `GET /workspace/snapshot` powers the existing frontend selectors.
+
+**Not built yet**
+
+- Metric definitions endpoint, `ETag`, text indexes or Atlas Search, recents endpoint, golden parity tests against the frontend selectors, caching.
+
+**Deviations and notes**
+
+- **Deviation:** the UI derives progress/health/coverage with `client/.../selectors.js` over the snapshot; the server functions are covered by tests but not yet the single source for the UI.

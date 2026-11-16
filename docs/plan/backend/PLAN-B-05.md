@@ -1,6 +1,8 @@
 # PLAN-B-05 — Users, Workspaces, and Preferences
 
-**Status:** Proposed · **Phase:** 2 · **Depends on:** [03](PLAN-B-03.md), [04](PLAN-B-04.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
+> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). Each account gets one individual workspace and saved preferences. Export and deletion are not built. See [Implementation status](#implementation-status-mvp) at the end.
+
+**Status:** 🟡 Partly done (MVP) · **Phase:** 2 · **Depends on:** [03](PLAN-B-03.md), [04](PLAN-B-04.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [14 Security and privacy](PLAN-B-14.md) · [18 Teams](PLAN-B-18.md) · frontend [PLAN-A-04K](../frontend/PLAN-A-04K.md) (Account), the Account page and theme switch
 
 ## 1. Purpose and scope
@@ -133,3 +135,19 @@ Preference merge and validation (unknown keys, bad time zone); workspace created
 - Q4 (one or many workspaces per account), Q5, Q7 in PLAN-B-00.
 - Whether the export should also offer Markdown-per-record (human readable) in addition to JSON.
 - Whether account deletion should offer an immediate (no grace period) option.
+
+---
+
+## Implementation status (MVP)
+
+**🟡 Partly done (MVP)** · local MVP, built 2026-11-16 · Each account gets one individual workspace and saved preferences. Export and deletion are not built.
+
+**Built**
+
+- User and individual workspace created together at registration; request context `ctx` (`userId`, `workspaceId`, `timeZone`) from the session.
+- `GET /me`, `PATCH /me` for display name and preferences (theme, week start, single-key shortcuts, motion, time zone, first-run flag).
+- Frontend Account page saves name, theme, week start, shortcuts, motion and changes the password.
+
+**Not built yet**
+
+- Workspace rename endpoint, data export, account deletion with grace period, first-run checklist endpoints, a named `canAccess()` seam (the tenant guard does this job today).

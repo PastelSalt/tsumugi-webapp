@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Plus } from 'lucide-react'
 import Modal from './Modal'
-import { addTask } from '../data/store'
+import { addTask, isLive } from '../data/store'
 import { activeProjects } from '../data/selectors'
 import { formatDate } from '../data/format'
 import { parseQuickAdd } from './parse'
@@ -17,8 +17,9 @@ export default function QuickAdd({ open, onClose, projectId }) {
   const submit = (event) => {
     event.preventDefault()
     if (!parsed.title) return
+    if (!parsed.projectId) { setMessage('Create a project first, then add tasks to it.'); return }
     addTask({ title: parsed.title, priority: parsed.priority, due: parsed.due, projectId: parsed.projectId })
-    setMessage(`Added “${parsed.title}” to ${project?.name ?? 'your project'} for this session.`)
+    setMessage(`Added “${parsed.title}” to ${project?.name ?? 'your project'}${isLive() ? '.' : ' for this session.'}`)
     setText('')
   }
 

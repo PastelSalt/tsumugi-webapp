@@ -1,0 +1,15 @@
+{
+  "name": "tsumugi",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tsumugi by Moeko Works: weaving ideas into finished work.",
+  "license": "MIT",
+  "scripts": {
+    "setup": "npm install --prefix Server && npm install --prefix client",
+    "dev": "node scripts/dev.mjs",
+    "seed": "npm run seed --prefix Server",
+    "test": "npm test --prefix Server",
+    "lint": "npm run lint --prefix client",
+    "build": "npm run build --prefix client"
+  }
+}

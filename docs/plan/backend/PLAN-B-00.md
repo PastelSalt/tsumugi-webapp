@@ -3,7 +3,7 @@
 ## Plan status
 
 **Revision:** 1 — initial master plan
-**Status:** Proposed. Nothing in this plan is implemented; `Server/` contains only a placeholder `package.json`.
+**Status:** **Local MVP built (2026-11-16).** The API (`Server/`) and the frontend integration run on this computer; deployment and third-party services are intentionally not started. See [section 16](#16-implementation-status).
 **Scope:** The complete technical plan for the Tsumugi backend: architecture, shared conventions, module breakdown, delivery order, and release criteria.
 **Audience:** Maintainers and contributors. Each module has its own detailed plan (index in section 4); this document holds everything that is shared between them.
 **Source material:** [PROJECT-SPECS.md](../../../PROJECT-SPECS.md) (target architecture), [CONTEXT.md](../../../CONTEXT.md) (decisions on record), [RESEARCH.md](../../../RESEARCH.md), the frontend plans [PLAN-A-01 to PLAN-A-05](../frontend/), and the working demo data model in `client/src/pages/workspace/data/`.
@@ -372,3 +372,49 @@ The ordering within a phase follows section 4's dependency column. The first end
 | Gap | A requirement lacking a linked task or a linked final file |
 | Derived value | A number or label computed from stored records on read |
 | Idempotency key | Client-supplied token making a create safe to retry |
+
+---
+
+## 16. Implementation status
+
+**Scope of the first build (decided 2026-11-16):** a working MVP on one computer. MERN only: MongoDB (local, persistent, no install needed), Express, React, Node. One individual account per person; no team accounts. No email, no Google/social sign-in, no third-party services, no deployment. The goal was to see the product work end to end on this device before adding any of those.
+
+**How to run it:** `npm run setup`, then `npm run dev` (API on port 3001, app on port 5173), optionally `npm run seed` for a demo account. Details are in the [README](../../../README.md).
+
+| Plan | Status | Summary |
+| --- | --- | --- |
+| [PLAN-B-10](PLAN-B-10.md) | 🟡 Partly done (MVP) | Files are stored on this computer instead of object storage, as chosen for the local MVP. |
+| [PLAN-B-11](PLAN-B-11.md) | ✅ Done (MVP) | Markdown documents with full version history, diff and Final protection work. |
+| [PLAN-B-12](PLAN-B-12.md) | 🟡 Partly done (MVP) | Validated links and recorded History work; the dedicated trace endpoints are not built. |
+| [PLAN-B-13](PLAN-B-13.md) | 🟡 Partly done (MVP) | Home, Insights and search exist on the server; the UI still computes its numbers from the snapshot. |
+| [PLAN-B-14](PLAN-B-14.md) | 🟡 Partly done (MVP) | The local-security basics are in place; the hosted-deployment items are not. |
+| [PLAN-B-15](PLAN-B-15.md) | 🟡 Partly done (MVP) | A working integration test suite runs offline in a few seconds. |
+| [PLAN-B-16](PLAN-B-16.md) | ⬜ Not started | Deployment is intentionally out of scope for the local MVP. Only the local run story exists. |
+| [PLAN-B-17](PLAN-B-17.md) | 🟡 Partly done (MVP) | The frontend runs on the real API through a snapshot bridge; demo mode remains. |
+| [PLAN-B-18](PLAN-B-18.md) | ⬜ Not started | Future design. Not built; only the seams exist (every record has `workspaceId`, the tenant guard, `404` for foreign records). |
+| [PLAN-B-19](PLAN-B-19.md) | ⬜ Not started | Future design. Not built. The only background work today is purging old deleted projects when the server starts. |
+| [PLAN-B-01](PLAN-B-01.md) | 🟡 Partly done (MVP) | The API runs locally with a persistent database. Tooling and platform pieces are still to do. |
+| [PLAN-B-02](PLAN-B-02.md) | 🟡 Partly done (MVP) | The core conventions are in place; pagination, concurrency headers, idempotency, and OpenAPI are not. |
+| [PLAN-B-03](PLAN-B-03.md) | 🟡 Partly done (MVP) | All user-facing collections exist with tenant scoping, links, counters, soft delete and a seed script. |
+| [PLAN-B-04](PLAN-B-04.md) | 🟡 Partly done (MVP) | Email-and-password accounts work locally without any email or third party. Email-based flows are intentionally not built. |
+| [PLAN-B-05](PLAN-B-05.md) | 🟡 Partly done (MVP) | Each account gets one individual workspace and saved preferences. Export and deletion are not built. |
+| [PLAN-B-06](PLAN-B-06.md) | ✅ Done (MVP) | Projects, templates, archive, delete and restore all work end to end. |
+| [PLAN-B-07](PLAN-B-07.md) | ✅ Done (MVP) | Milestones are fully usable; the dedicated timeline endpoint is not needed by the current UI. |
+| [PLAN-B-08](PLAN-B-08.md) | 🟡 Partly done (MVP) | Tasks, subtasks, flags, links, delete/restore and Undo work; the dedicated view endpoints are covered by the snapshot. |
+| [PLAN-B-09](PLAN-B-09.md) | ✅ Done (MVP) | Requirements, acceptance criteria and their rules are enforced on the server. |
+
+**Deviations from the decision record (D-01 to D-18)**
+
+| ID | Planned | Built in the MVP | Revisit |
+| --- | --- | --- | --- |
+| D-01 | TypeScript, strict | Plain JavaScript (ESM) with Zod validation | Before the codebase grows |
+| D-05 | Server-side sessions, opaque cookie | As planned | — |
+| D-06 | Argon2id | scrypt (`node:crypto`, the planned fallback) | Deployment |
+| D-08 | Presigned uploads to R2/S3 | Upload through the API to local disk | Deployment |
+| D-13 | Soft delete + purge job | Soft delete everywhere; purge of old deleted projects at server start; restore for projects and tasks | Add restore for other records |
+| D-14 | Links as edges | As planned | — |
+| D-15 | Derived values on the server | Server functions exist; the UI still derives from the snapshot | Cut over (PLAN-B-13/17) |
+| D-16 | npm workspaces | Root scripts that call `Server/` and `client/` | Optional |
+| D-17 | Vercel Functions | Not started | Deployment phase |
+
+**Known limitations of the MVP:** no email (no password recovery or verification); a single local `mongod` has no transactions, so multi-record deletes are not atomic; rate limits are in memory; files live on local disk; the whole workspace is sent as one snapshot; there is no pagination.

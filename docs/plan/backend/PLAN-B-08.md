@@ -1,6 +1,8 @@
 # PLAN-B-08 — Tasks and Subtasks
 
-**Status:** Proposed · **Phase:** 3 · **Depends on:** [06](PLAN-B-06.md), [07](PLAN-B-07.md); link storage from [12](PLAN-B-12.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
+> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). Tasks, subtasks, flags, links, delete/restore and Undo work; the dedicated view endpoints are covered by the snapshot. See [Implementation status](#implementation-status-mvp) at the end.
+
+**Status:** 🟡 Partly done (MVP) · **Phase:** 3 · **Depends on:** [06](PLAN-B-06.md), [07](PLAN-B-07.md); link storage from [12](PLAN-B-12.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [09 Requirements](PLAN-B-09.md) · [13 Home and Insights](PLAN-B-13.md) · [19 Recurrence](PLAN-B-19.md) · frontend [PLAN-A-04E](../frontend/PLAN-A-04E.md) (Tasks), [PLAN-A-04L](../frontend/PLAN-A-04L.md) (Quick add)
 
 ## 1. Purpose and scope
@@ -137,3 +139,20 @@ Time-zone matrix (UTC, UTC+13, UTC−11 around midnight) for overdue/today/tomor
 - Whether completing all subtasks should offer to complete the task (a preference, default off).
 - Whether tasks need `startDate` for scheduling (not in the demo; deferred).
 - Whether to keep `Doing` limited to one per project (no; not in the product design).
+
+---
+
+## Implementation status (MVP)
+
+**🟡 Partly done (MVP)** · local MVP, built 2026-11-16 · Tasks, subtasks, flags, links, delete/restore and Undo work; the dedicated view endpoints are covered by the snapshot.
+
+**Built**
+
+- Create, list with filters, read, update, soft delete and restore (`services/tasks.js`).
+- Status rules: `Done` sets `completedAt` and clears `blocked`; links to requirements and files with same-project validation.
+- Subtasks replace-on-write; frontend toggles them; Quick add, Edit task dialog, optimistic updates and Undo (`client/src/pages/workspace/data/store.js`).
+- Meaningful changes (status, due, priority, blocked, rename, links) are recorded in History; cosmetic edits are not.
+
+**Not built yet**
+
+- Cursor pagination, `bulk` endpoint, `views/today|upcoming|calendar` endpoints (the client derives these from the snapshot, and `GET /home` has the server version), `move` to another project, manual ordering endpoints, `Idempotency-Key`, recurrence (PLAN-B-19).

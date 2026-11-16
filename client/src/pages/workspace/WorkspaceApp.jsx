@@ -1,11 +1,14 @@
-import { lazy, Suspense } from 'react'
+import { lazy, Suspense, useEffect } from 'react'
 import WorkspaceProvider from './WorkspaceProvider'
 import WorkspaceShell from './WorkspaceShell'
 import { Skeleton } from './components/states'
-import { useStoreVersion } from './data/store'
+import { ensureLive, leaveLive, useLiveStatus, useStoreVersion } from './data/store'
+import { bootstrap, demoRequested, useSession } from '../../lib/session'
+import { navigate } from '../../app/router'
 import '../../styles/forms.css'
 import '../../styles/workspace.css'
 import '../../styles/workspace-pages.css'
+import '../../styles/live.css'
 
 // The shell stays mounted while the page inside it changes; each page is its own chunk.
 const pages = {
@@ -19,11 +22,10 @@ const pages = {
 }
 const ProjectPage = lazy(() => import('./pages/ProjectPage'))
 
-export default function WorkspaceApp({ pathname }) {
-  useStoreVersion() // re-render pages when session data (Quick add, new projects) changes
+function Workspace({ pathname }) {
+  useStoreVersion() // re-render pages when data (Quick add, new projects, saved changes) changes
   const projectMatch = pathname.match(/^\/projects\/([^/]+)$/)
   const Page = projectMatch ? ProjectPage : pages[pathname]
-
   return (
     <WorkspaceProvider>
       <WorkspaceShell pathname={pathname}>
@@ -33,4 +35,37 @@ export default function WorkspaceApp({ pathname }) {
       </WorkspaceShell>
     </WorkspaceProvider>
   )
+}
+
+function Centered({ children }) {
+  return <div className="route-loading live-gate" aria-busy="true">{children}</div>
+}
+
+export default function WorkspaceApp({ pathname }) {
+  const demo = demoRequested()
+  const session = useSession()
+  const live = useLiveStatus() // idle | loading | ready | failed
+
+  useEffect(() => { if (!demo) bootstrap() }, [demo])
+
+  useEffect(() => {
+    if (demo) return
+    if (session.status === 'out') {
+      leaveLive()
+      navigate(`/login?next=${encodeURIComponent(`${window.location.pathname}${window.location.search}`)}`, { replace: true })
+    } else if (session.status === 'in') ensureLive()
+  }, [demo, session.status])
+
+  if (demo) return <Workspace pathname={pathname} />
+  if (session.status === 'out') return <Centered />
+  if (live === 'failed') {
+    return (
+      <Centered>
+        <p>Can’t reach the Tsumugi server. Make sure it is running, then try again.</p>
+        <button className="button button--small button--secondary" type="button" onClick={() => { leaveLive(); ensureLive() }}>Try again</button>
+      </Centered>
+    )
+  }
+  if (session.status !== 'in' || live !== 'ready') return <Centered><Skeleton /></Centered>
+  return <Workspace pathname={pathname} />
 }

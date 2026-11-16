@@ -1,9 +1,11 @@
 import { ArrowUp, Check, ChevronDown, Circle, OctagonX, File, FileText, Image, Link2, Music, Table2, CircleCheckBig, Loader } from 'lucide-react'
-import { get, isFinalFile, criteriaProgress, milestoneProgress, milestoneState, requirementLinks, tasksOfMilestone } from '../data/selectors'
+import { get, isDoc, isFinalFile, criteriaProgress, milestoneProgress, milestoneState, recordTitle, reqLabel, requirementLinks, tasksOfMilestone } from '../data/selectors'
 import { formatBytes, formatDate, timeAgo } from '../data/format'
 import { DueLabel, Flag, ProgressBar, RelationChip, StatusBadge } from './badges'
 import { DetailPanel, Fields, PreviewAction } from './layout'
 import { UnsupportedPreview } from './states'
+import { isLive } from '../data/store'
+import { toggleCriterion, toggleSubtask } from '../data/liveActions'
 import { moveToTomorrow, setDue, setStatus, toggleBlocked, toggleDone, togglePriority } from '../data/actions'
 import { WORK_STATUSES } from '../data/status'
 import { kindLabel } from '../data/kinds'
@@ -90,7 +92,7 @@ export function RequirementRow({ requirement, selected, onSelect, href }) {
   return (
     <RowShell href={href} onSelect={onSelect} id={requirement.id} selected={selected} className="req-row">
       <span className="row__main">
-        <span className="row__title"><code className="req-id">{requirement.id}</code> {requirement.title}</span>
+        <span className="row__title"><code className="req-id">{requirement.key ?? requirement.id}</code> {requirement.title}</span>
         <span className="row__meta">
           <span>{criteria.total ? `${criteria.met}/${criteria.total} criteria` : 'No criteria'}</span>
           <span>{links.tasks.length} task{links.tasks.length === 1 ? '' : 's'} · {links.files.length} file{links.files.length === 1 ? '' : 's'}</span>
@@ -121,8 +123,8 @@ export function FileTile({ file, selected, onSelect }) {
       <span className="row__meta"><span>{get('project', file.projectId).name}</span></span>
       <span className="row__meta">
         <span>{file.progress ? `${file.progress}% uploaded` : file.kind === 'link' ? file.host : formatBytes(file.bytes)}</span>
-        {file.body && <StatusBadge domain="document" status={file.status} />}
-        {!file.body && isFinalFile(file) && <Flag name="Final" label="Final file" />}
+        {isDoc(file) && <StatusBadge domain="document" status={file.status} />}
+        {!isDoc(file) && isFinalFile(file) && <Flag name="Final" label="Final file" />}
       </span>
       {file.progress && <ProgressBar value={file.progress} max={100} label={`${file.name} upload`} />}
     </button>
@@ -158,7 +160,7 @@ export function TaskPanel({ task, onClose }) {
       actions={<>
         <button className="button button--small button--primary" type="button" onClick={() => toggleDone(task)}>{isDone ? 'Reopen' : 'Mark done'}</button>
         <button className="button button--small button--secondary" type="button" onClick={() => moveToTomorrow(task)}>Move to tomorrow</button>
-        <PreviewAction label="Edit task" />
+        <PreviewAction label="Edit task" record={task} />
       </>}>
       <div className="chip-list"><StatusBadge domain="work" status={task.status} />{task.blocked && <Flag name="Blocked" />}{task.priority === 'high' && <Flag name="High" label="High priority" />}</div>
       {task.notes && <p>{task.notes}</p>}
@@ -176,10 +178,16 @@ export function TaskPanel({ task, onClose }) {
       </div>
       <Fields items={[['Milestone', milestone?.title ?? 'None']]} />
       {task.subtasks.length > 0 && (
-        <div><h3>Subtasks</h3><ul className="checklist">{task.subtasks.map((s) => <li key={s.text} data-done={s.done}>{s.done ? <Check size={16} aria-label="Done" /> : <Circle size={16} aria-label="Not done" />}{s.text}</li>)}</ul></div>
+        <div><h3>Subtasks</h3><ul className="checklist">{task.subtasks.map((s, i) => (
+          <li key={s.text} data-done={s.done}>
+            {isLive()
+              ? <button type="button" className="checklist__toggle" aria-pressed={s.done} onClick={() => toggleSubtask(task, i)}>{s.done ? <Check size={16} aria-hidden="true" /> : <Circle size={16} aria-hidden="true" />}<span>{s.text}</span><span className="sr-only">{s.done ? ' (done, press to undo)' : ' (not done, press to mark done)'}</span></button>
+              : <>{s.done ? <Check size={16} aria-label="Done" /> : <Circle size={16} aria-label="Not done" />}{s.text}</>}
+          </li>
+        ))}</ul></div>
       )}
       <LensBlock
-        why={[<RelationChip type="Project" id={task.projectId} key="p" />, ...(milestone ? [<RelationChip type="Milestone" id={milestone.id} key="m" />] : []), ...task.requirementIds.map((id) => <RelationChip type="Requirement" id={id} label={id} key={id} />)]}
+        why={[<RelationChip type="Project" id={task.projectId} key="p" />, ...(milestone ? [<RelationChip type="Milestone" id={milestone.id} key="m" />] : []), ...task.requirementIds.map((id) => <RelationChip type="Requirement" id={id} label={reqLabel(id)} key={id} />)]}
         becomes={[...task.fileIds.map((id) => <RelationChip type="File" id={id} key={id} />), ...task.changeIds.map((id) => <RelationChip type="Change" id={id} key={id} />)]}
         emptyWhy="Not linked to a requirement yet." emptyBecomes="No files or changes yet."
       />
@@ -194,7 +202,7 @@ export function MilestonePanel({ milestone, onClose }) {
   const tasks = tasksOfMilestone(milestone.id)
   return (
     <DetailPanel title={milestone.title} kicker={`Milestone · ${get('project', milestone.projectId).name}`} onClose={onClose}
-      actions={<><PreviewAction label="Edit milestone" variant="primary" /><PreviewAction label="Mark done" /></>}>
+      actions={<><PreviewAction label="Edit milestone" variant="primary" record={milestone} /><PreviewAction label={milestone.done ? "Reopen" : "Mark done"} record={milestone} /></>}>
       <div className="chip-list"><StatusBadge domain="derived" status={state} />{milestone.blocked && <Flag name="Blocked" />}</div>
       <p>{milestone.description}</p>
       <Fields items={[['Starts', formatDate(milestone.start)], ['Due', <DueLabel due={milestone.due} done={state === 'Done'} key="d" />], ['After', milestone.afterId ? get('milestone', milestone.afterId).title : null]]} />
@@ -206,13 +214,19 @@ export function MilestonePanel({ milestone, onClose }) {
 export function RequirementPanel({ requirement, onClose }) {
   const links = requirementLinks(requirement)
   return (
-    <DetailPanel title={requirement.title} kicker={`${requirement.id} · ${get('project', requirement.projectId).name}`} onClose={onClose}
-      actions={<><PreviewAction label="Mark met" variant="primary" /><PreviewAction label="Mark verified" /><PreviewAction label="Link work" /></>}>
+    <DetailPanel title={requirement.title} kicker={`${requirement.key ?? requirement.id} · ${get('project', requirement.projectId).name}`} onClose={onClose}
+      actions={<><PreviewAction label="Mark met" variant="primary" record={requirement} /><PreviewAction label="Mark verified" record={requirement} /><PreviewAction label="Link work" record={requirement} /></>}>
       <div className="chip-list"><StatusBadge domain="requirement" status={requirement.status} />{requirement.verified && <Flag name="Verified" />}{requirement.type && <span className="chip"><span>{requirement.type}</span></span>}</div>
       <p>{requirement.description}</p>
       <div><h3>Acceptance criteria</h3>
         {requirement.acceptance.length
-          ? <ul className="checklist">{requirement.acceptance.map((c) => <li key={c.text} data-done={c.met}>{c.met ? <Check size={16} aria-label="Met" /> : <Circle size={16} aria-label="Not met" />}{c.text}</li>)}</ul>
+          ? <ul className="checklist">{requirement.acceptance.map((c, i) => (
+              <li key={c.text} data-done={c.met}>
+                {isLive()
+                  ? <button type="button" className="checklist__toggle" aria-pressed={c.met} onClick={() => toggleCriterion(requirement, i)}>{c.met ? <Check size={16} aria-hidden="true" /> : <Circle size={16} aria-hidden="true" />}<span>{c.text}</span><span className="sr-only">{c.met ? ' (met, press to undo)' : ' (not met, press to mark met)'}</span></button>
+                  : <>{c.met ? <Check size={16} aria-label="Met" /> : <Circle size={16} aria-label="Not met" />}{c.text}</>}
+              </li>
+            ))}</ul>
           : <p>No acceptance criteria defined. Add at least one before this can be marked met.</p>}
       </div>
       <LensBlock
@@ -231,11 +245,11 @@ export function FilePanel({ file, onClose }) {
   else if (file.progress) preview = <UnsupportedPreview kind="files still uploading" reason={`Upload is ${file.progress}% complete (sample progress).`} />
   else if (previewable(file)) preview = <div className="preview-area"><FileThumb file={file} large /><small>Preview area — sample illustration</small></div>
   else preview = <UnsupportedPreview kind={`.${file.ext} files`} reason="This type can’t be previewed in the browser. Download it to open it in another app." />
-  const links = file.requirementIds.map((id) => <RelationChip type="Requirement" id={id} label={id} key={id} />)
+  const links = file.requirementIds.map((id) => <RelationChip type="Requirement" id={id} label={reqLabel(id)} key={id} />)
   const tasks = file.taskIds.map((id) => <RelationChip type="Task" id={id} key={id} />)
   return (
     <DetailPanel title={file.name} kicker={`${kindLabel(file.kind)} · ${get('project', file.projectId).name}`} onClose={onClose}
-      actions={<>{file.body ? <a className="button button--small button--primary" href={`/library?doc=${file.id}`}>Open</a> : <PreviewAction label="Download" variant="primary" />}<PreviewAction label={isFinalFile(file) ? 'Unmark final file' : 'Mark as final file'} /></>}>
+      actions={<>{isDoc(file) ? <a className="button button--small button--primary" href={`/library?doc=${file.id}`}>Open</a> : <PreviewAction label="Download" variant="primary" record={file} />}<PreviewAction label={isFinalFile(file) ? "Unmark final file" : "Mark as final file"} record={file} /></>}>
       {preview}
       <p>{file.description}</p>
       <Fields items={[['Type', `${kindLabel(file.kind)} (.${file.ext})`], ['Size', file.bytes ? formatBytes(file.bytes) : null], ['Updated', formatDate(file.updatedAt)], ['Final file', isFinalFile(file) ? 'Yes' : 'No']]} />
@@ -249,11 +263,11 @@ export function FilePanel({ file, onClose }) {
 export function ChangePanel({ change, onClose }) {
   return (
     <DetailPanel title={change.summary} kicker={`Change · ${get('project', change.projectId).name}`} onClose={onClose}
-      actions={<PreviewAction label={change.reviewed ? 'Mark not reviewed' : 'Mark reviewed'} variant="primary" />}>
+      actions={<PreviewAction label={change.reviewed ? "Mark not reviewed" : "Mark reviewed"} variant="primary" record={change} />}>
       <div className="chip-list">{change.reviewed ? <Flag name="Reviewed" /> : <StatusBadge domain="change" status="Recorded" />}</div>
-      <Fields items={[['When', <time dateTime={change.at} key="t">{change.at.replace('T', ' ').slice(0, 16)}</time>], ['Affected', `${change.recordType} ${change.recordId}`], ['Versions', change.toVersion != null ? `v${change.fromVersion} → v${change.toVersion}` : null]]} />
+      <Fields items={[['When', <time dateTime={change.at} key="t">{change.at.replace('T', ' ').slice(0, 16)}</time>], ['Affected', `${change.recordType}: ${recordTitle(change.recordType, change.recordId)}`], ['Versions', change.toVersion != null ? `v${change.fromVersion} → v${change.toVersion}` : null]]} />
       <LensBlock
-        why={[...change.taskIds.map((id) => <RelationChip type="Task" id={id} key={id} />), ...change.requirementIds.map((id) => <RelationChip type="Requirement" id={id} label={id} key={id} />)]}
+        why={[...change.taskIds.map((id) => <RelationChip type="Task" id={id} key={id} />), ...change.requirementIds.map((id) => <RelationChip type="Requirement" id={id} label={reqLabel(id)} key={id} />)]}
         becomes={[<RelationChip type={change.recordType} id={change.recordId} key="r" />]}
         emptyWhy="No linked work." emptyBecomes=""
       />

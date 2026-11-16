@@ -1,6 +1,8 @@
 # PLAN-B-11 — Documents
 
-**Status:** Proposed · **Phase:** 5 · **Depends on:** [06](PLAN-B-06.md), [10](PLAN-B-10.md); link storage from [12](PLAN-B-12.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
+> **Implementation status (2026-11-16):** ✅ Done (MVP). Markdown documents with full version history, diff and Final protection work. See [Implementation status](#implementation-status-mvp) at the end.
+
+**Status:** ✅ Done (MVP) · **Phase:** 5 · **Depends on:** [06](PLAN-B-06.md), [10](PLAN-B-10.md); link storage from [12](PLAN-B-12.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [14 Security](PLAN-B-14.md) · frontend [PLAN-A-04I](../frontend/PLAN-A-04I.md) (Documents and the reader), [PLAN-A-04H](../frontend/PLAN-A-04H.md) (History)
 
 ## 1. Purpose and scope
@@ -121,3 +123,19 @@ Version numbering under concurrent saves (exactly one wins; the other gets `412`
 - Whether to offer branching/duplicate ("Edit a copy" creates a new document or a new draft version). Default: new draft version.
 - Whether version thinning thresholds are acceptable for creative-writing use (long manuscripts).
 - Rich-text or block editing later; would require a new storage format and migration plan.
+
+---
+
+## Implementation status (MVP)
+
+**✅ Done (MVP)** · local MVP, built 2026-11-16 · Markdown documents with full version history, diff and Final protection work.
+
+**Built**
+
+- Create; every body change creates a new immutable version; stale saves are rejected with `412` and the current text (`baseVersion`).
+- Version list and read, line diff in the History shape, restore an old version as a new one, finalize/unfinalize with edit protection, Markdown export.
+- Frontend: Edit document dialog (save new version, mark final, back to draft).
+
+**Not built yet**
+
+- Save coalescing, version thinning, move to another project, strict unsafe-content mode (bodies are stored as text and never rendered by the server), a dedicated documents list endpoint (use `/library`).

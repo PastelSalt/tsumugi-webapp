@@ -1,6 +1,8 @@
 # PLAN-B-14 — Security and Privacy
 
-**Status:** Proposed · **Phase:** 1 → 7 (cross-cutting) · **Depends on:** all modules · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
+> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). The local-security basics are in place; the hosted-deployment items are not. See [Implementation status](#implementation-status-mvp) at the end.
+
+**Status:** 🟡 Partly done (MVP) · **Phase:** 1 → 7 (cross-cutting) · **Depends on:** all modules · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [01 Foundation](PLAN-B-01.md) · [04 Authentication](PLAN-B-04.md) · [05 Privacy duties](PLAN-B-05.md) · [10 Files](PLAN-B-10.md) · [16 Operations](PLAN-B-16.md) · legal drafts in `docs/`
 
 ## 1. Purpose and scope
@@ -168,3 +170,19 @@ Publish `/.well-known/security.txt` with a contact (to be added to `CONTRIBUTING
 - Q7 retention values; legal basis wording; minimum age.
 - Whether to add TOTP/passkeys before public launch (PLAN-B-04 section 14).
 - Whether to use a managed WAF (Vercel Firewall) rules in addition to app-level limits.
+
+---
+
+## Implementation status (MVP)
+
+**🟡 Partly done (MVP)** · local MVP, built 2026-11-16 · The local-security basics are in place; the hosted-deployment items are not.
+
+**Built**
+
+- Hashed passwords and session tokens, `HttpOnly; SameSite=Lax` cookie, `Origin` check, lockout and in-memory rate limits.
+- Strict validation, tenant guard with `404` for foreign records, no stack traces, upload allow-list and `nosniff`, user search text always escaped.
+- Tests proving another user gets `404` on the main routes (`Server/test/work.test.js`).
+
+**Not built yet**
+
+- Full header set (helmet/HSTS/CSP), CSRF token, persistent rate limiter, audit log, secret scanning, dependency audit in CI, the all-routes authorization contract test, release security checklist.

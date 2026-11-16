@@ -1,6 +1,8 @@
 # PLAN-B-09 — Requirements and Acceptance Criteria
 
-**Status:** Proposed · **Phase:** 4 · **Depends on:** [06](PLAN-B-06.md), [07](PLAN-B-07.md), [08](PLAN-B-08.md); link storage from [12](PLAN-B-12.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
+> **Implementation status (2026-11-16):** ✅ Done (MVP). Requirements, acceptance criteria and their rules are enforced on the server. See [Implementation status](#implementation-status-mvp) at the end.
+
+**Status:** ✅ Done (MVP) · **Phase:** 4 · **Depends on:** [06](PLAN-B-06.md), [07](PLAN-B-07.md), [08](PLAN-B-08.md); link storage from [12](PLAN-B-12.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [10 Files](PLAN-B-10.md) · [13 Coverage](PLAN-B-13.md) · frontend [PLAN-A-04F](../frontend/PLAN-A-04F.md) (Specs)
 
 ## 1. Purpose and scope
@@ -115,3 +117,20 @@ Concurrent creates produce unique, gap-free-or-explained keys; mark-met rule mat
 - Whether `Non-functional` requirements should support measurable targets (value + unit), as the demo's "under 300 ms" implies. Default: free text in acceptance criteria.
 - Whether gaps should also include "no milestone". Default: no (matches the demo).
 - Import of requirements from Markdown/CSV (deferred to a later plan).
+
+---
+
+## Implementation status (MVP)
+
+**✅ Done (MVP)** · local MVP, built 2026-11-16 · Requirements, acceptance criteria and their rules are enforced on the server.
+
+**Built**
+
+- Create with atomic `REQ-###` keys that are never reused; update; delete (`services/requirements.js`).
+- Cannot be `Met` with open criteria (`422 requirement.criteria_open`); unticking a criterion reopens a Met requirement; verification only when Met.
+- Task and file links (both directions); coverage and gaps via `GET /insights`.
+- Frontend: Add requirement, tick criteria, Mark met / verified, Link work.
+
+**Not built yet**
+
+- `by-key` route, per-project coverage endpoint, restore for deleted requirements.

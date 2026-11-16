@@ -316,7 +316,7 @@ export default function LandingPage() {
             <p className="hero__lead">Tsumugi brings projects, requirements, milestones, tasks, assets, and revisions into one living thread — so you can always see why a piece of work exists and what it became.</p>
             <div className="hero__actions">
               <a className="button button--primary" href="/register">Create your workspace <ArrowUpRight size={17} strokeWidth={2.5} aria-hidden="true" /></a>
-              <a className="button button--secondary" href="/home"><Play size={15} strokeWidth={2.5} aria-hidden="true" /> Explore the demo</a>
+              <a className="button button--secondary" href="/home?demo"><Play size={15} strokeWidth={2.5} aria-hidden="true" /> Explore the demo</a>
             </div>
             <ul className="hero__facts">
               <li><Check size={15} strokeWidth={3} aria-hidden="true" /> Early preview with sample data</li>
@@ -402,7 +402,7 @@ export default function LandingPage() {
             <h2 id="closing-title" data-split><Words text="Make room for the work that matters." /></h2>
             <div className="closing__actions">
               <a className="button button--primary" href="/register">Create your workspace <ArrowUpRight size={17} strokeWidth={2.5} aria-hidden="true" /></a>
-              <a className="button button--ghost" href="/home">Explore the demo</a>
+              <a className="button button--ghost" href="/home?demo">Explore the demo</a>
               <a className="text-link" href="/login">Log in</a>
             </div>
             <p className="closing__note">Early preview · sample data · nothing is saved</p>

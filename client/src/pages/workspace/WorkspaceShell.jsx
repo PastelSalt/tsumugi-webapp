@@ -4,9 +4,11 @@ import { legalLinks } from '../../components/public/legalLinks'
 import { useQueryParam } from '../../hooks/useQueryParam'
 import { modules, mobileBar } from './nav'
 import { useWorkspace } from './context'
-import { resetSession, sessionCount } from './data/store'
+import { isLive, resetSession, sessionCount } from './data/store'
+import { logout, useSession } from '../../lib/session'
 import { figures } from './data/selectors'
 import { shortcutLabel } from '../../lib/keys'
+import { navigate } from '../../app/router'
 import { DEMO_TODAY } from './data/format'
 
 const isActive = (pathname, href) => pathname === href || (href === '/projects' && pathname.startsWith('/projects/'))
@@ -22,6 +24,8 @@ function NavLink({ item, pathname }) {
 }
 
 function AccountMenu({ pathname, placement }) {
+  const live = isLive()
+  const { user } = useSession()
   const { dev, setDev, openShortcuts } = useWorkspace()
   const menuRef = useRef(null)
   useEffect(() => { if (menuRef.current) menuRef.current.open = false }, [pathname])
@@ -37,11 +41,11 @@ function AccountMenu({ pathname, placement }) {
     <details className={rail ? 'ws-menu ws-menu--rail' : 'ws-menu ws-menu--top'} ref={menuRef}>
       <summary aria-label="Account menu">
         <span className="avatar" aria-hidden="true"><User size={16} /></span>
-        {rail && <span className="ws-menu__label"><strong>Demo user</strong><small>Individual</small></span>}
+        {rail && <span className="ws-menu__label"><strong>{live ? user?.displayName : "Demo user"}</strong><small>Individual</small></span>}
         {rail && <ChevronsUpDown size={15} aria-hidden="true" className="ws-menu__chevron" />}
       </summary>
       <div className="ws-menu__panel">
-        <p className="ws-menu__who"><strong>Demo workspace</strong><span>Individual · sample data, nothing is saved</span></p>
+        <p className="ws-menu__who"><strong>{live ? user?.email : "Demo workspace"}</strong><span>{live ? "Individual workspace · saved on this computer" : "Individual · sample data, nothing is saved"}</span></p>
         {!rail && <a href="/insights"><BarChart3 size={15} aria-hidden="true" /> Insights</a>}
         <a href="/account"><Settings size={15} aria-hidden="true" /> Account and preferences</a>
         <a href="/help"><CircleHelp size={15} aria-hidden="true" /> Help</a>
@@ -52,7 +56,7 @@ function AccountMenu({ pathname, placement }) {
           {legalLinks.map(([href, label]) => <a href={href} key={href}>{label}</a>)}
         </div>
         <a href="/">Back to landing page</a>
-        <a href="/login">Leave demo</a>
+        {live ? <button type="button" onClick={() => logout().then(() => navigate("/login", { replace: true }))}>Log out</button> : <a href="/login">Leave demo</a>}
       </div>
     </details>
   )
@@ -74,11 +78,10 @@ function Rail({ pathname }) {
   )
 }
 
-const todayLabel = new Date(`${DEMO_TODAY}T00:00:00`).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })
-
 /** Right side of the top bar: today's date and the two numbers that need attention. */
 function TopStatus() {
   const f = figures()
+  const todayLabel = new Date(`${DEMO_TODAY}T00:00:00`).toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })
   return (
     <div className="ws-status" aria-label="Today">
       <span className="ws-status__date"><CalendarDays size={15} aria-hidden="true" /> {todayLabel}</span>

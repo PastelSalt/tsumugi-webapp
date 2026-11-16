@@ -12,7 +12,7 @@ import '../../styles/auth.css'
 import '../../styles/forms.css'
 
 /** Shared frame for login, register, and recovery pages. `art` adds the illustrated side panel. */
-export default function AuthShell({ pageTitle, title, intro, art, previewStates = [], currentState, note, children }) {
+export default function AuthShell({ pageTitle, title, intro, art, previewStates = [], currentState, note, children, banner }) {
   usePageMeta({ title: `${pageTitle} | Tsumugi`, robots: 'noindex, nofollow' })
   const { pathname } = useLocation()
   const pageRef = useRef(null)
@@ -34,7 +34,7 @@ export default function AuthShell({ pageTitle, title, intro, art, previewStates 
 
       <section className={art ? 'auth-card auth-card--register section-shell' : 'auth-card section-shell'} id="auth-content" aria-labelledby="auth-title">
         <div className="auth-form-column">
-          <FormBanner tone="info" title="Demo mode">Nothing is sent or saved. You can continue without entering any details.</FormBanner>
+          {banner === undefined ? <FormBanner tone="info" title="Demo mode">Nothing is sent or saved. You can continue without entering any details.</FormBanner> : banner}
           <h1 id="auth-title"><Words text={title} /></h1>
           <p className="auth-intro">{intro}</p>
           {children}

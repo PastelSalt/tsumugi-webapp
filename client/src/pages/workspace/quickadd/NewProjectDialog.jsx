@@ -1,23 +1,33 @@
 import { useState } from 'react'
 import Modal from './Modal'
 import { navigate } from '../../../app/router'
-import { addProject } from '../data/store'
+import { addProject, createProject, isLive } from '../data/store'
 import { templates } from '../data/templates'
 
 export default function NewProjectDialog({ open, onClose }) {
   const [kind, setKind] = useState('software')
   const [name, setName] = useState('')
+  const [busy, setBusy] = useState(false)
+  const live = isLive()
 
-  const create = (event) => {
+  const create = async (event) => {
     event.preventDefault()
     const template = templates.find((t) => t.kind === kind)
     const title = name.trim() || `Untitled ${template.label.toLowerCase()} project`
-    const milestones = template.milestone ? [{ title: template.milestone, due: '2026-12-15' }] : []
-    const id = addProject(
-      { name: title, kind: template.kind, category: template.category, status: 'Planning', phases: template.phases, description: `${template.label} project created from a template.` },
-      milestones,
-      template.tasks.map((t) => ({ title: t, due: null })),
-    )
+    let id
+    if (live) {
+      setBusy(true)
+      id = await createProject({ name: title, templateKind: template.kind })
+      setBusy(false)
+      if (!id) return
+    } else {
+      const milestones = template.milestone ? [{ title: template.milestone, due: '2026-12-15' }] : []
+      id = addProject(
+        { name: title, kind: template.kind, category: template.category, status: 'Planning', phases: template.phases, description: `${template.label} project created from a template.` },
+        milestones,
+        template.tasks.map((t) => ({ title: t, due: null })),
+      )
+    }
     setName('')
     onClose()
     navigate(`/projects/${id}`)
@@ -36,8 +46,8 @@ export default function NewProjectDialog({ open, onClose }) {
           ))}
         </fieldset>
         <label className="field"><span>Project name</span><input autoFocus value={name} onChange={(e) => setName(e.target.value)} placeholder="Give it a short name" autoComplete="off" /></label>
-        <p className="muted">Created for this session only. It disappears when you reload.</p>
-        <div className="ws-modal__actions"><button className="button button--small button--secondary" type="button" onClick={onClose}>Cancel</button><button className="button button--small button--primary" type="submit">Create project</button></div>
+        {!live && <p className="muted">Created for this session only. It disappears when you reload.</p>}
+        <div className="ws-modal__actions"><button className="button button--small button--secondary" type="button" onClick={onClose}>Cancel</button><button className="button button--small button--primary" type="submit" disabled={busy}>{busy ? 'Creating…' : 'Create project'}</button></div>
       </form>
     </Modal>
   )

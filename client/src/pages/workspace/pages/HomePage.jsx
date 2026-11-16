@@ -11,10 +11,9 @@ import { data, getHistory, undoLast } from '../data/store'
 import { figures, get, projectProgress, recents, recentProjects, todayList, upNext } from '../data/selectors'
 import { DEMO_TODAY, timeAgo } from '../data/format'
 
-const dateLine = new Date(`${DEMO_TODAY}T00:00:00`).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })
-
 /** The one headline on Home: how things stand, in words. The whole block links to the full list. */
 function Headline({ figures }) {
+  const dateLine = new Date(`${DEMO_TODAY}T00:00:00`).toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' })
   usePageMeta({ title: 'Home | Tsumugi', robots: 'noindex, nofollow' })
   usePageEntrance()
   const need = figures.overdue + figures.dueToday

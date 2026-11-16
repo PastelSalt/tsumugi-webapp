@@ -1,4 +1,7 @@
+import { useEffect } from 'react'
 import { Check, TriangleAlert } from 'lucide-react'
+import { api } from '../../../lib/api'
+import { isLive } from '../data/store'
 import { useQueryParam } from '../../../hooks/useQueryParam'
 import { navigate } from '../../../app/router'
 import { PageHeader, ViewTabs, Section, SplitLayout, PreviewAction, Fields } from '../components/layout'
@@ -71,6 +74,7 @@ function Work({ project, select, setSelect }) {
         <button type="button" aria-pressed={mode === 'groups'} onClick={() => setMode(null)}>Groups</button>
         <button type="button" aria-pressed={mode === 'timeline'} onClick={() => setMode('timeline')}>Timeline</button>
       </div>
+      <PreviewAction label="Add milestone" variant="quiet" record={project} />
       <SplitLayout panel={panel}>
         {!milestones.length && !loose.length ? <EmptyState title="No work yet" body="Press Q to add a task to this project." />
           : mode === 'timeline' ? <Timeline milestones={milestones} selectedId={select} onSelect={setSelect} />
@@ -101,7 +105,7 @@ function CoverageMatrix({ list, select, setSelect }) {
             const hasFinal = links.files.some(isFinalFile)
             return (
               <tr key={r.id} className={select === r.id ? 'coverage__row--selected' : ''}>
-                <th scope="row"><button type="button" className="coverage__open" onClick={() => setSelect(r.id)}><code className="req-id">{r.id}</code> {r.title}</button></th>
+                <th scope="row"><button type="button" className="coverage__open" onClick={() => setSelect(r.id)}><code className="req-id">{r.key ?? r.id}</code> {r.title}</button></th>
                 <td>{links.gaps.task ? <span className="gap"><TriangleAlert size={12} aria-hidden="true" /> No work yet</span> : `${links.tasks.length} task${links.tasks.length === 1 ? '' : 's'}`}</td>
                 <td>{hasFinal ? <span className="coverage__yes"><Check size={14} aria-hidden="true" /> Yes</span> : <span className="gap"><TriangleAlert size={12} aria-hidden="true" /> No final file</span>}</td>
                 <td><StatusBadge domain="requirement" status={r.status} />{r.verified && <> <Flag name="Verified" /></>}</td>
@@ -127,7 +131,7 @@ function Specs({ project, select, setSelect }) {
         </div>
       )}
       <SplitLayout panel={selected && <RequirementPanel requirement={selected} onClose={() => setSelect(null)} />}>
-        {!list.length ? <EmptyState title="No requirements yet" body="Requirements say what must be true when the project is done." action={<PreviewAction label="Add requirement" variant="primary" />} />
+        {!list.length ? <EmptyState title="No requirements yet" body="Requirements say what must be true when the project is done." action={<PreviewAction label="Add requirement" variant="primary" record={project} />} />
           : mode === 'coverage' ? <CoverageMatrix list={list} select={select} setSelect={setSelect} />
           : <ul className="rows">{list.map((r) => <li key={r.id}><RequirementRow requirement={r} selected={select === r.id} onSelect={setSelect} /></li>)}</ul>}
       </SplitLayout>
@@ -141,7 +145,7 @@ function Files({ project, select, setSelect }) {
   return (
     <SplitLayout panel={selected && <FilePanel file={selected} onClose={() => setSelect(null)} />}>
       {list.length ? <div className="tile-grid">{list.map((f) => <FileTile key={f.id} file={f} selected={select === f.id} onSelect={setSelect} />)}</div>
-        : <EmptyState title="No files yet" body="Notes, drafts, and references for this project appear here." action={<PreviewAction label="Add file" variant="primary" />} />}
+        : <EmptyState title="No files yet" body="Notes, drafts, and references for this project appear here." action={<PreviewAction label="Add file" variant="primary" record={project} />} />}
     </SplitLayout>
   )
 }
@@ -186,6 +190,8 @@ export default function ProjectPage({ projectId }) {
   const [view, setView] = useQueryParam('view', 'overview')
   const [select, setSelect] = useQueryParam('select')
   const project = get('project', projectId)
+  // Remember which projects were opened last (Home's "Your projects"). Fire and forget; reads never write.
+  useEffect(() => { if (isLive() && project) api.post(`/projects/${project.id}/open`).catch(() => {}) }, [project?.id]) // eslint-disable-line react-hooks/exhaustive-deps
   if (!project) {
     return (
       <>
@@ -203,7 +209,7 @@ export default function ProjectPage({ projectId }) {
   return (
     <>
       <PageHeader title={project.name} metaTitle={project.name} crumbs={[['Projects', '/projects']]} description={project.description}
-        action={<><StatusBadge domain="project" status={project.archived ? 'Archived' : project.status} />{project.status === 'Active' && <StatusBadge domain="health" status={health} />}<PreviewAction label="Edit project" variant="quiet" /></>} />
+        action={<><StatusBadge domain="project" status={project.archived ? 'Archived' : project.status} />{project.status === 'Active' && <StatusBadge domain="health" status={health} />}<PreviewAction label="Edit project" variant="quiet" record={project} /></>} />
       {project.session && <p className="note">Created for this session only. It disappears when you reload.</p>}
       <ViewTabs tabs={tabs} value={view} onChange={change} label="Project sections" />
       <StateGate empty={{ title: 'Nothing here yet', body: 'Add the first record to get started.' }}>

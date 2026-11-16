@@ -1,6 +1,8 @@
 # PLAN-B-06 — Projects, Phases, and Templates
 
-**Status:** Proposed · **Phase:** 3 · **Depends on:** [03](PLAN-B-03.md), [05](PLAN-B-05.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
+> **Implementation status (2026-11-16):** ✅ Done (MVP). Projects, templates, archive, delete and restore all work end to end. See [Implementation status](#implementation-status-mvp) at the end.
+
+**Status:** ✅ Done (MVP) · **Phase:** 3 · **Depends on:** [03](PLAN-B-03.md), [05](PLAN-B-05.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [07 Milestones](PLAN-B-07.md) · [08 Tasks](PLAN-B-08.md) · [12 Traceability](PLAN-B-12.md) · frontend [PLAN-A-04B](../frontend/PLAN-A-04B.md) (Projects), [PLAN-A-04C](../frontend/PLAN-A-04C.md) (Project page), [PLAN-A-04L](../frontend/PLAN-A-04L.md) (templates)
 
 ## 1. Purpose and scope
@@ -141,3 +143,24 @@ Unit: slug generation, phase replace/clamp, tag normalization. Integration: crea
 - Q4 (multiple workspaces) may require moving projects between workspaces; not planned.
 - Whether `kind` should become a free-form label once the custom workflow builder arrives (PLAN-B-00 section 1.2).
 - Cover images/icons from the spec: deferred; the `tone` colour covers the visual need in the frontend.
+
+---
+
+## Implementation status (MVP)
+
+**✅ Done (MVP)** · local MVP, built 2026-11-16 · Projects, templates, archive, delete and restore all work end to end.
+
+**Built**
+
+- Create (blank or from a template), list, read, update, `open` tracking (`routes/work.js`, `services/projects.js`); `GET /templates`.
+- Archive makes a project read-only for all its records (`409 project.archived`); unarchive.
+- Delete cascades to all children and restores exactly (`POST /projects/:id/restore`); `GET /projects/deleted`.
+- Slug generation with collision handling; status and phase changes recorded in History.
+
+**Not built yet**
+
+- `by-slug` route, `GET /projects/recent`, `expand=summary`, `PUT /phases` with the `phase_in_use` rule, per-workspace project cap, `If-Match`.
+
+**Deviations and notes**
+
+- Progress and health are exposed by `GET /insights` and computed by the existing frontend selectors on the snapshot, not stored on the project.

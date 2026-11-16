@@ -1,6 +1,14 @@
-// Fixed "demo today" so relative dates, overdue checks, and sorting are computed, never hard-coded.
-export const DEMO_TODAY = '2026-11-12'
-export const DEMO_NOW = '2026-11-12T12:00:00'
+// "Today" for relative dates, overdue checks, and sorting. The demo uses a fixed day; once signed in, the server's
+// "today" (in the person's time zone) replaces it through setToday(). These are live bindings, so importers see updates.
+export let DEMO_TODAY = '2026-11-12'
+export let DEMO_NOW = '2026-11-12T12:00:00'
+
+export function setToday(today) {
+  const now = new Date()
+  const pad = (n) => String(n).padStart(2, '0')
+  DEMO_TODAY = today
+  DEMO_NOW = `${today}T${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`
+}
 
 const DAY = 86400000
 const toDate = (iso) => new Date(`${iso.slice(0, 10)}T00:00:00`)

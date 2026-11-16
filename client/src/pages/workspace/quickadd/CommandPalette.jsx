@@ -4,7 +4,7 @@ import Modal from './Modal'
 import { navigate } from '../../../app/router'
 import { modules } from '../nav'
 import { data } from '../data/store'
-import { activeProjects, recents } from '../data/selectors'
+import { activeProjects, isDoc, recents } from '../data/selectors'
 
 export default function CommandPalette({ open, onClose, onQuickAdd, onNewProject, onShortcuts }) {
   const [query, setQuery] = useState('')
@@ -21,7 +21,7 @@ export default function CommandPalette({ open, onClose, onQuickAdd, onNewProject
       { id: 'g-help', group: 'Go to', label: 'Help', run: go('/help') },
       { id: 'a-shortcuts', group: 'Actions', label: 'Keyboard shortcuts', hint: '?', run: onShortcuts },
       ...activeProjects().map((p) => ({ id: p.id, group: 'Projects', label: p.name, run: go(`/projects/${p.id}`) })),
-      ...data().files.map((f) => ({ id: f.id, group: 'Library', label: f.name, run: go(f.body ? `/library?doc=${f.id}` : `/library?select=${f.id}`) })),
+      ...data().files.map((f) => ({ id: f.id, group: 'Library', label: f.name, run: go(isDoc(f) ? `/library?doc=${f.id}` : `/library?select=${f.id}`) })),
     ]
     const q = query.trim().toLowerCase()
     if (!q) {

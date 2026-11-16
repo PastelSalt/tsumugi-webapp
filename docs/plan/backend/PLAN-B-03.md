@@ -1,6 +1,8 @@
 # PLAN-B-03 — Data Model and Persistence
 
-**Status:** Proposed · **Phase:** 1 · **Depends on:** [01](PLAN-B-01.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
+> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). All user-facing collections exist with tenant scoping, links, counters, soft delete and a seed script. See [Implementation status](#implementation-status-mvp) at the end.
+
+**Status:** 🟡 Partly done (MVP) · **Phase:** 1 · **Depends on:** [01](PLAN-B-01.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [02 API conventions](PLAN-B-02.md) · [12 Changes and links](PLAN-B-12.md) · [14 Security](PLAN-B-14.md)
 
 ## 1. Purpose and scope
@@ -211,3 +213,26 @@ Property tests for the tenant guard (random workspace pairs); transaction rollba
 
 - Atlas Search versus MongoDB text indexes for search (decided in PLAN-B-13 after a spike).
 - Whether to store audit events in MongoDB or ship them to a log service (PLAN-B-16).
+
+---
+
+## Implementation status (MVP)
+
+**🟡 Partly done (MVP)** · local MVP, built 2026-11-16 · All user-facing collections exist with tenant scoping, links, counters, soft delete and a seed script.
+
+**Built**
+
+- Collections: users, sessions, workspaces, projects, milestones, tasks, requirements, files, documents (+ versions), changes, links, counters (`models.js`).
+- Tenant guard `scope(ctx)` on every query; foreign records are indistinguishable from missing ones (`services/common.js`).
+- Soft delete with batch ids; project cascade delete and exact restore; task restore; hard purge of projects deleted over 30 days ago on server start.
+- Links collection with a closed relation set (`services/links.js`); `REQ-###` counters; indexes declared on the schemas.
+- Seed script that loads the frontend sample data into a demo account (`npm run seed`).
+
+**Not built yet**
+
+- `version` field and optimistic concurrency, transactions (a single local `mongod` is not a replica set, so cascades are not atomic), migrations runner, integrity checker, TTL collections (`email_tokens`, `idempotency_keys`, `upload_intents`, `rate_limits`), `audit_log`, `jobs`.
+- Restore for milestones, requirements, files, and documents.
+
+**Deviations and notes**
+
+- **Deviations:** project phases are stored as a list of names with `phaseIndex`, and milestones keep a phase index (not stable phase ids). A document keeps its current body inline plus immutable `document_versions`.

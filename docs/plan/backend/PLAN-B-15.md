@@ -1,6 +1,8 @@
 # PLAN-B-15 — Testing and Quality
 
-**Status:** Proposed · **Phase:** 1 → 7 (cross-cutting) · **Depends on:** all modules · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
+> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). A working integration test suite runs offline in a few seconds. See [Implementation status](#implementation-status-mvp) at the end.
+
+**Status:** 🟡 Partly done (MVP) · **Phase:** 1 → 7 (cross-cutting) · **Depends on:** all modules · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [01 Foundation](PLAN-B-01.md) · [02 Contract](PLAN-B-02.md) · [14 Security](PLAN-B-14.md) · [16 CI/CD](PLAN-B-16.md) · client checks in `docs/testing/ux-walkthrough-checklist.md`
 
 ## 1. Purpose and scope
@@ -151,3 +153,18 @@ Per pull request (target < 8 minutes): install (`npm ci`) → lint → typecheck
 
 - Whether to run the integration suite against a real Atlas dev cluster nightly in addition to the memory server (catches driver/server-version differences).
 - Whether to adopt Stryker mutation testing early; default: later, on the metrics and state machines only.
+
+---
+
+## Implementation status (MVP)
+
+**🟡 Partly done (MVP)** · local MVP, built 2026-11-16 · A working integration test suite runs offline in a few seconds.
+
+**Built**
+
+- Vitest + Supertest + an in-memory MongoDB; 19 tests across auth, isolation, projects, milestones, tasks, requirements and links, documents, files, Home/Insights/search (`npm test`).
+- Manual browser check of login, register, empty workspace, new project, Quick add, requirements, library note, and task completion against the real API.
+
+**Not built yet**
+
+- Separate unit tests, shared authorization contract suite, golden metric tests, coverage gates, performance budgets, Playwright journeys, CI workflow.

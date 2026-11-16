@@ -1,6 +1,8 @@
 # PLAN-B-16 — Deployment, Operations, and Observability
 
-**Status:** Proposed · **Phase:** 1 (CI and preview deploy) and 7 (production) · **Depends on:** [01](PLAN-B-01.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
+> **Implementation status (2026-11-16):** ⬜ Not started. Deployment is intentionally out of scope for the local MVP. Only the local run story exists. See [Implementation status](#implementation-status-mvp) at the end.
+
+**Status:** ⬜ Not started · **Phase:** 1 (CI and preview deploy) and 7 (production) · **Depends on:** [01](PLAN-B-01.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [14 Security](PLAN-B-14.md) · [15 Testing and CI](PLAN-B-15.md) · [19 Background jobs](PLAN-B-19.md)
 
 ## 1. Purpose and scope
@@ -153,3 +155,17 @@ Contents: how to deploy and roll back; how to run migrations and indexes; rotati
 - Log/monitoring vendors and who receives pages.
 - Production domain and email sending domain (Q1, Q2).
 - Whether to adopt a staging environment between Preview and Production (default: no, promote tested previews).
+
+---
+
+## Implementation status (MVP)
+
+**⬜ Not started** · local MVP, built 2026-11-16 · Deployment is intentionally out of scope for the local MVP. Only the local run story exists.
+
+**Built**
+
+- Local run: `npm run setup`, `npm run dev` (API + web), `npm run seed`, `npm test` from the repo root; data in `Server/.data`, uploads in `Server/uploads`.
+
+**Not built yet**
+
+- Everything in this plan: Vercel, Atlas, object storage, CI/CD, cron jobs, observability, backups, runbook.

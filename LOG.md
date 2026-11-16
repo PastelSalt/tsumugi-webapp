@@ -393,7 +393,7 @@ This file records actions made in the repository. Entries are chronological; eac
 
 ## 2026-11-16 (mobile handoff, revision 2)
 
-- **Reviewed** the Flutter app in  (commit d98db05; read-only, nothing changed there): README, CONTEXT, pubspec, data models, session store, preferences, quick-add parser, Android manifests, privacy test.
-- **Found** that revision 1 of  assumed Kotlin; the app is Flutter. Also found: the mobile "play-demo" rule (no network, no storage, no INTERNET permission, enforced by ) conflicts with a backend; the snapshot lacks ; the Dart  has no ;  is a constant;  and vibration have no server field; the fixtures tool points at the old website folder.
-- **Verified** with scripts: 39 HTTP claims against the running API (39/39), and every field of the snapshot (seeded demo account and a fresh account) against the casts in the Dart  (0 type problems).
-- **Rewrote**  as revision 2 (sanity-check section, Flutter integration guide, screen-by-screen endpoint map, preference mapping, gaps D-01-A to D-01-N, open questions). **Added**  (real API responses for mobile tests) and PLAN-C-01 items C1-27 to C1-29.
+- **Reviewed** the Flutter app in `../tsumugi-mobile` (commit d98db05; read-only, nothing changed there): README, CONTEXT, pubspec, data models, session store, preferences, quick-add parser, Android manifests, privacy test.
+- **Found** that revision 1 of `docs/PLAN-D-01.md` assumed Kotlin; the app is Flutter. Also found: the mobile "play-demo" rule (no network, no storage, no `INTERNET` permission, enforced by `test/privacy_test.dart`) conflicts with a backend; the snapshot lacks `templates`; the Dart `Requirement` has no `key`; `demoToday` is a constant; `textScale` and vibration have no server field; the fixtures tool points at the old website folder.
+- **Verified** with scripts: 39 HTTP claims against the running API (39/39), and every field of the snapshot (seeded demo account and a fresh account) against the casts in the Dart `models.dart` (0 type problems).
+- **Rewrote** `docs/PLAN-D-01.md` as revision 2 (sanity-check section, Flutter integration guide, screen-by-screen endpoint map, preference mapping, gaps D-01-A to D-01-N, open questions). **Added** `docs/samples/` (real API responses for mobile tests) and PLAN-C-01 items C1-27 to C1-29.

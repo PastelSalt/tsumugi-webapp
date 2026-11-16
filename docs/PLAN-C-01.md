@@ -173,14 +173,14 @@ These are listed in the frontend plans and testing checklist; I cannot do them f
 
 ## F. Mobile app (Flutter)
 
-Found while reviewing  for [PLAN-D-01](PLAN-D-01.md). These need the owner because the mobile app has its own recorded decisions.
+Found while reviewing `../tsumugi-mobile` for [PLAN-D-01](PLAN-D-01.md). These need the owner because the mobile app has its own recorded decisions.
 
 ### C1-27 🔴 Lift or narrow the mobile "play-demo" rule
 - **Blocks:** any networking in the Android app: sign-in, saving, syncing, files.
-- **Why it needs you:**  records (2026-11-14) that the app never gets a backend, never saves anything on the device, and requests no permissions;  fails the build if the app imports networking or storage packages (, , , , , , …) or if the release manifest asks for . Connecting to the backend contradicts that rule.
+- **Why it needs you:** `tsumugi-mobile/CONTEXT.md` records (2026-11-14) that the app never gets a backend, never saves anything on the device, and requests no permissions; `test/privacy_test.dart` fails the build if the app imports networking or storage packages (`http`, `dio`, `shared_preferences`, `sqflite`, `path_provider`, `url_launcher`, …) or if the release manifest asks for `INTERNET`. Connecting to the backend contradicts that rule.
 - **You need to decide:** keep the demo promise for people who never sign in (recommended: "Continue as demo user" stays offline and sends nothing), and allow networking and local storage only after sign-in, in clearly named folders, with the privacy text updated. Details in [PLAN-D-01 section 3](PLAN-D-01.md).
 - **Default if unanswered:** the mobile app stays a play-demo; I will not touch it. (I have not changed the mobile repository.)
-- **Then:** the mobile side adds Dio, a cookie jar, local cache, the  permission, updates  and the legal copy, and replaces the in-memory session overlay with the repository described in PLAN-D-01 section 10.
+- **Then:** the mobile side adds Dio, a cookie jar, local cache, the `INTERNET` permission, updates `privacy_test.dart` and the legal copy, and replaces the in-memory session overlay with the repository described in PLAN-D-01 section 10.
 
 ### C1-28 🟡 Notifications on Android
 - **Blocks:** reminders and "due today" alerts (the app removed its reminders setting because the demo forbids notifications).
@@ -189,7 +189,7 @@ Found while reviewing  for [PLAN-D-01](PLAN-D-01.md). These need the owner becau
 
 ### C1-29 🟡 Google Play release
 - **Blocks:** publishing the app.
-- **You need to:** create a Google Play developer account (fee and identity verification), choose the final application id (currently ), and complete the data-safety form and privacy-policy link once the legal pages are published (C1-14). Play will also expect in-app account deletion, which the backend already supports.
+- **You need to:** create a Google Play developer account (fee and identity verification), choose the final application id (currently `com.moekoworks.tsumugi_mobile`), and complete the data-safety form and privacy-policy link once the legal pages are published (C1-14). Play will also expect in-app account deletion, which the backend already supports.
 
 ---
 

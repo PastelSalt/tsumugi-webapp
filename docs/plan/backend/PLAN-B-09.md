@@ -1,6 +1,7 @@
 # PLAN-B-09 — Requirements and Acceptance Criteria
 
-> **Implementation status (2026-11-16):** ✅ Done (MVP). Requirements, acceptance criteria and their rules are enforced on the server. See [Implementation status](#implementation-status-mvp) at the end.
+> **Implementation status (2026-11-16):** ✅ Done (MVP). Requirements, acceptance criteria, and their rules are enforced on the server. See [Implementation status](#implementation-status-mvp) at the end.
+
 
 **Status:** ✅ Done (MVP) · **Phase:** 4 · **Depends on:** [06](PLAN-B-06.md), [07](PLAN-B-07.md), [08](PLAN-B-08.md); link storage from [12](PLAN-B-12.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [10 Files](PLAN-B-10.md) · [13 Coverage](PLAN-B-13.md) · frontend [PLAN-A-04F](../frontend/PLAN-A-04F.md) (Specs)
@@ -122,15 +123,15 @@ Concurrent creates produce unique, gap-free-or-explained keys; mark-met rule mat
 
 ## Implementation status (MVP)
 
-**✅ Done (MVP)** · local MVP, built 2026-11-16 · Requirements, acceptance criteria and their rules are enforced on the server.
+**✅ Done (MVP)** · local MVP, updated 2026-11-16 · Requirements, acceptance criteria, and their rules are enforced on the server.
 
 **Built**
 
-- Create with atomic `REQ-###` keys that are never reused; update; delete (`services/requirements.js`).
-- Cannot be `Met` with open criteria (`422 requirement.criteria_open`); unticking a criterion reopens a Met requirement; verification only when Met.
-- Task and file links (both directions); coverage and gaps via `GET /insights`.
+- Create with atomic `REQ-###` keys that are never reused; update; delete; restore from Recently deleted.
+- Cannot be `Met` with open criteria; unticking a criterion reopens a Met requirement; verification only when Met.
+- Task and file links (both directions); `GET /requirements/by-key/:projectId/:key`; `GET /projects/:id/coverage` with the gap list.
 - Frontend: Add requirement, tick criteria, Mark met / verified, Link work.
 
 **Not built yet**
 
-- `by-key` route, per-project coverage endpoint, restore for deleted requirements.
+- Dedicated `mark-met` / `verify` endpoints (the plan uses PATCH today).

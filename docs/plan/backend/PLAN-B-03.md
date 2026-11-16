@@ -1,6 +1,7 @@
 # PLAN-B-03 — Data Model and Persistence
 
-> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). All user-facing collections exist with tenant scoping, links, counters, soft delete and a seed script. See [Implementation status](#implementation-status-mvp) at the end.
+> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). All user-facing collections exist with tenant scoping, links, counters, restore, purge, and an integrity checker. See [Implementation status](#implementation-status-mvp) at the end.
+
 
 **Status:** 🟡 Partly done (MVP) · **Phase:** 1 · **Depends on:** [01](PLAN-B-01.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [02 API conventions](PLAN-B-02.md) · [12 Changes and links](PLAN-B-12.md) · [14 Security](PLAN-B-14.md)
@@ -218,20 +219,20 @@ Property tests for the tenant guard (random workspace pairs); transaction rollba
 
 ## Implementation status (MVP)
 
-**🟡 Partly done (MVP)** · local MVP, built 2026-11-16 · All user-facing collections exist with tenant scoping, links, counters, soft delete and a seed script.
+**🟡 Partly done (MVP)** · local MVP, updated 2026-11-16 · All user-facing collections exist with tenant scoping, links, counters, restore, purge, and an integrity checker.
 
 **Built**
 
-- Collections: users, sessions, workspaces, projects, milestones, tasks, requirements, files, documents (+ versions), changes, links, counters (`models.js`).
+- Collections: users, sessions, workspaces, projects, milestones, tasks, requirements, files, documents (+ versions), changes, links, counters, audit (`models.js`).
 - Tenant guard `scope(ctx)` on every query; foreign records are indistinguishable from missing ones (`services/common.js`).
-- Soft delete with batch ids; project cascade delete and exact restore; task restore; hard purge of projects deleted over 30 days ago on server start.
-- Links collection with a closed relation set (`services/links.js`); `REQ-###` counters; indexes declared on the schemas.
+- Soft delete with batch ids; project cascade delete and exact restore; restore for every kind through `GET /trash` and `POST /trash/:type/:id/restore`; hard purge of anything deleted over 30 days ago (and its stored files) on server start (`services/trash.js`).
+- Links collection with a closed relation set; `REQ-###` counters; indexes declared on the schemas.
+- Integrity checker (`npm run check:integrity`, `--fix`): dangling and duplicate links, orphans, duplicate keys, missing files on disk (`services/integrity.js`).
 - Seed script that loads the frontend sample data into a demo account (`npm run seed`).
 
 **Not built yet**
 
-- `version` field and optimistic concurrency, transactions (a single local `mongod` is not a replica set, so cascades are not atomic), migrations runner, integrity checker, TTL collections (`email_tokens`, `idempotency_keys`, `upload_intents`, `rate_limits`), `audit_log`, `jobs`.
-- Restore for milestones, requirements, files, and documents.
+- `version` field and optimistic concurrency, transactions (a single local `mongod` is not a replica set, so cascades are not atomic), migrations runner, TTL collections (`email_tokens`, `idempotency_keys`, `upload_intents`, `rate_limits`), `jobs`.
 
 **Deviations and notes**
 

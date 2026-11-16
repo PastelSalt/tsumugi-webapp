@@ -2,6 +2,7 @@
 
 > **Implementation status (2026-11-16):** 🟡 Partly done (MVP). Files are stored on this computer instead of object storage, as chosen for the local MVP. See [Implementation status](#implementation-status-mvp) at the end.
 
+
 **Status:** 🟡 Partly done (MVP) · **Phase:** 5 · **Depends on:** [06](PLAN-B-06.md); link storage from [12](PLAN-B-12.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [11 Documents](PLAN-B-11.md) · [14 Security](PLAN-B-14.md) · [16 Operations](PLAN-B-16.md) · frontend [PLAN-A-04G](../frontend/PLAN-A-04G.md) (Library), [PLAN-A-04H](../frontend/PLAN-A-04H.md)
 
@@ -144,18 +145,19 @@ Manual: real bucket smoke test per release (documented in the runbook).
 
 ## Implementation status (MVP)
 
-**🟡 Partly done (MVP)** · local MVP, built 2026-11-16 · Files are stored on this computer instead of object storage, as chosen for the local MVP.
+**🟡 Partly done (MVP)** · local MVP, updated 2026-11-16 · Files are stored on this computer instead of object storage, as chosen for the local MVP.
 
 **Built**
 
 - Upload through the API to `Server/uploads/<workspace>/` with a type allow-list, a 100 MB cap, sanitized names, and random storage keys (`services/library.js`).
-- Download as an attachment (inline only for safe types, SVG never inline, `nosniff`); external links (http/https only); metadata edits, Final flag, tags, link sets; delete.
-- Merged library list `GET /library` (files and documents together).
-- Frontend: Add file dialog (upload, link, note), Download, Mark as final file.
+- Contents are checked against the extension (magic bytes; text types must be valid UTF-8 without null bytes), so a renamed script or executable is refused (`services/sniff.js`).
+- 1 GB storage quota with `GET /files/usage`; replace a file's contents in place (`POST /files/:id/replace`); move a file to another project.
+- Download as an attachment (inline only for safe types with a sandboxing CSP, SVG never inline, `nosniff`); external links (http/https only); metadata edits, Final flag, tags, link sets; delete and restore; purge removes stored files.
+- Merged library list `GET /library`; frontend Add file dialog (upload, link, note), Download, Mark as final file.
 
 **Not built yet**
 
-- Object storage with presigned uploads, upload intents and verification, quotas and usage endpoint, replace bytes, move, magic-byte sniffing, thumbnails, orphan cleanup, antivirus hook.
+- Object storage with presigned uploads and upload intents, a separate preview endpoint, thumbnails, antivirus hook.
 
 **Deviations and notes**
 

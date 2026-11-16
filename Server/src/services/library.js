@@ -6,7 +6,9 @@ import { DocModel, DocVersionModel, FileModel, MilestoneModel } from '../models.
 import { named, recordChange } from './changes.js'
 import { checkMilestone, loadOne, loadProject, newId, scope } from './common.js'
 import { removeLinksFor, replaceLinks } from './links.js'
+import { contentMatches } from './sniff.js'
 import { documentDiff } from './shape.js'
+import { QUOTA_BYTES, storageUsage } from './extras.js'
 
 // Allow-list of uploads (PLAN-B-10 section 3.1). Anything else is rejected, including HTML, scripts, and executables.
 const KINDS = {
@@ -18,6 +20,7 @@ const KINDS = {
 const INLINE = new Set(['png', 'jpg', 'jpeg', 'gif', 'webp', 'pdf', 'mp3', 'wav', 'mp4', 'webm']) // svg is never inline
 export const extOf = (name) => path.extname(name).slice(1).toLowerCase()
 export const kindOf = (ext) => Object.keys(KINDS).find((k) => KINDS[k].includes(ext)) ?? null
+// eslint-disable-next-line no-control-regex -- stripping control characters from file names is the point
 const safeName = (name) => path.basename(name).replace(/[\u0000-\u001f<>:"/\\|?*]+/g, '_').slice(0, 200) || 'file'
 
 export const workspaceDir = (ctx) => path.join(config.uploadDir, String(ctx.workspaceId))
@@ -40,6 +43,8 @@ export async function uploadFile(ctx, { projectId, description, tags, file }) {
   const kind = kindOf(ext)
   if (!kind) throw unprocessable('file.type_not_allowed', `.${ext || 'unknown'} files are not supported. Supported: documents, images, audio/video, and data files.`)
   if (file.size > LIMITS.fileBytes) throw new AppError(413, 'file.too_large', 'That file is larger than 100 MB.')
+  if (!contentMatches(ext, file.buffer)) throw unprocessable('file.content_mismatch', `That file does not look like a real .${ext} file.`)
+  if ((await storageUsage(ctx)).usedBytes + file.size > QUOTA_BYTES) throw new AppError(413, 'file.quota_exceeded', 'That would go over your 1 GB of storage. Delete some files first.')
   const id = newId()
   const dir = workspaceDir(ctx)
   fs.mkdirSync(dir, { recursive: true })
@@ -48,6 +53,23 @@ export async function uploadFile(ctx, { projectId, description, tags, file }) {
   const rec = await FileModel.create({ _id: id, workspaceId: ctx.workspaceId, projectId: project._id, name, kind, ext, mime: file.mimetype, bytes: file.size, description: description ?? '', tags: tags ?? [], storageKey })
   await recordChange(ctx, { projectId: project._id, recordType: 'File', recordId: rec._id, action: 'uploaded', summary: `Added the file ${named(name)}` })
   return rec.toObject()
+}
+
+/** Replaces a file's contents but keeps its record, links, and history. */
+export async function replaceFileBytes(ctx, id, file) {
+  const rec = await loadOne(ctx, FileModel, id, 'That file')
+  await loadProject(ctx, rec.projectId, { write: true })
+  if (!rec.storageKey) throw unprocessable('file.no_download', 'Links have no file to replace.')
+  if (!file) throw unprocessable('file.missing', 'Choose a file to upload.')
+  const ext = extOf(safeName(file.originalname))
+  if (ext !== rec.ext) throw unprocessable('file.type_changed', `Choose another .${rec.ext} file, or add this as a new file.`)
+  if (!contentMatches(ext, file.buffer)) throw unprocessable('file.content_mismatch', `That file does not look like a real .${ext} file.`)
+  const usage = await storageUsage(ctx)
+  if (usage.usedBytes - rec.bytes + file.size > QUOTA_BYTES) throw new AppError(413, 'file.quota_exceeded', 'That would go over your 1 GB of storage.')
+  fs.writeFileSync(path.join(workspaceDir(ctx), rec.storageKey), file.buffer)
+  const updated = await FileModel.findOneAndUpdate(scope(ctx, { _id: id }), { bytes: file.size, mime: file.mimetype }, { returnDocument: 'after' }).lean()
+  await recordChange(ctx, { projectId: rec.projectId, recordType: 'File', recordId: rec._id, summary: `Replaced the contents of ${named(rec.name)}` })
+  return updated
 }
 
 export async function addLink(ctx, { projectId, name, url, description, tags }) {

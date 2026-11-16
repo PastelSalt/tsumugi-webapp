@@ -56,10 +56,11 @@ Plain JavaScript (ESM), Express 5, Mongoose, Zod. Local-first: see [Server/READM
 | `Server/src/middleware.js` | Session loader, `requireAuth`, Origin check, in-memory rate limit |
 | `Server/src/models.js` | Schemas: users, sessions, workspaces, projects, milestones, tasks, requirements, files, documents and versions, changes, links, counters |
 | `Server/src/lib/` | `dates.js` (time-zone aware "today"), `password.js` (scrypt, tokens), `serialize.js`, `templates.js` |
-| `Server/src/services/` | Business rules: `auth`, `projects`, `milestones`, `tasks`, `requirements`, `library` (files and documents), `links`, `changes`, `insights` (Home, Insights, search, snapshot), `shape` (records in the shape the frontend uses), `common` (tenant guard `scope()`, `loadProject`) |
-| `Server/src/routes/` | `auth.js`, `work.js` (workspace-wide, projects, milestones, tasks, requirements), `library.js` (files, documents, history) |
-| `Server/scripts/seed.js` | Loads the frontend sample data into a demo account |
-| `Server/test/` | Vitest + Supertest against an in-memory MongoDB: `auth.test.js`, `work.test.js` |
+| `Server/src/services/` | Business rules: `auth`, `account` (export, sessions, deletion), `audit`, `projects`, `milestones`, `tasks` (incl. repeating), `requirements`, `library` (files and documents), `links`, `changes`, `insights` (Home, Insights, search, snapshot), `extras` (summaries, coverage, timeline, trace, bulk, move, calendar, vocabulary), `trash` (Recently deleted, restore, purge), `paginate`, `sniff` (upload content checks), `integrity`, `shape` (records in the shape the frontend uses), `common` (tenant guard `scope()`, `loadProject`) |
+| `Server/src/routes/` | `auth.js` (accounts, devices, export, deletion), `work.js` (workspace-wide, projects, milestones, tasks, requirements, trash), `library.js` (files, documents, history), `extras.js` (lookups, summaries, bulk, move, trace, calendar, pagination; mounted before `work.js`) |
+| `Server/scripts/seed.js`, `check-integrity.js` | Loads the frontend sample data into a demo account; consistency check of stored links and records |
+| `Server/eslint.config.js`, `.github/workflows/ci.yml` | Server lint rules; CI for server and client (lint, tests, build, audit) |
+| `Server/test/` | Vitest + Supertest against an in-memory MongoDB: `auth`, `work`, `extras`, `integrity`, and `contract.test.js` (every route: 401 without a session, never leaks another user's records) |
 | `Server/.data/`, `Server/uploads/` | Local database and uploaded files (git-ignored, generated) |
 
 ## Client
@@ -77,6 +78,7 @@ Plain JavaScript (ESM), Express 5, Mongoose, Zod. Local-first: see [Server/READM
 | `client/src/app/router.js` | Minimal history-API router: `useLocation`, `navigate`, same-origin link interception, focus-after-navigation flag |
 | `client/src/hooks/` | `usePageMeta` (title/description/robots + heading focus), `usePreviewState` (`?preview=` demo states), `useQueryParam` (view, filter, and selection in the URL), `useMediaQuery` |
 | `client/src/lib/api.js`, `session.js` | API client (envelope unwrapping, `ApiError` with field errors) and the signed-in session store (`bootstrap`, `login`, `register`, `logout`, `updateMe`, `demoRequested`) |
+| `client/src/pages/workspace/pages/AccountExtras.jsx` | Account sections for a real account: devices, activity, Recently deleted, your data, delete account |
 | `client/src/lib/markdown.jsx` | Small Markdown parser/renderer (no raw HTML) used by the legal pages, the Help page, and the document reader |
 | `client/src/lib/keys.js` | OS-aware keyboard labels (Ctrl or Cmd) |
 | `client/src/lib/pointerFx.js` | Shared pointer effects (cursor, parallax) for landing, auth, and legal pages |

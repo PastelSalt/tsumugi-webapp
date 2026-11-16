@@ -60,9 +60,9 @@ Old workspace paths redirect: `/dashboard` to `/home`, `/milestones` to `/projec
 
 ## Known gaps and next steps
 
-- **Next backend steps** (see the master plan, section 16): email verification and password recovery (needs an email provider), deployment (Vercel, Atlas, object storage), TypeScript, CI, pagination, OpenAPI, the authorization contract test across all routes, and moving the UI's derived numbers to the server.
-- The local database cannot do transactions (single `mongod`), so cascades are not atomic. Rate limits are in memory.
-- Account deletion, data export, change of email, session list, and "Recently deleted" screens are not built.
+- **Next backend steps** (see the master plan, section 16): email verification and password recovery (needs an email provider), deployment (Vercel, Atlas, object storage), OpenAPI, idempotency keys and `If-Match`, a CSRF token, TypeScript, moving the UI's derived numbers to the server.
+- The local database cannot do transactions (single `mongod`), so cascades are not atomic; `npm run check:integrity` finds and repairs the damage. Rate limits are in memory.
+- Built since the first MVP pass: Recently deleted and restore, devices and activity, export and account deletion, repeating tasks, calendar export, pagination, bulk and move, trace, upload content checks and quota, server lint, CI, the all-routes authorization test.
 - Not built from the workspace plans: Account view tabs, a task row menu, bulk actions.
 - Not yet done: user testing against the success measures in PLAN-A-04 section 14, a screen-reader pass, reduced-motion review, and checks at 390 and 1536px.
 - Legal pages are drafts (`LEGAL_STATUS = 'draft'`, `noindex`); `npm run check:legal` warns about unresolved placeholders. Update them if the real service stores anything new.

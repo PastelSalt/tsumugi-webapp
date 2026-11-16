@@ -2,6 +2,7 @@
 
 > **Implementation status (2026-11-16):** 🟡 Partly done (MVP). The frontend runs on the real API through a snapshot bridge; demo mode remains. See [Implementation status](#implementation-status-mvp) at the end.
 
+
 **Status:** 🟡 Partly done (MVP) · **Phase:** 3 → 7 (delivered module by module) · **Depends on:** [02](PLAN-B-02.md), then each module · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [04 Authentication](PLAN-B-04.md) · [08 Tasks](PLAN-B-08.md) · [13 Derived metrics](PLAN-B-13.md) · frontend [PLAN-A-03](../frontend/PLAN-A-03.md), [PLAN-A-04](../frontend/PLAN-A-04.md), [PLAN-A-05](../frontend/PLAN-A-05.md)
 
@@ -141,18 +142,19 @@ Each step: add endpoint functions and hooks, switch the module's hooks to the AP
 
 ## Implementation status (MVP)
 
-**🟡 Partly done (MVP)** · local MVP, built 2026-11-16 · The frontend runs on the real API through a snapshot bridge; demo mode remains.
+**🟡 Partly done (MVP)** · local MVP, updated 2026-11-16 · The frontend runs on the real API through a snapshot bridge; demo mode remains.
 
 **Built**
 
-- API client, session store, route guard with `next`, login/register wired, real Account page (`client/src/lib/`, `pages/auth`, `pages/workspace/pages/AccountPage.jsx`).
+- API client, session store, route guard with `next`, login/register wired, real Account page.
 - Live mode in `data/store.js`: the whole workspace loads from `GET /workspace/snapshot`; task changes are optimistic with Undo; other writes save then refresh.
-- The former "Preview only" actions are real: edit task/project/milestone, add milestone/requirement/file/link/note, link work, tick criteria and subtasks, mark met/verified/final/reviewed, edit and finalize documents, download (`quickadd/ActionDialogs.jsx`, `data/liveActions.js`).
+- The former "Preview only" actions are real: edit task/project/milestone, add milestone/requirement/file/link/note, link work, tick criteria and subtasks, mark met/verified/final/reviewed, edit and finalize documents, download.
+- Account page: devices and sign out, recent activity, Recently deleted (restore), your data (export JSON, calendar .ics, storage use, rename workspace), delete account; a Repeat field and chip for tasks.
 - Demo mode (sample data, nothing saved) remains at `/home?demo`.
 
 **Not built yet**
 
-- TanStack Query, server-computed numbers in the UI, `GET /vocab`, theme no-flash reconcile, a "signed out" message on 401, a Recently deleted screen, offline state.
+- TanStack Query, server-computed numbers in the UI, a "signed out" message on 401, offline state, moving files/tasks between projects in the UI (the API supports it).
 
 **Deviations and notes**
 

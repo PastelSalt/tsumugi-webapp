@@ -1,6 +1,7 @@
 # PLAN-B-02 — API Contract and Conventions
 
-> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). The core conventions are in place; pagination, concurrency headers, idempotency, and OpenAPI are not. See [Implementation status](#implementation-status-mvp) at the end.
+> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). The core conventions, pagination, and vocabulary are in place; concurrency headers, idempotency, and OpenAPI are not. See [Implementation status](#implementation-status-mvp) at the end.
+
 
 **Status:** 🟡 Partly done (MVP) · **Phase:** 1 · **Depends on:** [01](PLAN-B-01.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [03 Data model](PLAN-B-03.md) · [14 Security](PLAN-B-14.md) · [17 Frontend integration](PLAN-B-17.md)
@@ -166,21 +167,22 @@ Unit: cursor signing, query parsing/whitelisting, envelope helpers, `If-Match` l
 
 ## Implementation status (MVP)
 
-**🟡 Partly done (MVP)** · local MVP, built 2026-11-16 · The core conventions are in place; pagination, concurrency headers, idempotency, and OpenAPI are not.
+**🟡 Partly done (MVP)** · local MVP, updated 2026-11-16 · The core conventions, pagination, and vocabulary are in place; concurrency headers, idempotency, and OpenAPI are not.
 
 **Built**
 
-- `/api/v1`, `{ data }` / `{ error: { code, message, details } }` envelopes, camelCase JSON, the exact vocabulary strings.
+- `/api/v1`, `{ data }` / `{ error: { code, message, details } }` envelopes, camelCase JSON, the exact vocabulary strings, and `GET /vocab`.
 - Strict Zod validation of params, query, and body; unknown fields rejected; per-field error `details` (`http.js`).
 - Status-code rules: `404` for foreign or missing records, `409` state conflicts, `412` stale document saves, `422` rule violations, `423` lockout, `429` rate limit.
+- Signed cursor pagination with stable ordering: `GET /page/tasks`, `GET /page/changes` (`services/paginate.js`); tampered cursors are `400`.
 - A small frontend client (`client/src/lib/api.js`) that unwraps envelopes and maps field errors.
 
 **Not built yet**
 
-- Cursor pagination, sort/filter whitelists beyond the basics.
+- Sort/filter whitelists beyond the basics and pagination on the remaining lists.
 - `ETag` / `If-Match` (documents use an explicit `baseVersion`; other records are last-write-wins).
-- `Idempotency-Key`, OpenAPI generation and docs route, contract-test runner, `GET /vocab`.
+- `Idempotency-Key`, OpenAPI generation and docs route, contract tests generated from OpenAPI.
 
 **Deviations and notes**
 
-- The workspace snapshot endpoint (`GET /workspace/snapshot`) was added as the MVP bridge for the existing frontend selectors; lists are not paginated yet.
+- The workspace snapshot endpoint (`GET /workspace/snapshot`) is the MVP bridge for the existing frontend selectors; the paginated endpoints are for other clients and future use.

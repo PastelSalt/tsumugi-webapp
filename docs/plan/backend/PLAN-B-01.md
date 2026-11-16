@@ -1,6 +1,7 @@
 # PLAN-B-01 — Platform Foundation
 
-> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). The API runs locally with a persistent database. Tooling and platform pieces are still to do. See [Implementation status](#implementation-status-mvp) at the end.
+> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). The API runs locally with a persistent database, lint, and CI. Serverless, logging, and TypeScript are still to do. See [Implementation status](#implementation-status-mvp) at the end.
+
 
 **Status:** 🟡 Partly done (MVP) · **Phase:** 1 · **Depends on:** — · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [02 API conventions](PLAN-B-02.md) · [03 Data model](PLAN-B-03.md) · [15 Testing](PLAN-B-15.md) · [16 Deployment](PLAN-B-16.md)
@@ -201,24 +202,25 @@ Every runtime dependency needs a one-line reason in `Server/DEPENDENCIES.md`. Pr
 
 ## Implementation status (MVP)
 
-**🟡 Partly done (MVP)** · local MVP, built 2026-11-16 · The API runs locally with a persistent database. Tooling and platform pieces are still to do.
+**🟡 Partly done (MVP)** · local MVP, updated 2026-11-16 · The API runs locally with a persistent database, lint, and CI. Serverless, logging, and TypeScript are still to do.
 
 **Built**
 
 - `createApp()` app factory and `server.js` entry (`Server/src/app.js`, `server.js`).
 - Environment config with local defaults (`config.js`, `.env.example`).
-- Error classes and one error envelope; no stack traces to clients (`errors.js`, error handler in `app.js`).
-- Local database: `connect()` joins or starts a persistent MongoDB stored in `Server/.data` (no install), or uses `MONGODB_URI` (`db.js`).
-- JSON body limit, `nosniff`/no-store headers, request id header, health endpoint `GET /api/v1/health`.
+- Error classes and one error envelope; no stack traces to clients.
+- Local database: `connect()` joins or starts a persistent MongoDB stored in `Server/.data` (no install), or uses `MONGODB_URI` (`db.js`). A clean clone installs, starts, and serves requests (checked 2026-11-16).
+- JSON body limit, request id header, health endpoint, and a locked-down header set (CSP `default-src 'none'`, `X-Frame-Options`, `nosniff`, `no-store`, `Cross-Origin-Resource-Policy`, `Permissions-Policy`, HSTS in production).
+- ESLint for `Server/` (`npm run lint`) and a GitHub Actions workflow for server and client (`.github/workflows/ci.yml`).
 - One-command start from the repo root: `npm run dev` (`scripts/dev.mjs`).
 
 **Not built yet**
 
-- TypeScript (the MVP is plain JavaScript ESM), ESLint/Prettier for `Server/`, layering lint rule.
-- Serverless entry (`platform/vercel.ts`), `health/ready`, `meta`, pino logging with redaction, CORS middleware (the Vite proxy keeps one origin locally), `helmet`.
-- GitHub Actions, Docker, `DEPENDENCIES.md`.
+- TypeScript (the MVP is plain JavaScript ESM), Prettier.
+- Serverless entry (`platform/vercel.ts`), `health/ready`, `meta`, pino logging with redaction, a CORS middleware (the Vite proxy keeps one origin locally), `helmet`.
+- Docker, `DEPENDENCIES.md`, moving the last three model reads out of the routes (lint warnings).
 
 **Deviations and notes**
 
-- **Deviation:** JavaScript instead of TypeScript (D-01) to reach a working MVP quickly; Zod still validates every request.
+- **Deviation:** JavaScript instead of TypeScript (D-01), kept deliberately for now: converting about 2,500 lines without a type checker already in place would add risk for little gain locally. Zod validates every request.
 - Files are grouped by kind (`services/`, `routes/`, `models.js`) rather than one folder per module.

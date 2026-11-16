@@ -58,13 +58,13 @@ function EditTask({ task, onClose }) {
   const d = data()
   const milestones = d.milestones.filter((m) => m.projectId === task.projectId)
   const reqs = d.requirements.filter((r) => r.projectId === task.projectId)
-  const [v, set, setV] = useForm({ title: task.title, notes: task.notes || '', status: task.status, priority: task.priority, due: task.due || '', blocked: task.blocked, milestoneId: task.milestoneId || '', requirementIds: task.requirementIds })
+  const [v, set, setV] = useForm({ title: task.title, notes: task.notes || '', status: task.status, priority: task.priority, due: task.due || '', blocked: task.blocked, milestoneId: task.milestoneId || '', requirementIds: task.requirementIds, repeat: task.recurrence?.freq ?? '' })
   const { busy, error, run } = useSave(onClose)
   const toggleReq = (id) => setV((x) => ({ ...x, requirementIds: x.requirementIds.includes(id) ? x.requirementIds.filter((r) => r !== id) : [...x.requirementIds, id] }))
   const [confirm, setConfirm] = useState(false)
   return (
     <Shell title="Edit task" onClose={onClose} busy={busy} error={error}
-      onSubmit={(e) => { e.preventDefault(); run(() => api.patch(`/tasks/${task.id}`, { title: v.title, notes: v.notes, status: v.status, priority: v.priority, due: v.due || null, blocked: v.blocked, milestoneId: v.milestoneId || null, requirementIds: v.requirementIds }), 'Task saved') }}
+      onSubmit={(e) => { e.preventDefault(); run(() => api.patch(`/tasks/${task.id}`, { title: v.title, notes: v.notes, status: v.status, priority: v.priority, due: v.due || null, blocked: v.blocked, milestoneId: v.milestoneId || null, requirementIds: v.requirementIds, recurrence: v.repeat ? { freq: v.repeat, interval: task.recurrence?.interval ?? 1 } : null }), 'Task saved') }}
       danger={<button type="button" className="button button--small button--quiet" onClick={() => (confirm ? run(() => api.delete(`/tasks/${task.id}`), 'Task deleted') : setConfirm(true))}>{confirm ? 'Really delete?' : 'Delete'}</button>}>
       <Field label="Title"><input value={v.title} onChange={set('title')} required maxLength={200} autoFocus /></Field>
       <Field label="Notes"><textarea value={v.notes} onChange={set('notes')} rows={4} /></Field>
@@ -74,6 +74,7 @@ function EditTask({ task, onClose }) {
         <Field label="Due date"><input type="date" value={v.due} onChange={set('due')} /></Field>
       </div>
       <Field label="Milestone"><select value={v.milestoneId} onChange={set('milestoneId')}><option value="">None</option>{milestones.map((m) => <option key={m.id} value={m.id}>{m.title}</option>)}</select></Field>
+      <Field label="Repeat" hint="When you finish a repeating task, the next one is created for you."><select value={v.repeat} onChange={set('repeat')}><option value="">Does not repeat</option><option value="daily">Every day</option><option value="weekly">Every week</option><option value="monthly">Every month</option><option value="yearly">Every year</option></select></Field>
       <label className="field--check"><input type="checkbox" checked={v.blocked} onChange={set('blocked')} /> <span>Blocked</span></label>
       {reqs.length > 0 && <fieldset className="ws-form__group"><legend>Requirements this task works toward</legend>{reqs.map((r) => <label className="field--check" key={r.id}><input type="checkbox" checked={v.requirementIds.includes(r.id)} onChange={() => toggleReq(r.id)} /> <span>{r.key} {r.title}</span></label>)}</fieldset>}
     </Shell>

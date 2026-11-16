@@ -110,3 +110,8 @@ export async function search(ctx, q, { limit = 20 } = {}) {
   ]
   return hits.slice(0, limit)
 }
+
+export function milestoneProgress(tasks, milestoneId) {
+  const list = tasks.filter((t) => t.milestoneId === milestoneId)
+  return { done: list.filter((t) => t.status === 'Done').length, total: list.length }
+}

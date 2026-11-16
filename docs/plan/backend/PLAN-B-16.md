@@ -1,8 +1,9 @@
 # PLAN-B-16 — Deployment, Operations, and Observability
 
-> **Implementation status (2026-11-16):** ⬜ Not started. Deployment is intentionally out of scope for the local MVP. Only the local run story exists. See [Implementation status](#implementation-status-mvp) at the end.
+> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). Deployment is intentionally out of scope for the local MVP. Only the local run story and CI exist. See [Implementation status](#implementation-status-mvp) at the end.
 
-**Status:** ⬜ Not started · **Phase:** 1 (CI and preview deploy) and 7 (production) · **Depends on:** [01](PLAN-B-01.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
+
+**Status:** 🟡 Partly done (MVP) · **Phase:** 1 (CI and preview deploy) and 7 (production) · **Depends on:** [01](PLAN-B-01.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [14 Security](PLAN-B-14.md) · [15 Testing and CI](PLAN-B-15.md) · [19 Background jobs](PLAN-B-19.md)
 
 ## 1. Purpose and scope
@@ -160,12 +161,13 @@ Contents: how to deploy and roll back; how to run migrations and indexes; rotati
 
 ## Implementation status (MVP)
 
-**⬜ Not started** · local MVP, built 2026-11-16 · Deployment is intentionally out of scope for the local MVP. Only the local run story exists.
+**🟡 Partly done (MVP)** · local MVP, updated 2026-11-16 · Deployment is intentionally out of scope for the local MVP. Only the local run story and CI exist.
 
 **Built**
 
-- Local run: `npm run setup`, `npm run dev` (API + web), `npm run seed`, `npm test` from the repo root; data in `Server/.data`, uploads in `Server/uploads`.
+- Local run: `npm run setup`, `npm run dev` (API + web), `npm run seed`, `npm test`, `npm run check:integrity`; data in `Server/.data`, uploads in `Server/uploads`.
+- GitHub Actions CI (lint, tests, build, audit).
 
 **Not built yet**
 
-- Everything in this plan: Vercel, Atlas, object storage, CI/CD, cron jobs, observability, backups, runbook.
+- Vercel, Atlas, object storage, release/rollback automation, cron jobs, observability, backups, runbook.

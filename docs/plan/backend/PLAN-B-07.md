@@ -1,6 +1,7 @@
 # PLAN-B-07 — Milestones
 
-> **Implementation status (2026-11-16):** ✅ Done (MVP). Milestones are fully usable; the dedicated timeline endpoint is not needed by the current UI. See [Implementation status](#implementation-status-mvp) at the end.
+> **Implementation status (2026-11-16):** ✅ Done (MVP). Milestones are fully usable, including the one-call timeline. See [Implementation status](#implementation-status-mvp) at the end.
+
 
 **Status:** ✅ Done (MVP) · **Phase:** 3 · **Depends on:** [06](PLAN-B-06.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [08 Tasks](PLAN-B-08.md) · [09 Requirements](PLAN-B-09.md) · [13 Derived metrics](PLAN-B-13.md) · frontend [PLAN-A-04D](../frontend/PLAN-A-04D.md) (Work), timeline view in [PLAN-A-04B](../frontend/PLAN-A-04B.md)
@@ -117,14 +118,15 @@ State derivation across the four cases and time zones (a milestone due "today" i
 
 ## Implementation status (MVP)
 
-**✅ Done (MVP)** · local MVP, built 2026-11-16 · Milestones are fully usable; the dedicated timeline endpoint is not needed by the current UI.
+**✅ Done (MVP)** · local MVP, updated 2026-11-16 · Milestones are fully usable, including the one-call timeline.
 
 **Built**
 
-- Create, list, update (including done/reopen and blocked), delete (detaches tasks, requirements, files).
-- Date rules, phase check, and dependency cycle prevention (`services/milestones.js`).
+- Create, list, update (including done/reopen and blocked), delete (detaches tasks, requirements, files), restore from Recently deleted.
+- Date rules, phase check, and dependency cycle prevention.
+- `GET /projects/:id/timeline`: window, phases, and milestones with derived state and progress.
 - Frontend: Add/Edit milestone dialogs, Mark done/Reopen.
 
 **Not built yet**
 
-- `GET /projects/:id/timeline`, `complete` with `completeOpenTasks`, restore for milestones, per-project cap, server-side `state` and `progress` fields.
+- `complete` with `completeOpenTasks`, per-project cap.

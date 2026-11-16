@@ -1,8 +1,9 @@
 # PLAN-B-19 — Notifications, Recurrence, and Background Jobs (Future Design)
 
-> **Implementation status (2026-11-16):** ⬜ Not started. Future design. Not built. The only background work today is purging old deleted projects when the server starts. See [Implementation status](#implementation-status-mvp) at the end.
+> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). Repeating tasks (on completion) work. Reminders, notifications, a job runner, and exports as jobs are not built. See [Implementation status](#implementation-status-mvp) at the end.
 
-**Status:** ⬜ Not started· **Phase:** Later · **Depends on:** [08](PLAN-B-08.md), [16](PLAN-B-16.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
+
+**Status:** 🟡 Partly done (MVP)· **Phase:** Later · **Depends on:** [08](PLAN-B-08.md), [16](PLAN-B-16.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [05 Export](PLAN-B-05.md) · [10 Files](PLAN-B-10.md) · [18 Teams](PLAN-B-18.md) · PROJECT-SPECS section 14 (notifications, background processing)
 
 ## 1. Purpose and scope
@@ -164,12 +165,14 @@ Runner lease and reclaim behavior with a controllable clock; concurrent runners 
 
 ## Implementation status (MVP)
 
-**⬜ Not started** · local MVP, built 2026-11-16 · Future design. Not built. The only background work today is purging old deleted projects when the server starts.
+**🟡 Partly done (MVP)** · local MVP, updated 2026-11-16 · Repeating tasks (on completion) work. Reminders, notifications, a job runner, and exports as jobs are not built.
 
 **Built**
 
-- Purge of projects deleted over 30 days ago on server start (`purgeDeleted`).
+- Repeating tasks in "on complete" mode (section 7.2): daily, weekly, monthly, yearly; month-end clamping; never scheduled in the past; series id; History entry.
+- Purge of anything deleted over 30 days ago on server start (`purgeOld`).
+- Calendar export to `.ics` (`GET /calendar.ics`), a natural first step toward calendar feeds.
 
 **Not built yet**
 
-- Job runner, notifications, reminders, recurrence, exports.
+- Job runner, notifications and reminders, "fixed" recurrence, series-wide edits and skip, exports as jobs.

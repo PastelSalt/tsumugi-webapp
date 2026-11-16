@@ -9,6 +9,7 @@ import * as tasks from '../services/tasks.js'
 import * as reqs from '../services/requirements.js'
 import * as insights from '../services/insights.js'
 import { loadOne } from '../services/common.js'
+import * as trash from '../services/trash.js'
 import { shapeMilestone, shapeProject, shapeRequirements, shapeTasks } from '../services/shape.js'
 
 export const workRouter = Router()
@@ -86,6 +87,7 @@ const taskFields = {
   milestoneId: objectId.nullable(),
   subtasks,
   order: z.number(),
+  recurrence: z.object({ freq: z.enum(['daily', 'weekly', 'monthly', 'yearly']), interval: z.number().int().min(1).max(30).default(1) }).strict().nullable(),
   requirementIds: z.array(objectId).max(200),
   fileIds: z.array(objectId).max(200),
 }
@@ -124,3 +126,10 @@ workRouter.patch('/requirements/:id', validate({ params: id, body: body(Object.f
   send(res, await one(shapeRequirements, req.ctx, await reqs.updateRequirement(req.ctx, req.valid.params.id, req.valid.body)))
 })
 workRouter.delete('/requirements/:id', validate({ params: id }), async (req, res) => { await reqs.deleteRequirement(req.ctx, req.valid.params.id); noContent(res) })
+
+/* ---------- recently deleted ---------- */
+workRouter.get('/trash', async (req, res) => send(res, await trash.listTrash(req.ctx)))
+workRouter.post('/trash/:type/:id/restore', validate({ params: z.object({ type: z.enum(['project', 'task', 'milestone', 'requirement', 'file', 'document']), id: objectId }) }), async (req, res) => {
+  const { type, record } = await trash.restoreRecord(req.ctx, req.valid.params.type, req.valid.params.id)
+  send(res, { type, id: String(record._id ?? record.id) })
+})

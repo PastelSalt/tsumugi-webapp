@@ -1,6 +1,7 @@
 # PLAN-B-18 — Teams and Collaboration (Future Design)
 
-> **Implementation status (2026-11-16):** ⬜ Not started. Future design. Not built; only the seams exist (every record has `workspaceId`, the tenant guard, `404` for foreign records). See [Implementation status](#implementation-status-mvp) at the end.
+> **Implementation status (2026-11-16):** ⬜ Not started. Future design. Not built; only the seams exist (every record has `workspaceId`, the tenant guard, `404` for foreign records, the all-routes authorization test). See [Implementation status](#implementation-status-mvp) at the end.
+
 
 **Status:** ⬜ Not started· **Phase:** Later (after v0.1) · **Depends on:** [05](PLAN-B-05.md), [12](PLAN-B-12.md), [14](PLAN-B-14.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [19 Notifications](PLAN-B-19.md) · [PROJECT-SPECS.md](../../../PROJECT-SPECS.md) sections 14 and 3.4 · [RESEARCH.md](../../../RESEARCH.md) section 8
@@ -113,7 +114,7 @@ A workspace switcher, a People area (team workspaces only), assignee pickers, co
 
 ## Implementation status (MVP)
 
-**⬜ Not started** · local MVP, built 2026-11-16 · Future design. Not built; only the seams exist (every record has `workspaceId`, the tenant guard, `404` for foreign records).
+**⬜ Not started** · local MVP, updated 2026-11-16 · Future design. Not built; only the seams exist (every record has `workspaceId`, the tenant guard, `404` for foreign records, the all-routes authorization test).
 
 **Built**
 

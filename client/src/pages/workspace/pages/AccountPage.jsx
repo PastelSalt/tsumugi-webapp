@@ -5,6 +5,7 @@ import { useWorkspace } from '../context'
 import { handle, isLive, notify, resetSession, sessionCount } from '../data/store'
 import { api, ApiError } from '../../../lib/api'
 import { updateMe, useSession } from '../../../lib/session'
+import { Devices, RecentlyDeleted, YourData } from './AccountExtras'
 
 const DEFAULTS = { name: 'Demo user', email: 'demo@example.com', density: 'comfortable', motion: 'system', reminders: true }
 
@@ -64,6 +65,9 @@ function LiveAccount() {
         <label className="field"><span>Motion</span><select value={motion} onChange={(e) => saveMotion(e.target.value)}><option value="system">Follow my device</option><option value="reduced">Reduce motion</option></select></label>
       </section>
       <ChangePassword />
+      <Devices />
+      <RecentlyDeleted />
+      <YourData />
       <section className="settings-card" aria-labelledby="acc-privacy"><h2 id="acc-privacy">Privacy</h2>
         <p>Your data is stored in the database on the computer running Tsumugi. Nothing is sent to other services. Read the <a href="/privacy-policy">privacy policy</a> draft for how the real service will handle your data.</p>
       </section>

@@ -1,6 +1,7 @@
 # PLAN-B-11 — Documents
 
-> **Implementation status (2026-11-16):** ✅ Done (MVP). Markdown documents with full version history, diff and Final protection work. See [Implementation status](#implementation-status-mvp) at the end.
+> **Implementation status (2026-11-16):** ✅ Done (MVP). Markdown documents with full version history, diff, Final protection, and move work. See [Implementation status](#implementation-status-mvp) at the end.
+
 
 **Status:** ✅ Done (MVP) · **Phase:** 5 · **Depends on:** [06](PLAN-B-06.md), [10](PLAN-B-10.md); link storage from [12](PLAN-B-12.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [14 Security](PLAN-B-14.md) · frontend [PLAN-A-04I](../frontend/PLAN-A-04I.md) (Documents and the reader), [PLAN-A-04H](../frontend/PLAN-A-04H.md) (History)
@@ -128,14 +129,14 @@ Version numbering under concurrent saves (exactly one wins; the other gets `412`
 
 ## Implementation status (MVP)
 
-**✅ Done (MVP)** · local MVP, built 2026-11-16 · Markdown documents with full version history, diff and Final protection work.
+**✅ Done (MVP)** · local MVP, updated 2026-11-16 · Markdown documents with full version history, diff, Final protection, and move work.
 
 **Built**
 
 - Create; every body change creates a new immutable version; stale saves are rejected with `412` and the current text (`baseVersion`).
-- Version list and read, line diff in the History shape, restore an old version as a new one, finalize/unfinalize with edit protection, Markdown export.
+- Version list and read, line diff in the History shape, restore an old version as a new one, finalize/unfinalize with edit protection, Markdown export, move to another project.
 - Frontend: Edit document dialog (save new version, mark final, back to draft).
 
 **Not built yet**
 
-- Save coalescing, version thinning, move to another project, strict unsafe-content mode (bodies are stored as text and never rendered by the server), a dedicated documents list endpoint (use `/library`).
+- Save coalescing, version thinning, strict unsafe-content mode (bodies are stored as text and never rendered by the server), a dedicated documents list endpoint (use `/library`).

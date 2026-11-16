@@ -105,6 +105,8 @@ const Task = record({
   completedAt: Date,
   subtasks: [subtask],
   order: { type: Number, default: 0 },
+  recurrence: { type: new Schema({ freq: { type: String, enum: ['daily', 'weekly', 'monthly', 'yearly'], required: true }, interval: { type: Number, min: 1, max: 30, default: 1 } }, { ...opts, _id: false }), default: null },
+  seriesId: { type: Schema.Types.ObjectId, default: null },
 })
 Task.index({ workspaceId: 1, projectId: 1, status: 1, due: 1 })
 Task.index({ workspaceId: 1, status: 1, due: 1 })
@@ -196,6 +198,11 @@ const Link = new Schema(
 Link.index({ workspaceId: 1, 'a.type': 1, 'a.id': 1 })
 Link.index({ workspaceId: 1, 'b.type': 1, 'b.id': 1 })
 
+const Audit = new Schema(
+  { userId: oid('User', { index: true }), event: { type: String, required: true }, ip: String, userAgent: { type: String, maxlength: 120 }, meta: { type: String, maxlength: 200 }, at: { type: Date, default: Date.now, index: true } },
+  { ...opts, timestamps: false },
+)
+
 const Counter = new Schema({ scope: { type: String, required: true, unique: true }, seq: { type: Number, default: 0 } }, opts)
 
 const model = (name, schema) => mongoose.models[name] || mongoose.model(name, schema)
@@ -213,5 +220,6 @@ export const Models = {
   Change: model('Change', Change),
   Link: model('Link', Link),
   Counter: model('Counter', Counter),
+  Audit: model('Audit', Audit),
 }
-export const { User: UserModel, Session: SessionModel, Workspace: WorkspaceModel, Project: ProjectModel, Milestone: MilestoneModel, Task: TaskModel, Requirement: RequirementModel, File: FileModel, Doc: DocModel, DocVersion: DocVersionModel, Change: ChangeModel, Link: LinkModel, Counter: CounterModel } = Models
+export const { User: UserModel, Session: SessionModel, Workspace: WorkspaceModel, Project: ProjectModel, Milestone: MilestoneModel, Task: TaskModel, Requirement: RequirementModel, File: FileModel, Doc: DocModel, DocVersion: DocVersionModel, Change: ChangeModel, Link: LinkModel, Counter: CounterModel, Audit: AuditModel } = Models

@@ -1,6 +1,7 @@
 # PLAN-B-13 — Home, Insights, and Search (Derived Metrics)
 
-> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). Home, Insights and search exist on the server; the UI still computes its numbers from the snapshot. See [Implementation status](#implementation-status-mvp) at the end.
+> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). Home, Insights, summaries, definitions, and search exist on the server; the UI still computes its numbers from the snapshot. See [Implementation status](#implementation-status-mvp) at the end.
+
 
 **Status:** 🟡 Partly done (MVP) · **Phase:** 7 (core helpers built earlier inside 06–09) · **Depends on:** [06](PLAN-B-06.md)–[12](PLAN-B-12.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** frontend [PLAN-A-04A](../frontend/PLAN-A-04A.md) (Home), [PLAN-A-04J](../frontend/PLAN-A-04J.md) (Insights), command palette in [PLAN-A-04L](../frontend/PLAN-A-04L.md)
@@ -151,16 +152,17 @@ Golden tests: the seeded demo workspace at the demo's fixed date must reproduce 
 
 ## Implementation status (MVP)
 
-**🟡 Partly done (MVP)** · local MVP, built 2026-11-16 · Home, Insights and search exist on the server; the UI still computes its numbers from the snapshot.
+**🟡 Partly done (MVP)** · local MVP, updated 2026-11-16 · Home, Insights, summaries, definitions, and search exist on the server; the UI still computes its numbers from the snapshot.
 
 **Built**
 
-- `GET /home`, `GET /insights`, `GET /search` using the documented definitions (`services/insights.js`), with "today" in the person's time zone.
+- `GET /home`, `GET /insights`, `GET /projects/:id/summary`, `GET /search` using the documented definitions (`services/insights.js`), with "today" in the person's time zone.
+- `GET /metrics/definitions` returns the plain-language rule for each metric.
 - `GET /workspace/snapshot` powers the existing frontend selectors.
 
 **Not built yet**
 
-- Metric definitions endpoint, `ETag`, text indexes or Atlas Search, recents endpoint, golden parity tests against the frontend selectors, caching.
+- `ETag`, text indexes or Atlas Search, golden parity tests against the frontend selectors, caching, moving the UI onto the server's numbers.
 
 **Deviations and notes**
 

@@ -1,6 +1,7 @@
 # PLAN-B-15 — Testing and Quality
 
-> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). A working integration test suite runs offline in a few seconds. See [Implementation status](#implementation-status-mvp) at the end.
+> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). A working integration suite (39 tests) plus the authorization contract runs offline in about 15 seconds, and CI runs it. See [Implementation status](#implementation-status-mvp) at the end.
+
 
 **Status:** 🟡 Partly done (MVP) · **Phase:** 1 → 7 (cross-cutting) · **Depends on:** all modules · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [01 Foundation](PLAN-B-01.md) · [02 Contract](PLAN-B-02.md) · [14 Security](PLAN-B-14.md) · [16 CI/CD](PLAN-B-16.md) · client checks in `docs/testing/ux-walkthrough-checklist.md`
@@ -158,13 +159,15 @@ Per pull request (target < 8 minutes): install (`npm ci`) → lint → typecheck
 
 ## Implementation status (MVP)
 
-**🟡 Partly done (MVP)** · local MVP, built 2026-11-16 · A working integration test suite runs offline in a few seconds.
+**🟡 Partly done (MVP)** · local MVP, updated 2026-11-16 · A working integration suite (39 tests) plus the authorization contract runs offline in about 15 seconds, and CI runs it.
 
 **Built**
 
-- Vitest + Supertest + an in-memory MongoDB; 19 tests across auth, isolation, projects, milestones, tasks, requirements and links, documents, files, Home/Insights/search (`npm test`).
-- Manual browser check of login, register, empty workspace, new project, Quick add, requirements, library note, and task completion against the real API.
+- Vitest + Supertest + an in-memory MongoDB; 39 tests in 5 files: auth, isolation, projects, milestones, tasks, requirements and links, documents, files, trash, account, summaries, trace, bulk and move, pagination, recurrence, upload checks, headers, integrity, and the authorization contract (`npm test`).
+- GitHub Actions workflow: server lint + tests + audit, client lint + build + audit (`.github/workflows/ci.yml`).
+- Clean-clone check (fresh clone, install, start, register, create, build) passed on 2026-11-16.
+- Manual browser checks, including the new account screens and dialogs at phone width (no horizontal overflow, all fields labelled).
 
 **Not built yet**
 
-- Separate unit tests, shared authorization contract suite, golden metric tests, coverage gates, performance budgets, Playwright journeys, CI workflow.
+- Separate unit tests, OpenAPI-generated contract tests, golden metric tests, coverage gates, performance budgets, Playwright journeys.

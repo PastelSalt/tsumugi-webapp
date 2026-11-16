@@ -60,6 +60,8 @@ It is built for people who make things, and for work that does not fit a single 
 - **Requirements** with acceptance criteria that you tick off; a requirement can only be marked met when every criterion is.
 - **Insights** showing progress, coverage, and what is overdue.
 - **History** of every meaningful change, with before/after comparison for documents.
+- **Repeating tasks** (daily, weekly, monthly, yearly): finish one and the next is scheduled for you.
+- **Recently deleted** with restore for 30 days, **account tools** (devices, activity, download all your data as JSON, calendar export, delete account).
 - **Landing page, sign-in and sign-up pages, and draft legal pages.** A no-account sample workspace is still available at `/home?demo`.
 - **Light, dark, or follow-my-device** theme, restrained motion that respects `prefers-reduced-motion`, and keyboard-friendly navigation.
 
@@ -100,8 +102,9 @@ Both folders are ignored by git. To start fresh, stop the app and delete them.
 | `npm run setup` | Install dependencies for `Server/` and `client/` |
 | `npm run dev` | Start the API and the web app together |
 | `npm run seed` | Create the demo account and sample data (the API can be running) |
-| `npm test` | Run the server tests (they use a temporary in-memory database) |
-| `npm run lint` | Lint the client |
+| `npm test` | Run the server tests (39, using a temporary in-memory database) |
+| `npm run check:integrity --prefix Server` | Check that stored links and records are consistent (`-- --fix` repairs dangling links) |
+| `npm run lint` | Lint the client (`npm run lint --prefix Server` lints the server) |
 | `npm run build` | Check the legal drafts, then build the client to `client/dist` |
 
 Client-only commands (`dev`, `build`, `preview`, `lint`, `check:legal`) also work from `client/`.

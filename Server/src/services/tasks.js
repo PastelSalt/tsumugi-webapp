@@ -1,8 +1,10 @@
 import { notFound } from '../errors.js'
+import { nextDue } from '../lib/recurrence.js'
+import { todayIn } from '../lib/dates.js'
 import { TaskModel } from '../models.js'
 import { named, recordChange } from './changes.js'
 import { checkMilestone, loadOne, loadProject, newId, scope } from './common.js'
-import { removeLinksFor, replaceLinks, restoreLinks } from './links.js'
+import { linksFor, removeLinksFor, replaceLinks, restoreLinks } from './links.js'
 import { MilestoneModel } from '../models.js'
 
 export function listTasks(ctx, f = {}) {
@@ -56,6 +58,7 @@ export async function updateTask(ctx, id, patch) {
   if (set.status === 'Done') set.blocked = false
   const updated = await TaskModel.findOneAndUpdate(scope(ctx, { _id: id }), { $set: set }, { returnDocument: 'after' }).lean()
   await syncLinks(ctx, task, { requirementIds, fileIds })
+  if (set.status === 'Done' && task.status !== 'Done' && task.recurrence) await spawnNext(ctx, updated)
   const summary = describe(task, set) ?? (requirementIds || fileIds ? `Changed what ${named(task.title)} is linked to` : null)
   if (summary) await recordChange(ctx, { projectId: task.projectId, recordType: 'Task', recordId: task._id, action: 'updated', summary, taskIds: [task._id] })
   return updated
@@ -79,4 +82,21 @@ export async function restoreTask(ctx, id) {
   await TaskModel.updateOne({ _id: id }, { deletedAt: null, deletedBatchId: null })
   await restoreLinks(ctx, task.deletedBatchId)
   return TaskModel.findById(id).lean()
+}
+
+/** Repeating tasks: finishing one creates the next occurrence right away (PLAN-B-19 "on complete" mode). */
+async function spawnNext(ctx, done) {
+  const base = done.due ?? todayIn(ctx.timeZone)
+  let due = nextDue(base, done.recurrence)
+  const today = todayIn(ctx.timeZone)
+  while (due < today) due = nextDue(due, done.recurrence) // never create an occurrence already overdue
+  const links = await linksFor(ctx, 'Task', [done._id])
+  const mine = links.get(String(done._id)) ?? {}
+  const last = await TaskModel.findOne(scope(ctx, { projectId: done.projectId })).sort({ order: -1 }).select('order').lean()
+  const next = await TaskModel.create({
+    workspaceId: ctx.workspaceId, projectId: done.projectId, milestoneId: done.milestoneId, title: done.title, notes: done.notes, status: 'To do', priority: done.priority,
+    due, subtasks: done.subtasks.map((s) => ({ text: s.text, done: false })), recurrence: done.recurrence, seriesId: done.seriesId ?? done._id, order: (last?.order ?? 0) + 1,
+  })
+  await syncLinks(ctx, next, { requirementIds: mine['implements:Requirement'] ?? [], fileIds: mine['attached:File'] ?? [] })
+  await recordChange(ctx, { projectId: done.projectId, recordType: 'Task', recordId: next._id, action: 'created', summary: `Scheduled the next ${named(done.title)} for ${due}`, taskIds: [next._id] })
 }

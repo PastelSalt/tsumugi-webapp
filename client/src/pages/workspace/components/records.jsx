@@ -162,7 +162,7 @@ export function TaskPanel({ task, onClose }) {
         <button className="button button--small button--secondary" type="button" onClick={() => moveToTomorrow(task)}>Move to tomorrow</button>
         <PreviewAction label="Edit task" record={task} />
       </>}>
-      <div className="chip-list"><StatusBadge domain="work" status={task.status} />{task.blocked && <Flag name="Blocked" />}{task.priority === 'high' && <Flag name="High" label="High priority" />}</div>
+      <div className="chip-list"><StatusBadge domain="work" status={task.status} />{task.recurrence && <span className="chip"><span>Repeats {task.recurrence.freq}</span></span>}{task.blocked && <Flag name="Blocked" />}{task.priority === 'high' && <Flag name="High" label="High priority" />}</div>
       {task.notes && <p>{task.notes}</p>}
       <div className="task-controls">
         <div className="segmented" role="group" aria-label="Status">

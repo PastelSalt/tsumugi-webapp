@@ -1,6 +1,7 @@
 # PLAN-B-04 — Authentication and Sessions
 
-> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). Email-and-password accounts work locally without any email or third party. Email-based flows are intentionally not built. See [Implementation status](#implementation-status-mvp) at the end.
+> **Implementation status (2026-11-16):** 🟡 Partly done (MVP). Email-and-password accounts work locally without any email or third party, with device management and an activity log. See [Implementation status](#implementation-status-mvp) at the end.
+
 
 **Status:** 🟡 Partly done (MVP) · **Phase:** 2 · **Depends on:** [01](PLAN-B-01.md), [02](PLAN-B-02.md), [03](PLAN-B-03.md) · **Master plan:** [PLAN-B-00](PLAN-B-00.md)
 **Related:** [05 Users and workspaces](PLAN-B-05.md) · [14 Security](PLAN-B-14.md) · frontend [PLAN-A-03](../frontend/PLAN-A-03.md) (the auth pages and their states)
@@ -166,20 +167,21 @@ PLAN-B-05 provides user/workspace creation called from `register`. PLAN-B-14 own
 
 ## Implementation status (MVP)
 
-**🟡 Partly done (MVP)** · local MVP, built 2026-11-16 · Email-and-password accounts work locally without any email or third party. Email-based flows are intentionally not built.
+**🟡 Partly done (MVP)** · local MVP, updated 2026-11-16 · Email-and-password accounts work locally without any email or third party, with device management and an activity log.
 
 **Built**
 
 - Register, log in, log out, `GET /auth/session`, change password (signs out other devices) (`routes/auth.js`, `services/auth.js`).
+- Session list, sign out one device, sign out everywhere (`GET /auth/sessions`, `DELETE /auth/sessions/:id`, `POST /auth/logout-all`); account activity log (`GET /auth/activity`, `services/audit.js`) with truncated IPs and no secrets.
 - Passwords hashed with scrypt (12+ characters, common-password check); opaque session tokens stored only as SHA-256 hashes; `HttpOnly; SameSite=Lax` cookie with sliding 30-day expiry.
-- Account lockout after 5 wrong passwords (15 minutes); the same error and work for unknown and wrong accounts (no account enumeration at login).
+- Account lockout after 5 wrong passwords (15 minutes); the same error and work for unknown and wrong accounts.
 - Cross-site write protection by `Origin` check; in-memory rate limits on auth routes.
-- Frontend login and register pages are wired (`client/src/pages/auth/AuthPage.jsx`, `lib/session.js`).
+- Frontend login/register wired; Account page shows devices and activity.
 
 **Not built yet**
 
 - Email verification, forgot/reset password, change email (need an email provider; deliberately out of scope for the local MVP).
-- Sessions list and revoke, "sign out everywhere", CSRF token, audit log, Argon2id, `__Host-` cookie (needs HTTPS), persistent rate limits.
+- CSRF token, Argon2id, `__Host-` cookie (needs HTTPS), persistent rate limits.
 
 **Deviations and notes**
 

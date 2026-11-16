@@ -40,6 +40,7 @@ libraryRouter.get('/files/:id/download', validate({ params: id, query: z.object(
   res.setHeader('Content-Disposition', `${f.inline ? 'inline' : 'attachment'}; filename*=UTF-8''${encodeURIComponent(f.name)}`)
   res.setHeader('X-Content-Type-Options', 'nosniff')
   res.setHeader('Cache-Control', 'private, no-store')
+  if (f.inline) res.setHeader('Content-Security-Policy', "default-src 'none'; img-src 'self'; media-src 'self'; style-src 'unsafe-inline'; sandbox") // lets images, audio, and video show; no scripts
   res.sendFile(f.full)
 })
 

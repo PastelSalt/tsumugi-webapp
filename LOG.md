@@ -354,4 +354,6 @@ This file records actions made in the repository. Entries are chronological; eac
 - **Rewrote** `README.md` as an open-source project README for Moeko Works (overview, features, setup, roadmap, architecture, documentation index).
 - **Created** `CONTRIBUTING.md` with setup, checks, conventions, and documentation rules.
 - **Updated** `PROJECT-SPECS.md` (legacy "Moesoft" brand replaced with Moeko Works), `CONTEXT.md` (new repository name), and `client/README.md` (title).
-- **Validation:** Documentation-only changes; no build or test command was required. No `LICENSE` file added yet; the owner has not chosen one.
+- **Validation:** Documentation-only changes; no build or test command was required. No license was chosen at this point; MIT was added afterward (see below).
+
+- **Added** `LICENSE` (MIT, copyright Moeko Works) and a license badge and mention in `README.md`.

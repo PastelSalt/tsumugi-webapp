@@ -11,6 +11,7 @@ A creative and technical production-management platform, built by **Moeko Works*
   <img alt="Frontend: React 19" src="https://img.shields.io/badge/react-19-61dafb?style=flat-square&logo=react&logoColor=white">
   <img alt="Bundler: Vite" src="https://img.shields.io/badge/vite-8-646cff?style=flat-square&logo=vite&logoColor=white">
   <img alt="Backend: planned" src="https://img.shields.io/badge/backend-planned-b8c0ff?style=flat-square">
+  <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-a8e6cf?style=flat-square">
   <img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-a8e6cf?style=flat-square">
 </p>
 
@@ -169,7 +170,7 @@ Contributions, bug reports, and ideas are welcome. Please read [CONTRIBUTING.md]
 
 ## 💜 About Moeko Works
 
-Tsumugi is made by **Moeko Works**, a small studio building gentle, well-crafted tools for makers. *Project Garden* is the product's working codename and appears in the demo's sample data.
+Tsumugi is released under the [MIT License](LICENSE) and made by **Moeko Works**, a small studio building gentle, well-crafted tools for makers. *Project Garden* is the product's working codename and appears in the demo's sample data.
 
 ---
 

@@ -1,0 +1,14 @@
+{
+  "id": "6afac1f3f17f6280b0c11684",
+  "email": "demo@tsumugi.local",
+  "displayName": "Demo user",
+  "workspaceId": "6afac1f3f17f6280b0c11685",
+  "preferences": {
+    "theme": "system",
+    "weekStart": "monday",
+    "shortcuts": true,
+    "motion": "system",
+    "timeZone": "UTC",
+    "firstRunDismissed": false
+  }
+}

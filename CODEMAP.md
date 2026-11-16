@@ -38,7 +38,8 @@ This document is the maintained index of the current codebase. Update it when fi
 | `docs/plan/backend/PLAN-B-18.md`, `PLAN-B-19.md` | Future designs: teams and collaboration, notifications/recurrence/background jobs |
 | `docs/` | Draft legal policies for owner/legal review, and `individual-workspace-guide.md` (user guide, rendered at `/help`) |
 | `docs/plan/frontend/` | Frontend plan-A documents for landing, legal, auth, authenticated workspace, and protected user pages |
-| `docs/PLAN-D-01.md` | Backend handoff for the Android app: how to connect, auth, data shapes, endpoint reference, rules, sync guidance, and the backend gaps mobile still needs |
+| `docs/PLAN-D-01.md` | Backend handoff for the Flutter/Android app (revision 2, checked against the mobile repo): sanity check, connection, auth, data shapes, endpoint map per screen, integration guide, gaps |
+| `docs/samples/` | Real API responses (snapshot, templates, user, home) for client tests |
 | `docs/PLAN-C-01.md` | Everything that needs the owner: accounts to create, decisions, legal and release tasks, human checks (open items checklist) |
 | `docs/plan/backend/` | Backend plan-B documents; each ends with an implementation status (done, partly done, or not started) |
 | `Server/` | Express + MongoDB API (local MVP): `src/`, `test/`, `scripts/seed.js` |

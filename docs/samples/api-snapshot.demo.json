@@ -1,0 +1,1596 @@
+{
+  "today": "2026-11-16",
+  "now": "2026-11-16T12:00:00.000Z",
+  "projects": [
+    {
+      "id": "6afac1f3f17f6280b0c1168e",
+      "name": "Field Notes 2025",
+      "slug": "field-notes-2025",
+      "category": "Research",
+      "kind": "research",
+      "status": "Done",
+      "tone": "lilac",
+      "tags": [
+        "archive"
+      ],
+      "description": "Notes from last year’s field work, kept for reference.",
+      "objective": "Preserve the record of the 2025 season.",
+      "start": "2025-03-01",
+      "end": "2025-11-30",
+      "phases": [
+        "Collect",
+        "Review",
+        "Archive"
+      ],
+      "phaseIndex": 2,
+      "lastOpenedAt": "2026-06-30T09:00:00",
+      "archivedAt": "2026-06-30",
+      "updatedAt": "2026-06-30",
+      "archived": true
+    },
+    {
+      "id": "6afac1f3f17f6280b0c1168c",
+      "name": "Atlas Zine",
+      "slug": "atlas-zine",
+      "category": "Creative",
+      "kind": "creative",
+      "status": "Done",
+      "tone": "yellow",
+      "tags": [
+        "print",
+        "zine"
+      ],
+      "description": "A small-run printed zine of map illustrations.",
+      "objective": "Print and distribute a first edition.",
+      "start": "2026-06-01",
+      "end": "2026-09-30",
+      "phases": [
+        "Concept",
+        "Layout",
+        "Proof",
+        "Print",
+        "Distribution"
+      ],
+      "phaseIndex": 4,
+      "lastOpenedAt": "2026-10-02T10:00:00",
+      "archivedAt": null,
+      "updatedAt": "2026-10-01",
+      "archived": false
+    },
+    {
+      "id": "6afac1f3f17f6280b0c1168b",
+      "name": "Color & Memory",
+      "slug": "color-and-memory",
+      "category": "Research",
+      "kind": "research",
+      "status": "On hold",
+      "tone": "lilac",
+      "tags": [
+        "interviews",
+        "color"
+      ],
+      "description": "A study of how color shapes recalled memories.",
+      "objective": "Collect and analyze interviews to answer one clear research question.",
+      "start": "2026-08-20",
+      "end": "2027-01-15",
+      "phases": [
+        "Question",
+        "Method",
+        "Collection",
+        "Analysis",
+        "Report"
+      ],
+      "phaseIndex": 2,
+      "lastOpenedAt": "2026-11-03T14:00:00",
+      "archivedAt": null,
+      "updatedAt": "2026-11-05",
+      "archived": false
+    },
+    {
+      "id": "6afac1f3f17f6280b0c11689",
+      "name": "Project Garden",
+      "slug": "project-garden",
+      "category": "Creative",
+      "kind": "creative",
+      "status": "Active",
+      "tone": "pink",
+      "tags": [
+        "visual novel",
+        "writing"
+      ],
+      "description": "A story-led creative production workspace for a visual novel.",
+      "objective": "Ship a welcoming first chapter that holds together as a story and as a product.",
+      "start": "2026-09-01",
+      "end": "2027-02-28",
+      "phases": [
+        "Concept",
+        "Outline",
+        "Chapter one",
+        "Review",
+        "Release"
+      ],
+      "phaseIndex": 2,
+      "lastOpenedAt": "2026-11-12T09:10:00",
+      "archivedAt": null,
+      "updatedAt": "2026-11-12",
+      "archived": false
+    },
+    {
+      "id": "6afac1f3f17f6280b0c1168a",
+      "name": "Tsumugi API",
+      "slug": "tsumugi-api",
+      "category": "Software",
+      "kind": "software",
+      "status": "Planning",
+      "tone": "blue",
+      "tags": [
+        "backend",
+        "auth"
+      ],
+      "description": "Service layer for projects, requirements, and traceability.",
+      "objective": "Define a secure, well-specified API that the workspace can rely on.",
+      "start": "2026-10-15",
+      "end": "2027-03-31",
+      "phases": [
+        "Discovery",
+        "Design",
+        "Build",
+        "Test",
+        "Ship"
+      ],
+      "phaseIndex": 1,
+      "lastOpenedAt": "2026-11-11T16:40:00",
+      "archivedAt": null,
+      "updatedAt": "2026-11-11",
+      "archived": false
+    },
+    {
+      "id": "6afac1f3f17f6280b0c1168d",
+      "name": "Sketchbook Sprint",
+      "slug": "sketchbook-sprint",
+      "category": "Multimedia",
+      "kind": "multimedia",
+      "status": "Planning",
+      "tone": "green",
+      "tags": [
+        "drawing"
+      ],
+      "description": "A rough plan for a month of daily sketches.",
+      "objective": "Decide whether this is worth planning in detail.",
+      "start": "2026-12-01",
+      "end": "2026-12-31",
+      "phases": [
+        "Brief",
+        "Production"
+      ],
+      "phaseIndex": 0,
+      "lastOpenedAt": "2026-11-10T20:00:00",
+      "archivedAt": null,
+      "updatedAt": "2026-11-10",
+      "archived": false
+    }
+  ],
+  "milestones": [
+    {
+      "id": "6afac1f3f17f6280b0c11697",
+      "projectId": "6afac1f3f17f6280b0c1168c",
+      "title": "Print run",
+      "description": "Send final files to the printer and receive copies.",
+      "start": "2026-08-01",
+      "due": "2026-09-30",
+      "phase": 3,
+      "done": true,
+      "blocked": false,
+      "afterId": null
+    },
+    {
+      "id": "6afac1f3f17f6280b0c11690",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "title": "Outline locked",
+      "description": "Freeze the story outline for chapters one to three.",
+      "start": "2026-09-15",
+      "due": "2026-10-15",
+      "phase": 1,
+      "done": true,
+      "blocked": false,
+      "afterId": null
+    },
+    {
+      "id": "6afac1f3f17f6280b0c11695",
+      "projectId": "6afac1f3f17f6280b0c1168b",
+      "title": "Interview protocol",
+      "description": "Final protocol and consent process.",
+      "start": "2026-09-20",
+      "due": "2026-10-30",
+      "phase": 1,
+      "done": true,
+      "blocked": false,
+      "afterId": null
+    },
+    {
+      "id": "6afac1f3f17f6280b0c11691",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "title": "Character bible",
+      "description": "Finish profiles and reference art for the main cast.",
+      "start": "2026-11-01",
+      "due": "2026-11-10",
+      "phase": 2,
+      "done": false,
+      "blocked": false,
+      "afterId": "6afac1f3f17f6280b0c11690"
+    },
+    {
+      "id": "6afac1f3f17f6280b0c1168f",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "title": "Chapter one review",
+      "description": "Review the opening chapter against the style guide.",
+      "start": "2026-10-20",
+      "due": "2026-11-13",
+      "phase": 2,
+      "done": false,
+      "blocked": false,
+      "afterId": null
+    },
+    {
+      "id": "6afac1f3f17f6280b0c11693",
+      "projectId": "6afac1f3f17f6280b0c1168a",
+      "title": "Auth flow map",
+      "description": "Document every sign-in and recovery state.",
+      "start": "2026-11-05",
+      "due": "2026-11-19",
+      "phase": 1,
+      "done": false,
+      "blocked": true,
+      "afterId": null
+    },
+    {
+      "id": "6afac1f3f17f6280b0c11696",
+      "projectId": "6afac1f3f17f6280b0c1168b",
+      "title": "Data collection wave 1",
+      "description": "Run the first round of participant sessions.",
+      "start": "2026-11-01",
+      "due": "2026-11-30",
+      "phase": 2,
+      "done": false,
+      "blocked": false,
+      "afterId": "6afac1f3f17f6280b0c11695"
+    },
+    {
+      "id": "6afac1f3f17f6280b0c11694",
+      "projectId": "6afac1f3f17f6280b0c1168a",
+      "title": "API schema v1",
+      "description": "First reviewed schema for projects and requirements.",
+      "start": "2026-11-20",
+      "due": "2026-12-15",
+      "phase": 2,
+      "done": false,
+      "blocked": false,
+      "afterId": "6afac1f3f17f6280b0c11693"
+    },
+    {
+      "id": "6afac1f3f17f6280b0c11692",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "title": "Chapter two draft",
+      "description": "First full draft of chapter two.",
+      "start": "2026-11-16",
+      "due": "2026-12-18",
+      "phase": 3,
+      "done": false,
+      "blocked": false,
+      "afterId": "6afac1f3f17f6280b0c1168f"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "6afac1f3f17f6280b0c11698",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "milestoneId": "6afac1f3f17f6280b0c1168f",
+      "title": "Review opening scene notes",
+      "notes": "Read the chapter one notes and confirm tone before the review.",
+      "status": "Doing",
+      "priority": "high",
+      "due": "2026-11-12",
+      "blocked": false,
+      "subtasks": [
+        {
+          "text": "Read the notes",
+          "done": true,
+          "id": "6afac1f3f17f6280b0c116d2"
+        },
+        {
+          "text": "Mark tone issues",
+          "done": false,
+          "id": "6afac1f3f17f6280b0c116d3"
+        }
+      ],
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116a7"
+      ],
+      "fileIds": [
+        "6afac1f3f17f6280b0c116b0"
+      ],
+      "changeIds": [
+        "6afac1f3f17f6280b0c11740",
+        "6afac1f3f17f6280b0c11748"
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c11699",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "milestoneId": "6afac1f3f17f6280b0c1168f",
+      "title": "Reconcile character names",
+      "notes": "Check every name against the character bible.",
+      "status": "To do",
+      "priority": "high",
+      "due": "2026-11-13",
+      "blocked": false,
+      "subtasks": [],
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116a8"
+      ],
+      "fileIds": [],
+      "changeIds": [
+        "6afac37fd00b4d956c8e61fc"
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c1169a",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "milestoneId": "6afac1f3f17f6280b0c11691",
+      "title": "Write character profiles",
+      "notes": "One page per main character: voice, goals, relationships.",
+      "status": "Doing",
+      "priority": "high",
+      "due": "2026-11-09",
+      "blocked": false,
+      "subtasks": [
+        {
+          "text": "Protagonist",
+          "done": true,
+          "id": "6afac1f3f17f6280b0c116d6"
+        },
+        {
+          "text": "Rival",
+          "done": true,
+          "id": "6afac1f3f17f6280b0c116d7"
+        },
+        {
+          "text": "Mentor",
+          "done": false,
+          "id": "6afac1f3f17f6280b0c116d8"
+        },
+        {
+          "text": "Villain",
+          "done": false,
+          "id": "6afac1f3f17f6280b0c116d9"
+        }
+      ],
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116a8"
+      ],
+      "fileIds": [],
+      "changeIds": []
+    },
+    {
+      "id": "6afac1f3f17f6280b0c1169b",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "milestoneId": "6afac1f3f17f6280b0c11691",
+      "title": "Collect reference art",
+      "notes": "Gather mood references for each character.",
+      "status": "Doing",
+      "priority": "normal",
+      "due": "2026-11-11",
+      "blocked": false,
+      "subtasks": [],
+      "requirementIds": [],
+      "fileIds": [
+        "6afac1f3f17f6280b0c116b3"
+      ],
+      "changeIds": []
+    },
+    {
+      "id": "6afac1f3f17f6280b0c1169c",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "milestoneId": "6afac1f3f17f6280b0c11692",
+      "title": "Outline chapter two beats",
+      "notes": "List the main story beats for chapter two.",
+      "status": "To do",
+      "priority": "normal",
+      "due": null,
+      "blocked": false,
+      "subtasks": [],
+      "requirementIds": [],
+      "fileIds": [],
+      "changeIds": []
+    },
+    {
+      "id": "6afac1f3f17f6280b0c1169d",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "milestoneId": "6afac1f3f17f6280b0c11690",
+      "title": "Lock outline v2",
+      "notes": "Final read-through and sign-off of the outline.",
+      "status": "Done",
+      "priority": "high",
+      "due": "2026-10-15",
+      "blocked": false,
+      "subtasks": [],
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116aa"
+      ],
+      "fileIds": [
+        "6afac1f3f17f6280b0c116b2"
+      ],
+      "changeIds": [
+        "6afac1f3f17f6280b0c11759"
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c1169e",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "milestoneId": "6afac1f3f17f6280b0c1168f",
+      "title": "Proof chapter one dialogue",
+      "notes": "Read dialogue aloud and fix awkward lines.",
+      "status": "To do",
+      "priority": "normal",
+      "due": "2026-11-18",
+      "blocked": false,
+      "subtasks": [],
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116a7"
+      ],
+      "fileIds": [],
+      "changeIds": [
+        "6afac1f3f17f6280b0c11744"
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c1169f",
+      "projectId": "6afac1f3f17f6280b0c1168a",
+      "milestoneId": "6afac1f3f17f6280b0c11693",
+      "title": "Map sign-in states",
+      "notes": "Draw every state from first visit to recovery. Waiting on the session decision.",
+      "status": "Doing",
+      "priority": "high",
+      "due": "2026-11-16",
+      "blocked": true,
+      "subtasks": [
+        {
+          "text": "List states",
+          "done": true,
+          "id": "6afac1f3f17f6280b0c116df"
+        },
+        {
+          "text": "Draw diagram",
+          "done": false,
+          "id": "6afac1f3f17f6280b0c116e0"
+        }
+      ],
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116ab"
+      ],
+      "fileIds": [],
+      "changeIds": []
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116a0",
+      "projectId": "6afac1f3f17f6280b0c1168a",
+      "milestoneId": "6afac1f3f17f6280b0c11693",
+      "title": "Choose session strategy",
+      "notes": "Compare cookie and token sessions and write a recommendation.",
+      "status": "To do",
+      "priority": "high",
+      "due": "2026-11-14",
+      "blocked": false,
+      "subtasks": [],
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116ab"
+      ],
+      "fileIds": [],
+      "changeIds": [
+        "6afac1f3f17f6280b0c1174b"
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116a1",
+      "projectId": "6afac1f3f17f6280b0c1168a",
+      "milestoneId": "6afac1f3f17f6280b0c11693",
+      "title": "Write auth threat notes",
+      "notes": "List the main threats and mitigations for sign-in.",
+      "status": "Doing",
+      "priority": "normal",
+      "due": "2026-11-18",
+      "blocked": false,
+      "subtasks": [],
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116ab"
+      ],
+      "fileIds": [],
+      "changeIds": [
+        "6afac1f3f17f6280b0c11755"
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116a2",
+      "projectId": "6afac1f3f17f6280b0c1168a",
+      "milestoneId": "6afac1f3f17f6280b0c11694",
+      "title": "Draft schema for projects",
+      "notes": "Fields and relationships for the projects collection.",
+      "status": "To do",
+      "priority": "normal",
+      "due": "2026-11-25",
+      "blocked": false,
+      "subtasks": [],
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116ad"
+      ],
+      "fileIds": [
+        "6afac1f3f17f6280b0c116b7"
+      ],
+      "changeIds": []
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116a3",
+      "projectId": "6afac1f3f17f6280b0c1168b",
+      "milestoneId": "6afac1f3f17f6280b0c11696",
+      "title": "Schedule participant sessions",
+      "notes": "Book twelve sessions across three weeks.",
+      "status": "Doing",
+      "priority": "normal",
+      "due": "2026-11-20",
+      "blocked": false,
+      "subtasks": [
+        {
+          "text": "Send invitations",
+          "done": true,
+          "id": "6afac1f3f17f6280b0c116e5"
+        },
+        {
+          "text": "Confirm rooms",
+          "done": false,
+          "id": "6afac1f3f17f6280b0c116e6"
+        }
+      ],
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116ae"
+      ],
+      "fileIds": [],
+      "changeIds": []
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116a4",
+      "projectId": "6afac1f3f17f6280b0c1168b",
+      "milestoneId": "6afac1f3f17f6280b0c11696",
+      "title": "Prepare consent forms",
+      "notes": "Finalize and print consent forms.",
+      "status": "Done",
+      "priority": "normal",
+      "due": "2026-11-05",
+      "blocked": false,
+      "subtasks": [],
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116ae"
+      ],
+      "fileIds": [
+        "6afac1f3f17f6280b0c116b9"
+      ],
+      "changeIds": []
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116a5",
+      "projectId": "6afac1f3f17f6280b0c1168b",
+      "milestoneId": "6afac1f3f17f6280b0c11696",
+      "title": "Transcribe first interviews",
+      "notes": "Waiting on a secure storage decision.",
+      "status": "To do",
+      "priority": "normal",
+      "due": "2026-11-22",
+      "blocked": true,
+      "subtasks": [],
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116af"
+      ],
+      "fileIds": [],
+      "changeIds": [
+        "6afac1f3f17f6280b0c1174f"
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116a6",
+      "projectId": "6afac1f3f17f6280b0c1168c",
+      "milestoneId": "6afac1f3f17f6280b0c11697",
+      "title": "Archive print files",
+      "notes": "Store final print-ready files.",
+      "status": "Done",
+      "priority": "normal",
+      "due": "2026-10-01",
+      "blocked": false,
+      "subtasks": [],
+      "requirementIds": [],
+      "fileIds": [
+        "6afac1f3f17f6280b0c116ba"
+      ],
+      "changeIds": []
+    }
+  ],
+  "requirements": [
+    {
+      "id": "6afac1f3f17f6280b0c116a7",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "key": "REQ-001",
+      "title": "Opening scene sets the tone",
+      "type": "Functional",
+      "status": "Open",
+      "verified": false,
+      "milestoneId": "6afac1f3f17f6280b0c1168f",
+      "description": "The first scene must establish mood, setting, and the main character within one page.",
+      "acceptance": [
+        {
+          "text": "Tone matches the style guide",
+          "met": true,
+          "id": "6afac1f3f17f6280b0c116eb"
+        },
+        {
+          "text": "Scene is under 600 words",
+          "met": false,
+          "id": "6afac1f3f17f6280b0c116ec"
+        },
+        {
+          "text": "Sign-off recorded",
+          "met": false,
+          "id": "6afac1f3f17f6280b0c116ed"
+        }
+      ],
+      "taskIds": [
+        "6afac1f3f17f6280b0c11698",
+        "6afac1f3f17f6280b0c1169e"
+      ],
+      "fileIds": [
+        "6afac1f3f17f6280b0c116bb",
+        "6afac1f3f17f6280b0c116bc"
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116a8",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "key": "REQ-002",
+      "title": "Characters keep consistent names",
+      "type": "Functional",
+      "status": "Open",
+      "verified": false,
+      "milestoneId": "6afac1f3f17f6280b0c11691",
+      "description": "Every named character uses the spelling in the character bible.",
+      "acceptance": [
+        {
+          "text": "No spelling conflicts across chapters",
+          "met": false,
+          "id": "6afac1f3f17f6280b0c116ef"
+        },
+        {
+          "text": "Bible lists every named character",
+          "met": false,
+          "id": "6afac1f3f17f6280b0c116f0"
+        }
+      ],
+      "taskIds": [
+        "6afac1f3f17f6280b0c11699",
+        "6afac1f3f17f6280b0c1169a"
+      ],
+      "fileIds": [
+        "6afac1f3f17f6280b0c116bb"
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116a9",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "key": "REQ-003",
+      "title": "Script exports to PDF in under 10 seconds",
+      "type": "Non-functional",
+      "status": "Open",
+      "verified": false,
+      "milestoneId": "6afac1f3f17f6280b0c11692",
+      "description": "Exporting the full script to PDF must feel immediate.",
+      "acceptance": [],
+      "taskIds": [],
+      "fileIds": []
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116aa",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "key": "REQ-004",
+      "title": "Style guide approved",
+      "type": "Functional",
+      "status": "Met",
+      "verified": true,
+      "milestoneId": "6afac1f3f17f6280b0c11690",
+      "description": "The style guide is reviewed and approved.",
+      "acceptance": [
+        {
+          "text": "Reviewed",
+          "met": true,
+          "id": "6afac1f3f17f6280b0c116f3"
+        },
+        {
+          "text": "Approved",
+          "met": true,
+          "id": "6afac1f3f17f6280b0c116f4"
+        }
+      ],
+      "taskIds": [
+        "6afac1f3f17f6280b0c1169d"
+      ],
+      "fileIds": [
+        "6afac1f3f17f6280b0c116b2",
+        "6afac1f3f17f6280b0c116bd"
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116ab",
+      "projectId": "6afac1f3f17f6280b0c1168a",
+      "key": "REQ-005",
+      "title": "Users can sign in with email",
+      "type": "Functional",
+      "status": "Open",
+      "verified": false,
+      "milestoneId": "6afac1f3f17f6280b0c11693",
+      "description": "A returning user can sign in with an email address and password.",
+      "acceptance": [
+        {
+          "text": "All sign-in states are documented",
+          "met": false,
+          "id": "6afac1f3f17f6280b0c116f6"
+        },
+        {
+          "text": "Session strategy is chosen",
+          "met": false,
+          "id": "6afac1f3f17f6280b0c116f7"
+        },
+        {
+          "text": "Threats are reviewed",
+          "met": false,
+          "id": "6afac1f3f17f6280b0c116f8"
+        }
+      ],
+      "taskIds": [
+        "6afac1f3f17f6280b0c1169f",
+        "6afac1f3f17f6280b0c116a0",
+        "6afac1f3f17f6280b0c116a1"
+      ],
+      "fileIds": [
+        "6afac1f3f17f6280b0c116be"
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116ac",
+      "projectId": "6afac1f3f17f6280b0c1168a",
+      "key": "REQ-006",
+      "title": "Auth responses under 300 ms",
+      "type": "Non-functional",
+      "status": "Open",
+      "verified": false,
+      "milestoneId": "6afac1f3f17f6280b0c11694",
+      "description": "Authentication endpoints respond quickly under normal load.",
+      "acceptance": [
+        {
+          "text": "Measured at the 95th percentile",
+          "met": false,
+          "id": "6afac1f3f17f6280b0c116fa"
+        }
+      ],
+      "taskIds": [],
+      "fileIds": []
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116ad",
+      "projectId": "6afac1f3f17f6280b0c1168a",
+      "key": "REQ-007",
+      "title": "Projects store their metadata",
+      "type": "Functional",
+      "status": "Open",
+      "verified": false,
+      "milestoneId": "6afac1f3f17f6280b0c11694",
+      "description": "Every project record stores its descriptive metadata.",
+      "acceptance": [
+        {
+          "text": "Metadata fields are documented",
+          "met": false,
+          "id": "6afac1f3f17f6280b0c116fc"
+        }
+      ],
+      "taskIds": [
+        "6afac1f3f17f6280b0c116a2"
+      ],
+      "fileIds": [
+        "6afac1f3f17f6280b0c116b7",
+        "6afac1f3f17f6280b0c116bf"
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116ae",
+      "projectId": "6afac1f3f17f6280b0c1168b",
+      "key": "REQ-008",
+      "title": "Consent recorded for each participant",
+      "type": "Functional",
+      "status": "Met",
+      "verified": true,
+      "milestoneId": "6afac1f3f17f6280b0c11696",
+      "description": "Each participant gives written consent before a session.",
+      "acceptance": [
+        {
+          "text": "Form signed before the session",
+          "met": true,
+          "id": "6afac1f3f17f6280b0c116fe"
+        },
+        {
+          "text": "Forms stored securely",
+          "met": true,
+          "id": "6afac1f3f17f6280b0c116ff"
+        }
+      ],
+      "taskIds": [
+        "6afac1f3f17f6280b0c116a3",
+        "6afac1f3f17f6280b0c116a4"
+      ],
+      "fileIds": [
+        "6afac1f3f17f6280b0c116c0"
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116af",
+      "projectId": "6afac1f3f17f6280b0c1168b",
+      "key": "REQ-009",
+      "title": "Transcripts stored securely",
+      "type": "Non-functional",
+      "status": "Open",
+      "verified": false,
+      "milestoneId": "6afac1f3f17f6280b0c11696",
+      "description": "Interview transcripts are stored with access limited to you.",
+      "acceptance": [
+        {
+          "text": "Storage location approved",
+          "met": false,
+          "id": "6afac1f3f17f6280b0c11701"
+        }
+      ],
+      "taskIds": [
+        "6afac1f3f17f6280b0c116a5"
+      ],
+      "fileIds": []
+    }
+  ],
+  "files": [
+    {
+      "id": "6afac1f3f17f6280b0c116b6",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "name": "chapter-one-draft.docx",
+      "kind": "document",
+      "ext": "docx",
+      "mime": "",
+      "bytes": 220000,
+      "tags": [
+        "draft"
+      ],
+      "description": "Draft export being added to the library.",
+      "isFinal": false,
+      "milestoneId": null,
+      "url": null,
+      "host": null,
+      "updatedAt": "2026-11-12",
+      "requirementIds": [],
+      "taskIds": [],
+      "downloadable": false
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116b0",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "name": "opening-scene-notes.md",
+      "kind": "document",
+      "ext": "md",
+      "mime": "",
+      "bytes": 18400,
+      "tags": [
+        "notes",
+        "chapter one"
+      ],
+      "description": "Working notes for the opening scene.",
+      "isFinal": false,
+      "milestoneId": null,
+      "url": null,
+      "host": null,
+      "updatedAt": "2026-11-11",
+      "requirementIds": [],
+      "taskIds": [
+        "6afac1f3f17f6280b0c11698"
+      ],
+      "downloadable": false
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116b3",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "name": "moodboard.jpg",
+      "kind": "image",
+      "ext": "jpg",
+      "mime": "",
+      "bytes": 3100000,
+      "tags": [
+        "reference"
+      ],
+      "description": "Mood references for the main cast.",
+      "isFinal": false,
+      "milestoneId": null,
+      "url": null,
+      "host": null,
+      "updatedAt": "2026-11-11",
+      "requirementIds": [],
+      "taskIds": [
+        "6afac1f3f17f6280b0c1169b"
+      ],
+      "downloadable": false
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116b1",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "name": "cover-art-v2.png",
+      "kind": "image",
+      "ext": "png",
+      "mime": "",
+      "bytes": 2480000,
+      "tags": [
+        "cover",
+        "art"
+      ],
+      "description": "Second pass of the cover illustration.",
+      "isFinal": false,
+      "milestoneId": null,
+      "url": null,
+      "host": null,
+      "updatedAt": "2026-11-09",
+      "requirementIds": [],
+      "taskIds": [],
+      "downloadable": false
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116b7",
+      "projectId": "6afac1f3f17f6280b0c1168a",
+      "name": "schema-draft.xlsx",
+      "kind": "data",
+      "ext": "xlsx",
+      "mime": "",
+      "bytes": 96000,
+      "tags": [
+        "schema"
+      ],
+      "description": "Spreadsheet sketch of the projects schema.",
+      "isFinal": false,
+      "milestoneId": null,
+      "url": null,
+      "host": null,
+      "updatedAt": "2026-11-08",
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116ad"
+      ],
+      "taskIds": [
+        "6afac1f3f17f6280b0c116a2"
+      ],
+      "downloadable": false
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116b8",
+      "projectId": "6afac1f3f17f6280b0c1168a",
+      "name": "tsumugi-api repository",
+      "kind": "link",
+      "ext": "link",
+      "mime": "",
+      "bytes": 0,
+      "tags": [
+        "code"
+      ],
+      "description": "Source repository for the API.",
+      "isFinal": false,
+      "milestoneId": null,
+      "url": "https://github.com/",
+      "host": "github.com",
+      "updatedAt": "2026-11-06",
+      "requirementIds": [],
+      "taskIds": [],
+      "downloadable": false
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116b5",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "name": "teaser-cut.mp4",
+      "kind": "media",
+      "ext": "mp4",
+      "mime": "",
+      "bytes": 48000000,
+      "tags": [
+        "teaser"
+      ],
+      "description": "Unreleased teaser cut.",
+      "isFinal": false,
+      "milestoneId": null,
+      "url": null,
+      "host": null,
+      "updatedAt": "2026-11-03",
+      "requirementIds": [],
+      "taskIds": [],
+      "downloadable": false
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116b4",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "name": "theme-sketch.wav",
+      "kind": "media",
+      "ext": "wav",
+      "mime": "",
+      "bytes": 8900000,
+      "tags": [
+        "music"
+      ],
+      "description": "Rough sketch of the main theme.",
+      "isFinal": false,
+      "milestoneId": null,
+      "url": null,
+      "host": null,
+      "updatedAt": "2026-11-02",
+      "requirementIds": [],
+      "taskIds": [],
+      "downloadable": false
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116b9",
+      "projectId": "6afac1f3f17f6280b0c1168b",
+      "name": "survey-responses.csv",
+      "kind": "data",
+      "ext": "csv",
+      "mime": "",
+      "bytes": 410000,
+      "tags": [
+        "survey",
+        "data"
+      ],
+      "description": "Pilot survey responses.",
+      "isFinal": false,
+      "milestoneId": null,
+      "url": null,
+      "host": null,
+      "updatedAt": "2026-10-20",
+      "requirementIds": [],
+      "taskIds": [
+        "6afac1f3f17f6280b0c116a4"
+      ],
+      "downloadable": false
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116b2",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "name": "style-guide.pdf",
+      "kind": "document",
+      "ext": "pdf",
+      "mime": "",
+      "bytes": 5300000,
+      "tags": [
+        "style"
+      ],
+      "description": "Approved visual and writing style guide.",
+      "isFinal": true,
+      "milestoneId": null,
+      "url": null,
+      "host": null,
+      "updatedAt": "2026-10-15",
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116aa"
+      ],
+      "taskIds": [
+        "6afac1f3f17f6280b0c1169d"
+      ],
+      "downloadable": false
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116ba",
+      "projectId": "6afac1f3f17f6280b0c1168c",
+      "name": "atlas-final.pdf",
+      "kind": "document",
+      "ext": "pdf",
+      "mime": "",
+      "bytes": 12000000,
+      "tags": [
+        "print"
+      ],
+      "description": "Final print-ready export.",
+      "isFinal": true,
+      "milestoneId": null,
+      "url": null,
+      "host": null,
+      "updatedAt": "2026-09-29",
+      "requirementIds": [],
+      "taskIds": [
+        "6afac1f3f17f6280b0c116a6"
+      ],
+      "downloadable": false
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116bb",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "name": "Chapter one script",
+      "kind": "document",
+      "ext": "md",
+      "bytes": 144,
+      "tags": [
+        "script"
+      ],
+      "description": "The chapter one script, in progress.",
+      "status": "Draft",
+      "version": 1,
+      "body": "# Chapter one script\n\n## Scene one\nThe garden gate is open. Someone has been here before.\n\n## Scene two\nA quiet conversation that sets the tone.",
+      "isDoc": true,
+      "isFinal": false,
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116a7",
+        "6afac1f3f17f6280b0c116a8"
+      ],
+      "taskIds": [],
+      "milestoneId": "6afac1f3f17f6280b0c1168f",
+      "updatedAt": "2026-11-12"
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116bc",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "name": "Opening brief",
+      "kind": "document",
+      "ext": "md",
+      "bytes": 504,
+      "tags": [
+        "brief"
+      ],
+      "description": "Scope and goals for the opening chapter.",
+      "status": "Draft",
+      "version": 4,
+      "body": "# Opening brief\n\n## Overview\nThe opening chapter introduces the world and its main character. It must feel welcoming without explaining everything.\n\n## Goals\n- Establish tone and setting in the first page\n- Introduce the protagonist through action\n- End on a **clear hook** into chapter two\n\n## Scope\nThis brief covers chapter one only. Later chapters get their own briefs.\n\n## Open questions\n1. Should the narrator be named?\n2. How much backstory belongs in the first scene?\n\n> Review date: 13 November.",
+      "isDoc": true,
+      "isFinal": false,
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116a7"
+      ],
+      "taskIds": [],
+      "milestoneId": "6afac1f3f17f6280b0c1168f",
+      "updatedAt": "2026-11-12"
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116be",
+      "projectId": "6afac1f3f17f6280b0c1168a",
+      "name": "Auth design notes",
+      "kind": "document",
+      "ext": "md",
+      "bytes": 352,
+      "tags": [
+        "decision"
+      ],
+      "description": "Session strategy decision record.",
+      "status": "Draft",
+      "version": 2,
+      "body": "# Auth design notes\n\n## Decision\nUse server-side sessions with secure cookies.\n\n## Why\n- Simple revocation\n- No tokens stored in the browser\n- Works with the planned backend\n\n## Consequences\nThe client must send cookies with every request, and CSRF protection is required.\n\n## Alternatives\n1. Short-lived tokens with refresh\n2. Third-party sign-in only",
+      "isDoc": true,
+      "isFinal": false,
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116ab"
+      ],
+      "taskIds": [],
+      "milestoneId": "6afac1f3f17f6280b0c11693",
+      "updatedAt": "2026-11-11"
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116bf",
+      "projectId": "6afac1f3f17f6280b0c1168a",
+      "name": "API schema outline",
+      "kind": "document",
+      "ext": "md",
+      "bytes": 183,
+      "tags": [
+        "spec"
+      ],
+      "description": "Collections and relationships.",
+      "status": "Draft",
+      "version": 1,
+      "body": "# API schema outline\n\n## Collections\n- projects\n- milestones\n- tasks\n- requirements\n\n## Relationships\nEvery record stores its project ID. Links between records use IDs, not free text.",
+      "isDoc": true,
+      "isFinal": false,
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116ad"
+      ],
+      "taskIds": [],
+      "milestoneId": "6afac1f3f17f6280b0c11694",
+      "updatedAt": "2026-11-08"
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116c0",
+      "projectId": "6afac1f3f17f6280b0c1168b",
+      "name": "Interview protocol",
+      "kind": "document",
+      "ext": "md",
+      "bytes": 261,
+      "tags": [
+        "research"
+      ],
+      "description": "Protocol and consent process.",
+      "status": "Final",
+      "version": 3,
+      "body": "# Interview protocol\n\n## Before the session\n1. Confirm consent\n2. Explain that the session is recorded\n\n## Questions\n- What color do you remember from that day?\n- What did it feel like?\n\n## After the session\nSend the transcript to the participant within a week.",
+      "isDoc": true,
+      "isFinal": true,
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116ae"
+      ],
+      "taskIds": [],
+      "milestoneId": "6afac1f3f17f6280b0c11695",
+      "updatedAt": "2026-10-30"
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116bd",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "name": "Style guide",
+      "kind": "document",
+      "ext": "md",
+      "bytes": 288,
+      "tags": [
+        "style"
+      ],
+      "description": "Voice, visual rules, and naming.",
+      "status": "Final",
+      "version": 2,
+      "body": "# Style guide\n\n## Voice\nWarm, concrete, and a little playful. Prefer short sentences.\n\n## Visual rules\n- Solid colors, no gradients\n- One accent color per scene\n- Characters are always outlined\n\n## Naming\nUse the spelling in the character bible. When unsure, decide once and note it here.",
+      "isDoc": true,
+      "isFinal": true,
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116aa"
+      ],
+      "taskIds": [],
+      "milestoneId": "6afac1f3f17f6280b0c11690",
+      "updatedAt": "2026-10-15"
+    },
+    {
+      "id": "6afac1f3f17f6280b0c116c1",
+      "projectId": "6afac1f3f17f6280b0c1168c",
+      "name": "Release notes: Atlas Zine 1.0",
+      "kind": "document",
+      "ext": "md",
+      "bytes": 134,
+      "tags": [
+        "release"
+      ],
+      "description": "What shipped in the first edition.",
+      "status": "Final",
+      "version": 1,
+      "body": "# Atlas Zine 1.0\n\n## Included\n- 24 pages of map illustrations\n- A short afterword\n\n## Print details\nRisograph, two colors, 150 copies.",
+      "isDoc": true,
+      "isFinal": true,
+      "requirementIds": [],
+      "taskIds": [],
+      "milestoneId": null,
+      "updatedAt": "2026-10-01"
+    }
+  ],
+  "changes": [
+    {
+      "id": "6afac37fd00b4d956c8e61fc",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "at": "2026-11-16T08:49:03",
+      "summary": "Marked “Reconcile character names” done",
+      "recordType": "Task",
+      "recordId": "6afac1f3f17f6280b0c11699",
+      "reviewed": false,
+      "requirementIds": [],
+      "taskIds": [
+        "6afac1f3f17f6280b0c11699"
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c11740",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "at": "2026-11-12T10:42:00",
+      "summary": "Updated scope and goals in the Opening brief",
+      "recordType": "File",
+      "recordId": "6afac1f3f17f6280b0c116bc",
+      "reviewed": false,
+      "fromVersion": 3,
+      "toVersion": 4,
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116a7"
+      ],
+      "taskIds": [
+        "6afac1f3f17f6280b0c11698"
+      ],
+      "diff": [
+        {
+          "mark": "=",
+          "text": "# Opening brief"
+        },
+        {
+          "mark": "+",
+          "text": ""
+        },
+        {
+          "mark": "+",
+          "text": "## Overview"
+        },
+        {
+          "mark": "+",
+          "text": "The opening chapter introduces the world and its main character. It must feel welcoming without explaining everything."
+        },
+        {
+          "mark": "+",
+          "text": ""
+        },
+        {
+          "mark": "=",
+          "text": "## Goals"
+        },
+        {
+          "mark": "-",
+          "text": "- Establish tone in the first scene"
+        },
+        {
+          "mark": "-",
+          "text": "- End on a clear hook into chapter two"
+        },
+        {
+          "mark": "+",
+          "text": "- Establish tone and setting in the first page"
+        },
+        {
+          "mark": "+",
+          "text": "- Introduce the protagonist through action"
+        },
+        {
+          "mark": "+",
+          "text": "- End on a **clear hook** into chapter two"
+        },
+        {
+          "mark": "+",
+          "text": ""
+        },
+        {
+          "mark": "=",
+          "text": "## Scope"
+        },
+        {
+          "mark": "-",
+          "text": "This brief covers chapters one and two."
+        },
+        {
+          "mark": "+",
+          "text": "This brief covers chapter one only. Later chapters get their own briefs."
+        },
+        {
+          "mark": "+",
+          "text": ""
+        },
+        {
+          "mark": "+",
+          "text": "## Open questions"
+        },
+        {
+          "mark": "+",
+          "text": "1. Should the narrator be named?"
+        },
+        {
+          "mark": "+",
+          "text": "2. How much backstory belongs in the first scene?"
+        },
+        {
+          "mark": "+",
+          "text": ""
+        },
+        {
+          "mark": "+",
+          "text": "> Review date: 13 November."
+        }
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c11744",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "at": "2026-11-12T09:15:00",
+      "summary": "Added a dialogue proofing task",
+      "recordType": "Task",
+      "recordId": "6afac1f3f17f6280b0c1169e",
+      "reviewed": false,
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116a7"
+      ],
+      "taskIds": [
+        "6afac1f3f17f6280b0c1169e"
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c11748",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "at": "2026-11-11T16:30:00",
+      "summary": "Replaced the opening scene notes",
+      "recordType": "File",
+      "recordId": "6afac1f3f17f6280b0c116b0",
+      "reviewed": true,
+      "requirementIds": [],
+      "taskIds": [
+        "6afac1f3f17f6280b0c11698"
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c1174b",
+      "projectId": "6afac1f3f17f6280b0c1168a",
+      "at": "2026-11-11T11:05:00",
+      "summary": "Rewrote the session strategy section",
+      "recordType": "File",
+      "recordId": "6afac1f3f17f6280b0c116be",
+      "reviewed": false,
+      "fromVersion": 1,
+      "toVersion": 2,
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116ab"
+      ],
+      "taskIds": [
+        "6afac1f3f17f6280b0c116a0"
+      ],
+      "diff": [
+        {
+          "mark": "=",
+          "text": "# Auth design notes"
+        },
+        {
+          "mark": "+",
+          "text": ""
+        },
+        {
+          "mark": "=",
+          "text": "## Decision"
+        },
+        {
+          "mark": "-",
+          "text": "Use short-lived tokens stored in the browser."
+        },
+        {
+          "mark": "-",
+          "text": "## Why"
+        },
+        {
+          "mark": "+",
+          "text": "Use server-side sessions with secure cookies."
+        },
+        {
+          "mark": "+",
+          "text": ""
+        },
+        {
+          "mark": "+",
+          "text": "## Why"
+        },
+        {
+          "mark": "+",
+          "text": "- Simple revocation"
+        },
+        {
+          "mark": "+",
+          "text": "- No tokens stored in the browser"
+        },
+        {
+          "mark": "+",
+          "text": "- Works with the planned backend"
+        },
+        {
+          "mark": "+",
+          "text": ""
+        },
+        {
+          "mark": "+",
+          "text": "## Consequences"
+        },
+        {
+          "mark": "+",
+          "text": "The client must send cookies with every request, and CSRF protection is required."
+        },
+        {
+          "mark": "+",
+          "text": ""
+        },
+        {
+          "mark": "+",
+          "text": "## Alternatives"
+        },
+        {
+          "mark": "+",
+          "text": "1. Short-lived tokens with refresh"
+        },
+        {
+          "mark": "+",
+          "text": "2. Third-party sign-in only"
+        }
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c1174f",
+      "projectId": "6afac1f3f17f6280b0c1168b",
+      "at": "2026-11-10T14:20:00",
+      "summary": "Marked transcript storage as not yet verified",
+      "recordType": "Requirement",
+      "recordId": "6afac1f3f17f6280b0c116af",
+      "reviewed": false,
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116af"
+      ],
+      "taskIds": [
+        "6afac1f3f17f6280b0c116a5"
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c11753",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "at": "2026-11-09T09:00:00",
+      "summary": "Uploaded cover art v2",
+      "recordType": "File",
+      "recordId": "6afac1f3f17f6280b0c116b1",
+      "reviewed": true,
+      "requirementIds": [],
+      "taskIds": []
+    },
+    {
+      "id": "6afac1f3f17f6280b0c11755",
+      "projectId": "6afac1f3f17f6280b0c1168a",
+      "at": "2026-11-06T17:45:00",
+      "summary": "Added a threat model outline",
+      "recordType": "File",
+      "recordId": "6afac1f3f17f6280b0c116be",
+      "reviewed": true,
+      "fromVersion": 0,
+      "toVersion": 1,
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116ab"
+      ],
+      "taskIds": [
+        "6afac1f3f17f6280b0c116a1"
+      ],
+      "diff": [
+        {
+          "mark": "+",
+          "text": "# Auth design notes"
+        },
+        {
+          "mark": "+",
+          "text": "## Decision"
+        },
+        {
+          "mark": "+",
+          "text": "Use short-lived tokens stored in the browser."
+        },
+        {
+          "mark": "+",
+          "text": "## Why"
+        }
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c11759",
+      "projectId": "6afac1f3f17f6280b0c11689",
+      "at": "2026-10-28T10:10:00",
+      "summary": "Marked the outline as locked",
+      "recordType": "Milestone",
+      "recordId": "6afac1f3f17f6280b0c11690",
+      "reviewed": true,
+      "requirementIds": [
+        "6afac1f3f17f6280b0c116aa"
+      ],
+      "taskIds": [
+        "6afac1f3f17f6280b0c1169d"
+      ]
+    },
+    {
+      "id": "6afac1f3f17f6280b0c1175d",
+      "projectId": "6afac1f3f17f6280b0c1168b",
+      "at": "2026-10-20T13:00:00",
+      "summary": "Updated the survey export",
+      "recordType": "File",
+      "recordId": "6afac1f3f17f6280b0c116b9",
+      "reviewed": false,
+      "requirementIds": [],
+      "taskIds": []
+    }
+  ]
+}

@@ -18,6 +18,7 @@ Related: [PLAN-B-00 open questions (section 13)](plan/backend/PLAN-B-00.md#13-op
 | C. Legal and public-release tasks | C1-14 to C1-18 | Making the repository public, publishing the legal pages |
 | D. Checks that need real people or devices | C1-19 to C1-22 | Confidence in accessibility and usability |
 | E. Optional choices (defaults are fine) | C1-23 to C1-26 | Nothing; I can proceed with the default |
+| F. Mobile app (Flutter) | C1-27 to C1-29 | Connecting the Android app to the backend, notifications, store release |
 
 ---
 
@@ -167,6 +168,28 @@ These are listed in the frontend plans and testing checklist; I cannot do them f
 | C1-24 | Whether to convert the server to **TypeScript** now or later | Later (recorded in PLAN-B-01) |
 | C1-25 | Whether to add an **OpenAPI** document and generated API docs | Yes, when you say go; needs no input |
 | C1-26 | Whether to build **team accounts** next, after deployment | Separate matter, as you decided; PLAN-B-18 stays a design |
+
+---
+
+## F. Mobile app (Flutter)
+
+Found while reviewing  for [PLAN-D-01](PLAN-D-01.md). These need the owner because the mobile app has its own recorded decisions.
+
+### C1-27 🔴 Lift or narrow the mobile "play-demo" rule
+- **Blocks:** any networking in the Android app: sign-in, saving, syncing, files.
+- **Why it needs you:**  records (2026-11-14) that the app never gets a backend, never saves anything on the device, and requests no permissions;  fails the build if the app imports networking or storage packages (, , , , , , …) or if the release manifest asks for . Connecting to the backend contradicts that rule.
+- **You need to decide:** keep the demo promise for people who never sign in (recommended: "Continue as demo user" stays offline and sends nothing), and allow networking and local storage only after sign-in, in clearly named folders, with the privacy text updated. Details in [PLAN-D-01 section 3](PLAN-D-01.md).
+- **Default if unanswered:** the mobile app stays a play-demo; I will not touch it. (I have not changed the mobile repository.)
+- **Then:** the mobile side adds Dio, a cookie jar, local cache, the  permission, updates  and the legal copy, and replaces the in-memory session overlay with the repository described in PLAN-D-01 section 10.
+
+### C1-28 🟡 Notifications on Android
+- **Blocks:** reminders and "due today" alerts (the app removed its reminders setting because the demo forbids notifications).
+- **You need to:** create a Firebase project if you want push notifications (needs a Google account and acceptance of terms), or decide on local-only notifications (no Firebase, no server push).
+- **Then I will:** add device tokens and reminder scheduling to the backend (PLAN-B-19).
+
+### C1-29 🟡 Google Play release
+- **Blocks:** publishing the app.
+- **You need to:** create a Google Play developer account (fee and identity verification), choose the final application id (currently ), and complete the data-safety form and privacy-policy link once the legal pages are published (C1-14). Play will also expect in-app account deletion, which the backend already supports.
 
 ---
 

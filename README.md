@@ -175,7 +175,7 @@ Each backend plan is marked done, partly done, or not started at its end (and in
 | [RESEARCH.md](RESEARCH.md) | Why the workspace is structured the way it is |
 | [docs/individual-workspace-guide.md](docs/individual-workspace-guide.md) | The user guide (also shown at `/help`) |
 | [docs/plan/frontend/](docs/plan/frontend/) | Frontend plans (`PLAN-A-*`) with implementation status |
-| [docs/PLAN-D-01.md](docs/PLAN-D-01.md) | Backend handoff for the Android app (connection, auth, data shapes, endpoints, gaps) |
+| [docs/PLAN-D-01.md](docs/PLAN-D-01.md) | Backend handoff for the Flutter/Android app (connection, auth, data shapes, per-screen endpoint map, gaps) |
 | [docs/PLAN-C-01.md](docs/PLAN-C-01.md) | What still needs the owner: accounts, decisions, legal review, human checks |
 | [docs/plan/backend/PLAN-B-00.md](docs/plan/backend/PLAN-B-00.md) | Backend master plan and index of the per-module plans (`PLAN-B-01` to `PLAN-B-19`) |
 | [docs/testing/ux-walkthrough-checklist.md](docs/testing/ux-walkthrough-checklist.md) | Manual accessibility and UX checks |

@@ -390,3 +390,10 @@ This file records actions made in the repository. Entries are chronological; eac
 
 - **Created** `docs/PLAN-D-01.md`: backend handoff for the Android app (connection setup, conventions, auth, data shapes, endpoint reference, rules, time zones, files, sync and offline guidance, limits, security notes, derived-number rules, gaps with proposed backend work D-01-A to D-01-L, open questions). Linked from `README.md` and `CODEMAP.md`.
 - **Added** an optional `HOST` setting (`Server/src/config.js`, `server.js`, `.env.example`, `Server/README.md`) so an emulator or phone can reach the local API; default stays `127.0.0.1`. **Validation:** `npm test` passes 39/39.
+
+## 2026-11-16 (mobile handoff, revision 2)
+
+- **Reviewed** the Flutter app in  (commit d98db05; read-only, nothing changed there): README, CONTEXT, pubspec, data models, session store, preferences, quick-add parser, Android manifests, privacy test.
+- **Found** that revision 1 of  assumed Kotlin; the app is Flutter. Also found: the mobile "play-demo" rule (no network, no storage, no INTERNET permission, enforced by ) conflicts with a backend; the snapshot lacks ; the Dart  has no ;  is a constant;  and vibration have no server field; the fixtures tool points at the old website folder.
+- **Verified** with scripts: 39 HTTP claims against the running API (39/39), and every field of the snapshot (seeded demo account and a fresh account) against the casts in the Dart  (0 type problems).
+- **Rewrote**  as revision 2 (sanity-check section, Flutter integration guide, screen-by-screen endpoint map, preference mapping, gaps D-01-A to D-01-N, open questions). **Added**  (real API responses for mobile tests) and PLAN-C-01 items C1-27 to C1-29.

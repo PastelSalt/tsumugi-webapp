@@ -1,0 +1,432 @@
+{
+  "today": "2026-11-16",
+  "figures": {
+    "dueToday": 1,
+    "overdue": 4,
+    "doing": 6
+  },
+  "attention": {
+    "overdue": [
+      {
+        "id": "6afac1f3f17f6280b0c11698",
+        "projectId": "6afac1f3f17f6280b0c11689",
+        "milestoneId": "6afac1f3f17f6280b0c1168f",
+        "title": "Review opening scene notes",
+        "notes": "Read the chapter one notes and confirm tone before the review.",
+        "status": "Doing",
+        "priority": "high",
+        "due": "2026-11-12",
+        "blocked": false,
+        "subtasks": [
+          {
+            "text": "Read the notes",
+            "done": true,
+            "id": "6afac1f3f17f6280b0c116d2"
+          },
+          {
+            "text": "Mark tone issues",
+            "done": false,
+            "id": "6afac1f3f17f6280b0c116d3"
+          }
+        ],
+        "requirementIds": [
+          "6afac1f3f17f6280b0c116a7"
+        ],
+        "fileIds": [
+          "6afac1f3f17f6280b0c116b0"
+        ],
+        "changeIds": [
+          "6afac1f3f17f6280b0c11740",
+          "6afac1f3f17f6280b0c11748"
+        ]
+      },
+      {
+        "id": "6afac1f3f17f6280b0c1169a",
+        "projectId": "6afac1f3f17f6280b0c11689",
+        "milestoneId": "6afac1f3f17f6280b0c11691",
+        "title": "Write character profiles",
+        "notes": "One page per main character: voice, goals, relationships.",
+        "status": "Doing",
+        "priority": "high",
+        "due": "2026-11-09",
+        "blocked": false,
+        "subtasks": [
+          {
+            "text": "Protagonist",
+            "done": true,
+            "id": "6afac1f3f17f6280b0c116d6"
+          },
+          {
+            "text": "Rival",
+            "done": true,
+            "id": "6afac1f3f17f6280b0c116d7"
+          },
+          {
+            "text": "Mentor",
+            "done": false,
+            "id": "6afac1f3f17f6280b0c116d8"
+          },
+          {
+            "text": "Villain",
+            "done": false,
+            "id": "6afac1f3f17f6280b0c116d9"
+          }
+        ],
+        "requirementIds": [
+          "6afac1f3f17f6280b0c116a8"
+        ],
+        "fileIds": [],
+        "changeIds": []
+      },
+      {
+        "id": "6afac1f3f17f6280b0c1169b",
+        "projectId": "6afac1f3f17f6280b0c11689",
+        "milestoneId": "6afac1f3f17f6280b0c11691",
+        "title": "Collect reference art",
+        "notes": "Gather mood references for each character.",
+        "status": "Doing",
+        "priority": "normal",
+        "due": "2026-11-11",
+        "blocked": false,
+        "subtasks": [],
+        "requirementIds": [],
+        "fileIds": [
+          "6afac1f3f17f6280b0c116b3"
+        ],
+        "changeIds": []
+      },
+      {
+        "id": "6afac1f3f17f6280b0c116a0",
+        "projectId": "6afac1f3f17f6280b0c1168a",
+        "milestoneId": "6afac1f3f17f6280b0c11693",
+        "title": "Choose session strategy",
+        "notes": "Compare cookie and token sessions and write a recommendation.",
+        "status": "To do",
+        "priority": "high",
+        "due": "2026-11-14",
+        "blocked": false,
+        "subtasks": [],
+        "requirementIds": [
+          "6afac1f3f17f6280b0c116ab"
+        ],
+        "fileIds": [],
+        "changeIds": [
+          "6afac1f3f17f6280b0c1174b"
+        ]
+      }
+    ],
+    "today": [
+      {
+        "id": "6afac1f3f17f6280b0c1169f",
+        "projectId": "6afac1f3f17f6280b0c1168a",
+        "milestoneId": "6afac1f3f17f6280b0c11693",
+        "title": "Map sign-in states",
+        "notes": "Draw every state from first visit to recovery. Waiting on the session decision.",
+        "status": "Doing",
+        "priority": "high",
+        "due": "2026-11-16",
+        "blocked": true,
+        "subtasks": [
+          {
+            "text": "List states",
+            "done": true,
+            "id": "6afac1f3f17f6280b0c116df"
+          },
+          {
+            "text": "Draw diagram",
+            "done": false,
+            "id": "6afac1f3f17f6280b0c116e0"
+          }
+        ],
+        "requirementIds": [
+          "6afac1f3f17f6280b0c116ab"
+        ],
+        "fileIds": [],
+        "changeIds": []
+      }
+    ],
+    "doing": [
+      {
+        "id": "6afac1f3f17f6280b0c116a1",
+        "projectId": "6afac1f3f17f6280b0c1168a",
+        "milestoneId": "6afac1f3f17f6280b0c11693",
+        "title": "Write auth threat notes",
+        "notes": "List the main threats and mitigations for sign-in.",
+        "status": "Doing",
+        "priority": "normal",
+        "due": "2026-11-18",
+        "blocked": false,
+        "subtasks": [],
+        "requirementIds": [
+          "6afac1f3f17f6280b0c116ab"
+        ],
+        "fileIds": [],
+        "changeIds": [
+          "6afac1f3f17f6280b0c11755"
+        ]
+      },
+      {
+        "id": "6afac1f3f17f6280b0c116a3",
+        "projectId": "6afac1f3f17f6280b0c1168b",
+        "milestoneId": "6afac1f3f17f6280b0c11696",
+        "title": "Schedule participant sessions",
+        "notes": "Book twelve sessions across three weeks.",
+        "status": "Doing",
+        "priority": "normal",
+        "due": "2026-11-20",
+        "blocked": false,
+        "subtasks": [
+          {
+            "text": "Send invitations",
+            "done": true,
+            "id": "6afac1f3f17f6280b0c116e5"
+          },
+          {
+            "text": "Confirm rooms",
+            "done": false,
+            "id": "6afac1f3f17f6280b0c116e6"
+          }
+        ],
+        "requirementIds": [
+          "6afac1f3f17f6280b0c116ae"
+        ],
+        "fileIds": [],
+        "changeIds": []
+      }
+    ]
+  },
+  "upNext": [
+    {
+      "kind": "task",
+      "record": {
+        "id": "6afac1f3f17f6280b0c1169e",
+        "projectId": "6afac1f3f17f6280b0c11689",
+        "milestoneId": "6afac1f3f17f6280b0c1168f",
+        "title": "Proof chapter one dialogue",
+        "notes": "Read dialogue aloud and fix awkward lines.",
+        "status": "To do",
+        "priority": "normal",
+        "due": "2026-11-18",
+        "blocked": false,
+        "subtasks": [],
+        "requirementIds": [
+          "6afac1f3f17f6280b0c116a7"
+        ],
+        "fileIds": [],
+        "changeIds": [
+          "6afac1f3f17f6280b0c11744"
+        ]
+      },
+      "due": "2026-11-18"
+    },
+    {
+      "kind": "task",
+      "record": {
+        "id": "6afac1f3f17f6280b0c116a1",
+        "projectId": "6afac1f3f17f6280b0c1168a",
+        "milestoneId": "6afac1f3f17f6280b0c11693",
+        "title": "Write auth threat notes",
+        "notes": "List the main threats and mitigations for sign-in.",
+        "status": "Doing",
+        "priority": "normal",
+        "due": "2026-11-18",
+        "blocked": false,
+        "subtasks": [],
+        "requirementIds": [
+          "6afac1f3f17f6280b0c116ab"
+        ],
+        "fileIds": [],
+        "changeIds": [
+          "6afac1f3f17f6280b0c11755"
+        ]
+      },
+      "due": "2026-11-18"
+    },
+    {
+      "kind": "milestone",
+      "record": {
+        "id": "6afac1f3f17f6280b0c11693",
+        "projectId": "6afac1f3f17f6280b0c1168a",
+        "title": "Auth flow map",
+        "description": "Document every sign-in and recovery state.",
+        "start": "2026-11-05",
+        "due": "2026-11-19",
+        "phase": 1,
+        "done": false,
+        "blocked": true,
+        "afterId": null
+      },
+      "due": "2026-11-19"
+    },
+    {
+      "kind": "task",
+      "record": {
+        "id": "6afac1f3f17f6280b0c116a3",
+        "projectId": "6afac1f3f17f6280b0c1168b",
+        "milestoneId": "6afac1f3f17f6280b0c11696",
+        "title": "Schedule participant sessions",
+        "notes": "Book twelve sessions across three weeks.",
+        "status": "Doing",
+        "priority": "normal",
+        "due": "2026-11-20",
+        "blocked": false,
+        "subtasks": [
+          {
+            "text": "Send invitations",
+            "done": true,
+            "id": "6afac1f3f17f6280b0c116e5"
+          },
+          {
+            "text": "Confirm rooms",
+            "done": false,
+            "id": "6afac1f3f17f6280b0c116e6"
+          }
+        ],
+        "requirementIds": [
+          "6afac1f3f17f6280b0c116ae"
+        ],
+        "fileIds": [],
+        "changeIds": []
+      },
+      "due": "2026-11-20"
+    },
+    {
+      "kind": "task",
+      "record": {
+        "id": "6afac1f3f17f6280b0c116a5",
+        "projectId": "6afac1f3f17f6280b0c1168b",
+        "milestoneId": "6afac1f3f17f6280b0c11696",
+        "title": "Transcribe first interviews",
+        "notes": "Waiting on a secure storage decision.",
+        "status": "To do",
+        "priority": "normal",
+        "due": "2026-11-22",
+        "blocked": true,
+        "subtasks": [],
+        "requirementIds": [
+          "6afac1f3f17f6280b0c116af"
+        ],
+        "fileIds": [],
+        "changeIds": [
+          "6afac1f3f17f6280b0c1174f"
+        ]
+      },
+      "due": "2026-11-22"
+    }
+  ],
+  "recentProjects": [
+    {
+      "id": "6afac1f3f17f6280b0c11689",
+      "name": "Project Garden",
+      "slug": "project-garden",
+      "category": "Creative",
+      "kind": "creative",
+      "status": "Active",
+      "tone": "pink",
+      "tags": [
+        "visual novel",
+        "writing"
+      ],
+      "description": "A story-led creative production workspace for a visual novel.",
+      "objective": "Ship a welcoming first chapter that holds together as a story and as a product.",
+      "start": "2026-09-01",
+      "end": "2027-02-28",
+      "phases": [
+        "Concept",
+        "Outline",
+        "Chapter one",
+        "Review",
+        "Release"
+      ],
+      "phaseIndex": 2,
+      "lastOpenedAt": "2026-11-12T09:10:00",
+      "archivedAt": null,
+      "updatedAt": "2026-11-12",
+      "archived": false
+    },
+    {
+      "id": "6afac1f3f17f6280b0c1168a",
+      "name": "Tsumugi API",
+      "slug": "tsumugi-api",
+      "category": "Software",
+      "kind": "software",
+      "status": "Planning",
+      "tone": "blue",
+      "tags": [
+        "backend",
+        "auth"
+      ],
+      "description": "Service layer for projects, requirements, and traceability.",
+      "objective": "Define a secure, well-specified API that the workspace can rely on.",
+      "start": "2026-10-15",
+      "end": "2027-03-31",
+      "phases": [
+        "Discovery",
+        "Design",
+        "Build",
+        "Test",
+        "Ship"
+      ],
+      "phaseIndex": 1,
+      "lastOpenedAt": "2026-11-11T16:40:00",
+      "archivedAt": null,
+      "updatedAt": "2026-11-11",
+      "archived": false
+    },
+    {
+      "id": "6afac1f3f17f6280b0c1168d",
+      "name": "Sketchbook Sprint",
+      "slug": "sketchbook-sprint",
+      "category": "Multimedia",
+      "kind": "multimedia",
+      "status": "Planning",
+      "tone": "green",
+      "tags": [
+        "drawing"
+      ],
+      "description": "A rough plan for a month of daily sketches.",
+      "objective": "Decide whether this is worth planning in detail.",
+      "start": "2026-12-01",
+      "end": "2026-12-31",
+      "phases": [
+        "Brief",
+        "Production"
+      ],
+      "phaseIndex": 0,
+      "lastOpenedAt": "2026-11-10T20:00:00",
+      "archivedAt": null,
+      "updatedAt": "2026-11-10",
+      "archived": false
+    },
+    {
+      "id": "6afac1f3f17f6280b0c1168b",
+      "name": "Color & Memory",
+      "slug": "color-and-memory",
+      "category": "Research",
+      "kind": "research",
+      "status": "On hold",
+      "tone": "lilac",
+      "tags": [
+        "interviews",
+        "color"
+      ],
+      "description": "A study of how color shapes recalled memories.",
+      "objective": "Collect and analyze interviews to answer one clear research question.",
+      "start": "2026-08-20",
+      "end": "2027-01-15",
+      "phases": [
+        "Question",
+        "Method",
+        "Collection",
+        "Analysis",
+        "Report"
+      ],
+      "phaseIndex": 2,
+      "lastOpenedAt": "2026-11-03T14:00:00",
+      "archivedAt": null,
+      "updatedAt": "2026-11-05",
+      "archived": false
+    }
+  ],
+  "_note": "Shape sample only: numbers reflect the demo account when captured, not the pristine seed."
+}

@@ -6,6 +6,8 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 export const config = {
   env: process.env.NODE_ENV || 'development',
   port: Number(process.env.PORT || 3001),
+  // 127.0.0.1 keeps the API private to this computer. Set HOST=0.0.0.0 to let a phone or emulator on your network reach it.
+  host: process.env.HOST || '127.0.0.1',
   mongoUri: process.env.MONGODB_URI || '',
   dataDir: path.resolve(root, process.env.DATA_DIR || '.data'),
   uploadDir: path.resolve(root, process.env.UPLOAD_DIR || 'uploads'),

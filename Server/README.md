@@ -19,6 +19,8 @@ From `Server/` alone: `npm run dev`, `npm run seed`, `npm test`.
 
 **Database.** With no `MONGODB_URI`, the server uses a MongoDB stored in `Server/.data/db` on port 27018. The first run downloads the MongoDB engine once (through `mongodb-memory-server`); after that it works offline. If a database is already running on that port (for example the API is running and you start `npm run seed`), other processes join it. Set `MONGODB_URI` (see `.env.example`) to use a MongoDB you installed yourself.
 
+**Phone or emulator.** The API listens on this computer only by default. Set `HOST=0.0.0.0` in `Server/.env` to let the Android emulator (`http://10.0.2.2:3001`) or a phone on your Wi-Fi reach it; see [PLAN-D-01](../docs/PLAN-D-01.md).
+
 **Files.** Uploaded files go to `Server/uploads/<workspace id>/` under random names. Both `.data` and `uploads` are git-ignored.
 
 ## Layout

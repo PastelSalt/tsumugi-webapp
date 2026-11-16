@@ -7,7 +7,7 @@ const uri = await connect()
 console.log(`Database ready (${config.mongoUri ? uri.replace(/\/\/[^@]*@/, '//***@') : `local, stored in ${config.dataDir}`})`)
 await purgeOld().then((c) => { if (Object.values(c).some(Boolean)) console.log('Purged old deleted records', c) }).catch((e) => console.warn('Purge skipped:', e.message))
 
-const server = createApp().listen(config.port, '127.0.0.1', () => console.log(`Tsumugi API listening on http://localhost:${config.port}/api/v1`))
+const server = createApp().listen(config.port, config.host, () => console.log(`Tsumugi API listening on http://${config.host === '0.0.0.0' ? 'this-computer' : config.host}:${config.port}/api/v1`))
 
 const stop = async () => { server.close(); await disconnect(); process.exit(0) }
 process.on('SIGINT', stop)

@@ -387,3 +387,6 @@ This file records actions made in the repository. Entries are chronological; eac
 - **Updated** all backend plans' implementation status, the master plan's roll-up (section 16), `README.md`, `Server/README.md`, `CODEMAP.md`, and `CONTEXT.md`.
 
 - **Created** `docs/PLAN-C-01.md`: the checklist of everything that needs the owner (accounts and services, decisions, legal and public-release tasks, checks by real people or on real devices, optional choices), each with what it blocks, a default, and what happens next. Linked from `README.md` and `CODEMAP.md`. Documentation only.
+
+- **Created** `docs/PLAN-D-01.md`: backend handoff for the Android app (connection setup, conventions, auth, data shapes, endpoint reference, rules, time zones, files, sync and offline guidance, limits, security notes, derived-number rules, gaps with proposed backend work D-01-A to D-01-L, open questions). Linked from `README.md` and `CODEMAP.md`.
+- **Added** an optional `HOST` setting (`Server/src/config.js`, `server.js`, `.env.example`, `Server/README.md`) so an emulator or phone can reach the local API; default stays `127.0.0.1`. **Validation:** `npm test` passes 39/39.
